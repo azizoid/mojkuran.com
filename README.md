@@ -1,4 +1,4 @@
-# # Mojkuran.com is an educational project.
+# Mojkuran.com is an educational project.
 
 The project is oriented to Azerbaijan and have been used 4 translations popular in that country.
 
@@ -14,5 +14,5 @@ Frontend is built on Next.js + Bootstrap
 
 Future plan is to move it completely to Typescript
 
-# # Backend is made on Nodejs + MySQL, it generates API.
+# Backend is made on Nodejs + MySQL, it generates API.
 
