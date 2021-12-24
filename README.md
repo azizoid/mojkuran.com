@@ -1,6 +1,6 @@
 # Mojkuran.com is an educational project.
 
-The project is oriented to Azerbaijan and have been used 4 translations popular in that country.
+The project is oriented to Bosnia and Herzegovina, Serbia, Montenegro with the most popular translation in those countries.
 
 And makes accessible a search system by verses.
 
