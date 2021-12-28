@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-const Empty = ({ alert = null }) => {
+export const Empty = ({ alert = null }): JSX.Element => {
   const classes = ["text-end", "alert"]
 
   if (alert === "danger") classes.push("alert-info")

@@ -1,22 +1,22 @@
-import { useEffect, useState, useCallback } from "react";
-import { useRouter } from "next/router";
+import { useEffect, useState, useCallback } from "react"
+import { useRouter } from "next/router"
 
-import Pagination from "react-js-pagination";
+import Pagination from "react-js-pagination"
 
-import MainLayout from "../../layouts/main.layout";
-import Empty from "../../components/empty.component";
+import MainLayout from "../../layouts/main.layout"
+import Empty from "../../components/empty.component"
 
-import SearchAyah from "../../components/search.ayah.component";
+import SearchAyah from "../../components/search.ayah.component"
 
-import Loading from "../../components/loader.component";
+import Loading from "../../components/loader.component"
 
-const Search = () => {
-  const [paginate, setPaginate] = useState([]);
-  const [out, setOut] = useState([]);
+const Search = (): JSX.Element => {
+  const [paginate, setPaginate] = useState<any>([])
+  const [out, setOut] = useState([])
 
-  const router = useRouter();
+  const router = useRouter()
 
-  const query = router.query.search;
+  const query = router.query.search.toString()
   // const translator = router.query.t || 1;
   /*
     0 - start
@@ -25,40 +25,42 @@ const Search = () => {
     */
 
   const [page, setPage] = useState(1)
-  const [empty, setEmpty] = useState(0);
+  const [empty, setEmpty] = useState(0)
 
   const getData = useCallback(async () => {
-    const url = `https://mojkuran.com/api/search/${query}?page=${page}`;
+    const url = `https://mojkuran.com/api/search/${query}?page=${page}`
     await fetch(url)
       .then((response) => response.json())
       .then(({ out, paginate }) => {
         if (out && out.length > 0) {
-          setOut(out);
-          setPaginate(paginate);
+          setOut(out)
+          setPaginate(paginate)
           setEmpty(2)
-        } else setEmpty(1);
+        } else setEmpty(1)
       })
-  }, [page, query]);
+  }, [page, query])
 
   useEffect(() => {
     if (query && query.length > 2) {
       setPage(1)
-      getData(1)
+      getData()
     }
-  }, [query, getData]);
+  }, [query, getData])
 
   if (empty === 1) {
     return (
       <MainLayout>
         <div className="row">
-          <div className="col-sm-12 alert alert-danger">Riječ nije pronađena</div>
+          <div className="col-sm-12 alert alert-danger">
+            Riječ nije pronađena
+          </div>
           <Empty alert="danger" />
         </div>
       </MainLayout>
-    );
-  }// else if (empty === 0) return <Loading />;
+    )
+  } // else if (empty === 0) return <Loading />;
 
-  const paginateLinks = 
+  const paginateLinks = (
     <li className="list-group-item">
       <Pagination
         activePage={parseInt(paginate.currentPage)}
@@ -71,6 +73,7 @@ const Search = () => {
         onChange={setPage}
       />
     </li>
+  )
 
   return (
     <MainLayout>
@@ -88,7 +91,7 @@ const Search = () => {
         {paginate && paginateLinks}
       </ul>
     </MainLayout>
-  );
-};
+  )
+}
 
-export default Search;
+export default Search

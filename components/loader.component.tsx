@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 
-const Loader = () => (
+const Loader = (): JSX.Element => (
   <div className="col-sm-12 text-center">
     <div className="loadingio-spinner-eclipse-5rkdd8dfofv">
       <div className="ldio-4rs3u70qdq">
@@ -8,6 +8,6 @@ const Loader = () => (
       </div>
     </div>
   </div>
-);
+)
 
-export default Loader;
+export default Loader
