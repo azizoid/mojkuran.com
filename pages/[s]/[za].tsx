@@ -59,6 +59,7 @@ const Ayah = ({ out, data, error }) => {
         </title>
         <meta name="description" content={out[0]["c"]} />
       </Head>
+
       <ul className="list-group list-group-flush col-12">
         {data.soorah !== 1 && data.ayah !== 1 && (
           <li className="list-group-item">

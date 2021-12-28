@@ -55,10 +55,16 @@
 //   line-height: 1.5em;
 // }
 
-.ayah-form-input, .kelme-form-input {
+.searchForm {
+  margin-bottom: 3em;
+}
+
+.ayah-form-input,
+.kelme-form-input {
   border-color: #38c172;
 }
-.ayah-form-input::placeholder, .kelme-form-input::placeholder {
+.ayah-form-input::placeholder,
+.kelme-form-input::placeholder {
   color: #38c172;
   opacity: 1; /* Firefox */
 }

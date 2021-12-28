@@ -11,3 +11,13 @@ export type RouterForm = {
   za?: number | "";
   q?: string;
 }
+
+export enum PageStates {
+  INIT = "Initialization",
+  EMPTY = "Page is empty",
+  LOADING = "Loading...",
+
+  SOORAH = "Soorah View",
+  AYAH = "Ayah View",
+  SEARCH = "Search View"
+}

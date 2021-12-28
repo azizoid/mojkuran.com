@@ -11,8 +11,18 @@ const Form = () => {
   const context = useContext(FormContext)
 
   useEffect(() => {
-    console.log("context form component", context.form)
-  }, [context?.form])
+    const form = getView({
+      s: parseInt(router.query?.s?.toString()) || 0,
+      a: parseInt(router.query?.za?.toString()) || "",
+      q: router.query?.search?.toString() || "",
+      view: "empty",
+    })
+    context.setForm(form)
+  }, [router])
+
+  useEffect(() => {
+    console.warn("context form component", context.form)
+  }, [context])
 
   const onHandleChange = (event) => {
     const { name, value } = event.target
@@ -72,7 +82,7 @@ const Form = () => {
   return (
     <form
       id="search"
-      className="card card-header"
+      className="card card-header searchForm"
       acceptCharset="UTF-8"
       onSubmit={onSubmit}
     >
@@ -119,6 +129,7 @@ const Form = () => {
             name="query"
             value={context.form?.q}
             onChange={onHandleChange}
+            defaultValue={router.query.search?.toString()}
           />
         </div>
         <div className="input-group-append col-5">

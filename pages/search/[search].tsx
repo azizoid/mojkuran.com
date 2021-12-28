@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react"
+import React, { useEffect, useState, useCallback, Suspense } from "react"
 import { useRouter } from "next/router"
 
 import Pagination from "react-js-pagination"
@@ -8,7 +8,8 @@ import Empty from "../../components/empty.component"
 
 import SearchAyah from "../../components/search.ayah.component"
 
-import Loading from "../../components/loader.component"
+import Loader from "../../components/loader.component"
+import { PageStates } from "../../assets/types"
 
 const Search = (): JSX.Element => {
   const [paginate, setPaginate] = useState<any>([])
@@ -16,38 +17,41 @@ const Search = (): JSX.Element => {
 
   const router = useRouter()
 
-  const query = router.query.search.toString()
+  const query = router.query.search?.toString()
   // const translator = router.query.t || 1;
   /*
     0 - start
     1 - not found
     2 - result 
     */
+  const [pageState, setPageState] = useState(PageStates.INIT)
 
   const [page, setPage] = useState(1)
-  const [empty, setEmpty] = useState(0)
 
   const getData = useCallback(async () => {
     const url = `https://mojkuran.com/api/search/${query}?page=${page}`
     await fetch(url)
       .then((response) => response.json())
       .then(({ out, paginate }) => {
-        if (out && out.length > 0) {
+        if (out?.length > 0) {
           setOut(out)
           setPaginate(paginate)
-          setEmpty(2)
-        } else setEmpty(1)
+
+          setPageState(PageStates.SEARCH)
+        } else {
+          setPageState(PageStates.LOADING)
+        }
       })
   }, [page, query])
 
   useEffect(() => {
-    if (query && query.length > 2) {
+    if (query?.length > 2) {
       setPage(1)
       getData()
     }
   }, [query, getData])
 
-  if (empty === 1) {
+  if (pageState === PageStates.EMPTY) {
     return (
       <MainLayout>
         <div className="row">
@@ -58,7 +62,14 @@ const Search = (): JSX.Element => {
         </div>
       </MainLayout>
     )
-  } // else if (empty === 0) return <Loading />;
+  }
+  if (pageState === PageStates.LOADING) {
+    return (
+      <MainLayout>
+        <Loader />
+      </MainLayout>
+    )
+  }
 
   const paginateLinks = (
     <li className="list-group-item">
@@ -78,10 +89,6 @@ const Search = (): JSX.Element => {
   return (
     <MainLayout>
       <ul className="list-group list-group-flush col-12">
-        {/* <li className="list-group-item text-right">
-          <span className="badge badge-primary">{query}</span> pronađeno {paginate.total} rezultat(a)
-        </li> */}
-
         {paginate && paginateLinks}
 
         {out.map((ayah) => (

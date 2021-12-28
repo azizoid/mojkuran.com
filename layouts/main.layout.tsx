@@ -1,17 +1,15 @@
-import React, { useContext, useEffect } from "react"
+import React from "react"
 import Link from "next/link"
 import Image from "next/image"
 
 import { TiSocialFacebookCircular, TiSocialInstagram } from "react-icons/ti"
-
-import Form from "../components/form.component"
 
 // import PrayerWidget from "../components/sidebar/prayer.widget"
 // import RandomAyah from "../components/sidebar/randomayah"
 // import FacebookPage from "../components/sidebar/facebook.page"
 
 import Footer from "../components/footer.component"
-import { FormContext, FormContextProvider } from "../store/form-store"
+import Form from "../components/form.component"
 
 const MainLayout = ({ children }) => (
   <>
@@ -62,11 +60,9 @@ const MainLayout = ({ children }) => (
     <div className="container" style={{ minHeight: "70vh" }}>
       <div className="row">
         <div className="col-12 col-lg-7">
-          <FormContextProvider>
-            <Form />
-            <br />
-            {children}
-          </FormContextProvider>
+          <Form />
+
+          {children}
         </div>
         {/* <div className="col-12 col-lg-4" style={{ fontSize: "0.9rem" }}>
           <PrayerWidget />
