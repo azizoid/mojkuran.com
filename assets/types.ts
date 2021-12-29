@@ -19,5 +19,7 @@ export enum PageStates {
 
   SOORAH = "Soorah View",
   AYAH = "Ayah View",
-  SEARCH = "Search View"
+  SEARCH = "Search View",
+
+  NOT_FOUND = 'Not Found'
 }

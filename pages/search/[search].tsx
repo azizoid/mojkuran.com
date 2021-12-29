@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, Suspense } from "react"
+import React, { useEffect, useState, useCallback, useMemo } from "react"
 import { useRouter } from "next/router"
 
 import Pagination from "react-js-pagination"
@@ -14,19 +14,11 @@ import { PageStates } from "../../assets/types"
 const Search = (): JSX.Element => {
   const [paginate, setPaginate] = useState<any>([])
   const [out, setOut] = useState([])
+  const [pageState, setPageState] = useState(PageStates.INIT)
+  const [page, setPage] = useState(1)
 
   const router = useRouter()
-
   const query = router.query.search?.toString()
-  // const translator = router.query.t || 1;
-  /*
-    0 - start
-    1 - not found
-    2 - result 
-    */
-  const [pageState, setPageState] = useState(PageStates.INIT)
-
-  const [page, setPage] = useState(1)
 
   const getData = useCallback(async () => {
     const url = `https://mojkuran.com/api/search/${query}?page=${page}`
@@ -71,19 +63,22 @@ const Search = (): JSX.Element => {
     )
   }
 
-  const paginateLinks = (
-    <li className="list-group-item">
-      <Pagination
-        activePage={parseInt(paginate.currentPage)}
-        itemsCountPerPage={parseInt(paginate.perPage)}
-        totalItemsCount={parseInt(paginate.total)}
-        pageRangeDisplayed={5}
-        innerClass="pagination justify-content-center"
-        itemClass="page-item"
-        linkClass="page-link"
-        onChange={setPage}
-      />
-    </li>
+  const paginateLinks = useMemo(
+    () => (
+      <li className="list-group-item">
+        <Pagination
+          activePage={parseInt(paginate.currentPage)}
+          itemsCountPerPage={parseInt(paginate.perPage)}
+          totalItemsCount={parseInt(paginate.total)}
+          pageRangeDisplayed={5}
+          innerClass="pagination justify-content-center"
+          itemClass="page-item"
+          linkClass="page-link"
+          onChange={setPage}
+        />
+      </li>
+    ),
+    [paginate]
   )
 
   return (

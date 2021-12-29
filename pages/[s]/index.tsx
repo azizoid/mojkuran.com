@@ -7,8 +7,8 @@ import SoorahAyah from "../../components/soorah.ayah.component"
 
 import SOORAH_LIST from "../../assets/soorahList"
 
-const Soorah = ({ out, data }) => {
-  if (!out || out.length === 0) {
+const Soorah = ({ out, data, error }) => {
+  if (error !== null) {
     return (
       <MainLayout>
         <div className="text-center">
@@ -48,30 +48,6 @@ const Soorah = ({ out, data }) => {
   )
 }
 
-// export async function getServerSideProps({ query }) {
-//   const soorah = query.s;
-//   const t = query.t || 1;
-
-//   console.log(query);
-//   console.log(`https://quran.az/api/${soorah}?t=${t}`);
-
-//   const propsData = await fetch(
-//     `https://quran.az/api/${soorah}?t=${t}`
-//   ).then((response) => response.json());
-
-//   const props = {
-//     error: "Not Found",
-//     out: [],
-//     data: { s: null, a: null },
-//   };
-
-//   if (propsData.out && propsData.out.length > 0) {
-//     props.out = propsData.out;
-//     props.data = propsData.data;
-//   } else context.response = "404";
-//   return { props };
-// }
-
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = Array.from({ length: 114 }, (_, i) => i + 1).map((soorah) => ({
     params: { s: soorah.toString() },
@@ -92,7 +68,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     data: { s: 0, a: "" },
   }
 
-  if (propsData.out && propsData.out.length > 0) {
+  if (propsData?.out?.length > 0) {
     props.error = ""
     props.out = propsData.out
     props.data = propsData.data
