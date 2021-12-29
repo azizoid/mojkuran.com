@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react"
 
 import SOORAH_LIST from "../../assets/soorahList"
+import { AyahProps } from "../../assets/types"
+
+const fetchData = async () =>
+  await fetch("https://mojkuran.com/api/random").then((response) =>
+    response.json()
+  )
 
 const RandomAyah = (): JSX.Element => {
-  const [out, setOut] = useState({
-    s: "96",
-    a: "1",
+  const [out, setOut] = useState<AyahProps>({
+    id: 0,
+    s: 96,
+    a: 1,
     c: "Čitaj, u ime Gospodara tvoga, koji stvara,",
     t: 1,
   })
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetch("https://mojkuran.com/api/random")
-        .then((response) => response.json())
-        .then((data) => setOut(data.out))
-    }
-    fetchData()
+    fetchData().then((data) => setOut(data.out))
   }, [])
 
   return (
