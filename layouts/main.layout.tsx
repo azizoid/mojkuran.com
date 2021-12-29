@@ -12,7 +12,7 @@ import { TiSocialFacebookCircular, TiSocialInstagram } from "react-icons/ti"
 const PrayerWidget = dynamic(
   () => import("../components/sidebar/prayer.widget"),
   {
-    loading: () => <Loader />,
+    // loading: () => <Loader />,
     ssr: false,
   }
 )
@@ -23,14 +23,14 @@ const RandomAyah = dynamic(() => import("../components/sidebar/randomayah"), {
 const FacebookPage = dynamic(
   () => import("../components/sidebar/facebook.page"),
   {
-    loading: () => <Loader />,
+    // loading: () => <Loader />,
     ssr: false,
   }
 )
 
 import Footer from "../components/footer.component"
 import Form from "../components/form.component"
-import Loader from "../components/loader.component"
+import Loader from "../components/Loader/Loader"
 
 const MainLayout = ({ children }) => {
   return (

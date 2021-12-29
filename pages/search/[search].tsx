@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useCallback } from "react"
 import { useRouter } from "next/router"
 
-import Pagination, { ReactJsPaginationProps } from "react-js-pagination"
+import Pagination from "react-js-pagination"
 
 import { PageStates, PaginationProps } from "../../assets/types"
 
 import MainLayout from "../../layouts/main.layout"
 import Empty from "../../components/empty.component"
-import Loader from "../../components/loader.component"
+import Loader from "../../components/Loader/Loader"
 import SearchAyah from "../../components/search.ayah.component"
 
 const Search = (): JSX.Element => {
