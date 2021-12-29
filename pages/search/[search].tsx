@@ -1,18 +1,17 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react"
+import React, { useEffect, useState, useCallback } from "react"
 import { useRouter } from "next/router"
 
-import Pagination from "react-js-pagination"
+import Pagination, { ReactJsPaginationProps } from "react-js-pagination"
+
+import { PageStates, PaginationProps } from "../../assets/types"
 
 import MainLayout from "../../layouts/main.layout"
 import Empty from "../../components/empty.component"
-
+import Loader from "../../components/loader.component"
 import SearchAyah from "../../components/search.ayah.component"
 
-import Loader from "../../components/loader.component"
-import { PageStates } from "../../assets/types"
-
 const Search = (): JSX.Element => {
-  const [paginate, setPaginate] = useState<any>([])
+  const [paginate, setPaginate] = useState<PaginationProps>()
   const [out, setOut] = useState([])
   const [pageState, setPageState] = useState(PageStates.INIT)
   const [page, setPage] = useState(1)
@@ -20,21 +19,22 @@ const Search = (): JSX.Element => {
   const router = useRouter()
   const query = router.query.search?.toString()
 
-  const getData = useCallback(async () => {
-    const url = `https://mojkuran.com/api/search/${query}?page=${page}`
-    await fetch(url)
-      .then((response) => response.json())
-      .then(({ out, paginate }) => {
-        if (out?.length > 0) {
-          setOut(out)
-          setPaginate(paginate)
+  const getData = useCallback(
+    async () =>
+      await fetch(`https://mojkuran.com/api/search/${query}?page=${page}`)
+        .then((response) => response.json())
+        .then(({ out, paginate }) => {
+          if (out?.length > 0) {
+            setOut(out)
+            setPaginate(paginate)
 
-          setPageState(PageStates.SEARCH)
-        } else {
-          setPageState(PageStates.LOADING)
-        }
-      })
-  }, [page, query])
+            setPageState(PageStates.SEARCH)
+          } else {
+            setPageState(PageStates.LOADING)
+          }
+        }),
+    [page, query]
+  )
 
   useEffect(() => {
     if (query?.length > 2) {
@@ -55,6 +55,7 @@ const Search = (): JSX.Element => {
       </MainLayout>
     )
   }
+
   if (pageState === PageStates.LOADING) {
     return (
       <MainLayout>
@@ -63,34 +64,31 @@ const Search = (): JSX.Element => {
     )
   }
 
-  const paginateLinks = useMemo(
-    () => (
-      <li className="list-group-item">
-        <Pagination
-          activePage={parseInt(paginate.currentPage)}
-          itemsCountPerPage={parseInt(paginate.perPage)}
-          totalItemsCount={parseInt(paginate.total)}
-          pageRangeDisplayed={5}
-          innerClass="pagination justify-content-center"
-          itemClass="page-item"
-          linkClass="page-link"
-          onChange={setPage}
-        />
-      </li>
-    ),
-    [paginate]
+  const paginateLinks = paginate && (
+    <li className="list-group-item">
+      <Pagination
+        activePage={paginate.currentPage}
+        itemsCountPerPage={paginate.perPage}
+        totalItemsCount={paginate.total}
+        pageRangeDisplayed={5}
+        innerClass="pagination justify-content-center"
+        itemClass="page-item"
+        linkClass="page-link"
+        onChange={setPage}
+      />
+    </li>
   )
 
   return (
     <MainLayout>
       <ul className="list-group list-group-flush col-12">
-        {paginate && paginateLinks}
+        {paginateLinks}
 
         {out.map((ayah) => (
           <SearchAyah ayah={ayah} mark={query} key={ayah.id} />
         ))}
 
-        {paginate && paginateLinks}
+        {paginateLinks}
       </ul>
     </MainLayout>
   )

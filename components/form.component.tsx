@@ -20,10 +20,6 @@ const Form = () => {
     context.setForm(form)
   }, [router])
 
-  useEffect(() => {
-    console.warn("context form component", context.form)
-  }, [context])
-
   const onHandleChange = (event) => {
     const { name, value } = event.target
 
@@ -125,7 +121,7 @@ const Form = () => {
           <input
             type="text"
             placeholder="Pretraživač"
-            className="form-control kelme-form-input"
+            className="form-control"
             name="query"
             value={context.form?.q}
             onChange={onHandleChange}

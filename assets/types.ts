@@ -23,3 +23,12 @@ export enum PageStates {
 
   NOT_FOUND = 'Not Found'
 }
+
+export type PaginationProps = {
+  currentPage: number,
+  from: number,
+  lastPage: number,
+  perPage: number,
+  to: number,
+  total: number,
+}
