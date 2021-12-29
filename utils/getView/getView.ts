@@ -1,7 +1,7 @@
 import { RouterForm } from "../../assets/types"
 
 export type GetViewProps = Omit<RouterForm, 'za'> & {
-  a?: number | "",
+  a?: number | undefined,
   view: string
 }
 

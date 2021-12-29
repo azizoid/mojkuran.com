@@ -8,8 +8,8 @@ export type AyahProps = {
 
 export type RouterForm = {
   s?: number;
-  za?: number | "";
-  q?: string;
+  za?: number | undefined;
+  q?: string | undefined;
 }
 
 export enum PageStates {

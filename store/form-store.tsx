@@ -2,7 +2,7 @@ import React, { createContext, FC, useState } from "react"
 
 export type FormProps = {
   s?: number
-  a?: number | ""
+  a?: number | undefined
   t?: 1
   q?: string
   view: string
@@ -10,7 +10,7 @@ export type FormProps = {
 
 export const initialStateProps: FormProps = {
   s: 0,
-  a: "",
+  a: undefined,
   q: "",
   view: "empty",
   t: 1,

@@ -8,7 +8,7 @@ import SoorahAyah from "../../components/soorah.ayah.component"
 import SOORAH_LIST from "../../assets/soorahList"
 
 const Soorah = ({ out, data, error }) => {
-  if (error !== null) {
+  if (error !== "") {
     return (
       <MainLayout>
         <div className="text-center">

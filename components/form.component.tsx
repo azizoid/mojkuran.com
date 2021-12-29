@@ -12,8 +12,8 @@ const Form = () => {
 
   useEffect(() => {
     const form = getView({
-      s: parseInt(router.query?.s?.toString()) || 0,
-      a: parseInt(router.query?.za?.toString()) || "",
+      s: Number(router.query?.s?.toString()) || 0,
+      a: Number(router.query?.za?.toString()) || undefined,
       q: router.query?.search?.toString() || "",
       view: "empty",
     })
@@ -28,7 +28,7 @@ const Form = () => {
         context.setForm((prev) => ({
           ...prev,
           s: Number(value),
-          a: "",
+          a: undefined,
           q: "",
           view: name,
         }))
@@ -45,7 +45,7 @@ const Form = () => {
         context.setForm((prev) => ({
           ...prev,
           s: 0,
-          a: "",
+          a: undefined,
           q: value,
           view: name,
         }))
