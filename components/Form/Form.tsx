@@ -3,6 +3,7 @@ import React, {
   SyntheticEvent,
   useContext,
   useEffect,
+  useRef,
 } from "react"
 import { useRouter } from "next/router"
 
@@ -16,7 +17,7 @@ import styles from "./Form.module.scss"
 
 export const Form = (): JSX.Element => {
   const router = useRouter()
-  const context = useContext(FormContext)
+  const context = useRef(useContext(FormContext))
 
   useEffect(() => {
     const form = getView({
@@ -25,8 +26,8 @@ export const Form = (): JSX.Element => {
       q: router.query?.search?.toString() || "",
       view: "empty",
     })
-    context.setForm(form)
-  }, [context, router.query])
+    context.current.setForm(form)
+  }, [router])
 
   const onHandleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -35,7 +36,7 @@ export const Form = (): JSX.Element => {
 
     switch (name) {
       case "soorah":
-        context.setForm((prev) => ({
+        context.current.setForm((prev) => ({
           ...prev,
           s: Number(value),
           a: "",
@@ -44,7 +45,7 @@ export const Form = (): JSX.Element => {
         }))
         break
       case "ayah":
-        context.setForm((prev) => ({
+        context.current.setForm((prev) => ({
           ...prev,
           a: Number(value),
           q: "",
@@ -52,7 +53,7 @@ export const Form = (): JSX.Element => {
         }))
         break
       case "query":
-        context.setForm((prev) => ({
+        context.current.setForm((prev) => ({
           ...prev,
           s: 0,
           a: "",
@@ -68,7 +69,7 @@ export const Form = (): JSX.Element => {
   const onSubmit = (event: SyntheticEvent) => {
     event.preventDefault()
 
-    const form = getView(context.form)
+    const form = getView(context.current.form)
 
     switch (form.view) {
       case "search":
@@ -99,7 +100,7 @@ export const Form = (): JSX.Element => {
           <select
             className="form-select"
             name="soorah"
-            value={context.form?.s}
+            value={context.current.form?.s}
             onChange={onHandleChange}
           >
             {soorahList.map((soorah, index) => (
@@ -119,7 +120,7 @@ export const Form = (): JSX.Element => {
             min={1}
             max={286}
             name="ayah"
-            value={context.form?.a}
+            value={context.current.form?.a}
             onChange={onHandleChange}
           />
         </div>
@@ -135,7 +136,7 @@ export const Form = (): JSX.Element => {
             placeholder="Pretraživač"
             className="form-control"
             name="query"
-            value={context.form?.q}
+            value={context.current.form?.q}
             onChange={onHandleChange}
           />
         </div>
