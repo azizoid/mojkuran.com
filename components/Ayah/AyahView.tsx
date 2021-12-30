@@ -2,8 +2,11 @@ import Link from "next/link"
 import dynamic from "next/dynamic"
 
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md"
+import classnames from "classnames"
 
-const ColoredText = dynamic(() => import("./colored.text.component"), {
+import styles from "./AyahView.module.scss"
+
+const ColoredText = dynamic(() => import("../../ui/ColoredText/ColoredText"), {
   ssr: false,
 })
 
@@ -12,10 +15,10 @@ const AyahView = ({ data }): JSX.Element => {
 
   return (
     <>
-      <li className="list-group-item text-top list-group-item-action d-flex w-100 justify-content-between ">
+      <li className="list-group-item text-top list-group-item-action d-flex w-100 justify-content-between">
         {prev !== null && (
           <Link href={`/${data.s}/${prev}`}>
-            <a className="ayah-nav-click">
+            <a className={styles.ayahNavClick}>
               <MdNavigateBefore />
             </a>
           </Link>
@@ -27,16 +30,26 @@ const AyahView = ({ data }): JSX.Element => {
         </div>
         {next !== null && (
           <Link href={`/${data.s}/${next}`}>
-            <a className="ayah-nav-click">
+            <a className={styles.ayahNavClick}>
               <MdNavigateNext />
             </a>
           </Link>
         )}
       </li>
-      <li className="list-group-item list-group-item-action align-middle ayah-details">
+      <li
+        className={classnames(
+          "list-group-item list-group-item-action align-middle",
+          styles.ayahDetails
+        )}
+      >
         <ColoredText key="transliteration" content={transliteration} />
       </li>
-      <li className="list-group-item list-group-item-action ayah-details">
+      <li
+        className={classnames(
+          "list-group-item list-group-item-action",
+          styles.ayahDetails
+        )}
+      >
         <h2 className="text-right align-text-top arabic">{arabic}</h2>
       </li>
       <li className="list-group-item ">

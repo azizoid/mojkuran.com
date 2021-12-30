@@ -2,8 +2,8 @@ import React from "react"
 import Head from "next/head"
 import { GetStaticPaths, GetStaticProps } from "next"
 
-import MainLayout from "../../layouts/main.layout"
-import SoorahAyah from "../../components/soorah.ayah.component"
+import { MainLayout } from "../../layouts/MainLayout"
+import { SoorahAyah } from "../../components/SoorahAyah/SoorahAyah"
 
 import SOORAH_LIST from "../../assets/soorahList"
 

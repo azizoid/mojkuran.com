@@ -24,24 +24,3 @@ a {
 * {
   box-sizing: border-box;
 }
-
-#ornament {
-  height: 5em;
-  background: url("/img/ornament.gif") repeat-x;
-  background-position: left -2.3em;
-}
-
-@media (max-width: 480px) {
-  #ornament {
-    height: 3em;
-  }
-}
-
-.ayah-nav-click {
-  font-size: 3em;
-  color: #6cb2eb;
-}
-
-.ayah-details {
-  padding: 2rem;
-}

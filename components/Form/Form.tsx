@@ -1,12 +1,15 @@
 import React, { useContext, useEffect } from "react"
 import { useRouter } from "next/router"
 
-import soorahList from "../assets/soorahList"
+import soorahList from "../../assets/soorahList"
 
-import { FormContext } from "../store/form-store"
-import { getView } from "../utils/getView/getView"
+import { FormContext } from "../../store/form-store"
+import { getView } from "../../utils/getView/getView"
+import classNames from "classnames"
 
-const Form = () => {
+import styles from "./Form.module.scss"
+
+export const Form = () => {
   const router = useRouter()
   const context = useContext(FormContext)
 
@@ -78,7 +81,7 @@ const Form = () => {
   return (
     <form
       id="search"
-      className="card card-header searchForm"
+      className={classNames("card card-header", styles.searchForm)}
       acceptCharset="UTF-8"
       onSubmit={onSubmit}
     >

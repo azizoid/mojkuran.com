@@ -2,15 +2,15 @@ import Head from "next/head"
 import Link from "next/link"
 import { GetServerSideProps } from "next"
 
-import MainLayout from "../../layouts/main.layout"
+import { MainLayout } from "../../layouts/MainLayout"
 
-import ColoredText from "../../components/colored.text.component"
+import { ColoredText } from "../../ui/ColoredText/ColoredText"
 
 import SOORAH_LIST from "../../assets/soorahList"
 
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md"
 
-const Ayah = ({ out, data, error }) => {
+export const Ayah = ({ out, data, error }) => {
   if (error !== null) {
     return (
       <MainLayout>
