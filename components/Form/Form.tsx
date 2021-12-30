@@ -1,29 +1,36 @@
-import React, { useContext, useEffect } from "react"
+import React, {
+  ChangeEvent,
+  SyntheticEvent,
+  useContext,
+  useEffect,
+} from "react"
 import { useRouter } from "next/router"
 
 import soorahList from "../../assets/soorahList"
 
 import { FormContext } from "../../store/form-store"
-import { getView } from "../../utils/getView/getView"
+import { getView } from "../../utility/getView/getView"
 import classNames from "classnames"
 
 import styles from "./Form.module.scss"
 
-export const Form = () => {
+export const Form = (): JSX.Element => {
   const router = useRouter()
   const context = useContext(FormContext)
 
   useEffect(() => {
     const form = getView({
       s: Number(router.query?.s?.toString()) || 0,
-      a: Number(router.query?.za?.toString()) || undefined,
+      a: Number(router.query?.za?.toString()) || "",
       q: router.query?.search?.toString() || "",
       view: "empty",
     })
     context.setForm(form)
   }, [router])
 
-  const onHandleChange = (event) => {
+  const onHandleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = event.target
 
     switch (name) {
@@ -31,7 +38,7 @@ export const Form = () => {
         context.setForm((prev) => ({
           ...prev,
           s: Number(value),
-          a: undefined,
+          a: "",
           q: "",
           view: name,
         }))
@@ -48,15 +55,17 @@ export const Form = () => {
         context.setForm((prev) => ({
           ...prev,
           s: 0,
-          a: undefined,
+          a: "",
           q: value,
           view: name,
         }))
         break
+      default:
+        throw new Error("Invalid Form Element")
     }
   }
 
-  const onSubmit = (event) => {
+  const onSubmit = (event: SyntheticEvent) => {
     event.preventDefault()
 
     const form = getView(context.form)
@@ -81,7 +90,7 @@ export const Form = () => {
   return (
     <form
       id="search"
-      className={classNames("card card-header", styles.searchForm)}
+      className={classNames("card", "card-header", styles.searchForm)}
       acceptCharset="UTF-8"
       onSubmit={onSubmit}
     >
@@ -128,7 +137,6 @@ export const Form = () => {
             name="query"
             value={context.form?.q}
             onChange={onHandleChange}
-            defaultValue={router.query.search?.toString()}
           />
         </div>
         <div className="input-group-append col-5">

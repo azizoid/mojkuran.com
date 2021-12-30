@@ -26,7 +26,10 @@ export const Search = (): JSX.Element => {
         .then(({ out, paginate }) => {
           if (out?.length > 0) {
             setOut(out)
-            setPaginate(paginate)
+            setPaginate({
+              ...paginate,
+              currentPage: Number(paginate.currentPage),
+            })
 
             setPageState(PageStates.SEARCH)
           } else {

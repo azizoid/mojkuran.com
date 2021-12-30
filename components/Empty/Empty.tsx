@@ -1,7 +1,11 @@
 import Link from "next/link"
 import classnames from "classnames"
 
-export const Empty = ({ alert = null }): JSX.Element => (
+export type EmptyProps = {
+  alert: "danger" | "success"
+}
+
+export const Empty = ({ alert = "success" }): JSX.Element => (
   <div className="row">
     <div className="clearfix col">
       <ol className="breadcrumb justify-content-center">

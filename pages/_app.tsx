@@ -8,7 +8,7 @@ import { FormContextProvider } from "../store/form-store"
 
 import "../styles/app.scss"
 
-const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => (
+const MyApp = ({ Component, pageProps }: AppProps) => (
   <FormContextProvider>
     <Script
       src="https://www.googletagmanager.com/gtag/js?id=UA-46216659-7"

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import dynamic from "next/dynamic"
 import Link from "next/link"
 import Image from "next/image"
@@ -31,7 +31,7 @@ import classnames from "classnames"
 
 import styles from "./MainLayout.module.scss"
 
-export const MainLayout = ({ children }) => (
+export const MainLayout: FC = ({ children }) => (
   <>
     <div className="container position-relative">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">

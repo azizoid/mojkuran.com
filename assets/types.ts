@@ -1,15 +1,19 @@
 export type AyahProps = {
   id: number;
-  s: number;
-  a: number;
+  s: FormSoorahProp;
+  a: FormAyahProp;
   c: string;
   t: 1
 }
 
+export type FormSoorahProp = number
+export type FormAyahProp = number | ""
+export type FormQueryProp = string | undefined
+
 export type RouterForm = {
-  s?: number;
-  za?: number | undefined;
-  q?: string | undefined;
+  s?: FormSoorahProp;
+  za?: FormAyahProp;
+  q?: FormQueryProp;
 }
 
 export enum PageStates {
@@ -32,3 +36,4 @@ export type PaginationProps = {
   to: number,
   total: number,
 }
+

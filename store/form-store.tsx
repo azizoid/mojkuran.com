@@ -1,16 +1,17 @@
 import React, { createContext, FC, useState } from "react"
+import { FormAyahProp, FormQueryProp, FormSoorahProp } from "../assets/types"
 
 export type FormProps = {
-  s?: number
-  a?: number | undefined
+  s?: FormSoorahProp
+  a?: FormAyahProp
   t?: 1
-  q?: string
+  q?: FormQueryProp
   view: string
 }
 
 export const initialStateProps: FormProps = {
   s: 0,
-  a: undefined,
+  a: "",
   q: "",
   view: "empty",
   t: 1,

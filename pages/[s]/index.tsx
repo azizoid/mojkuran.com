@@ -7,7 +7,7 @@ import { SoorahAyah } from "../../components/SoorahAyah/SoorahAyah"
 
 import SOORAH_LIST from "../../assets/soorahList"
 
-const Soorah = ({ out, data, error }) => {
+export const Soorah = ({ out, data, error }): JSX.Element => {
   if (error !== "") {
     return (
       <MainLayout>

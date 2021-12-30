@@ -1,19 +1,19 @@
-import { RouterForm } from "../../assets/types"
+import { RouterForm, FormAyahProp } from "../../assets/types"
 
 export type GetViewProps = Omit<RouterForm, 'za'> & {
-  a?: number | undefined,
+  a?: FormAyahProp,
   view: string
 }
 
 export const getView = (form: GetViewProps): GetViewProps => {
 
-  if (form.s && form.s > 0 && form.s < 115) {
+  if (form?.s > 0 && form?.s < 115) {
     form.view = "soorah"
 
-    if (form.a && form.a > 0 && form.a < 287) {
+    if (form?.a > 0 && form?.a < 287) {
       form.view = "ayah"
     }
-  } else if (form.q && form.q.length > 2) {
+  } else if (form?.q?.length > 2) {
     form.view = "search"
   } else form.view = "empty"
 

@@ -10,7 +10,7 @@ const ColoredText = dynamic(() => import("../../ui/ColoredText/ColoredText"), {
   ssr: false,
 })
 
-const AyahView = ({ data }): JSX.Element => {
+export const AyahView = ({ data }): JSX.Element => {
   const { s, a, c, arabic, transliteration, prev, next } = data
 
   return (
@@ -50,7 +50,7 @@ const AyahView = ({ data }): JSX.Element => {
           styles.ayahDetails
         )}
       >
-        <h2 className="text-right align-text-top arabic">{arabic}</h2>
+        <h2 className="text-right align-text-top">{arabic}</h2>
       </li>
       <li className="list-group-item ">
         <ul className="pagination justify-content-center">
