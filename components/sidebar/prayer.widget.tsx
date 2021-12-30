@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react"
 
 const prayersListEmpty = [
   { id: 1, title: "Zora", time: "--:--" },
@@ -7,11 +7,11 @@ const prayersListEmpty = [
   { id: 4, title: "Ikindija", time: "--:--" },
   { id: 5, title: "Akšam", time: "--:--" },
   { id: 6, title: "Jatsija", time: "--:--" },
-];
+]
 
-const PrayerWidget = () => {
-  const [prayers, setPrayers] = useState(prayersListEmpty);
-  const [hijri, setHijri] = useState("");
+const PrayerWidget = (): JSX.Element => {
+  const [prayers, setPrayers] = useState(prayersListEmpty)
+  const [hijri, setHijri] = useState("")
 
   useEffect(() => {
     async function fetchData() {
@@ -21,13 +21,13 @@ const PrayerWidget = () => {
           const out = prayersListEmpty.map((prayer, i) => ({
             ...prayer,
             time: data["vakat"][i],
-          }));
-          setHijri(data.datum[1]);
-          setPrayers(out);
-        });
+          }))
+          setHijri(data.datum[1])
+          setPrayers(out)
+        })
     }
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   return (
     <table className="table table-borderless table-sm">
@@ -60,6 +60,6 @@ const PrayerWidget = () => {
         </tr>
       </tbody>
     </table>
-  );
-};
-export default PrayerWidget;
+  )
+}
+export default PrayerWidget

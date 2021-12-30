@@ -55,10 +55,16 @@
 //   line-height: 1.5em;
 // }
 
-.ayah-form-input, .kelme-form-input {
+.searchForm {
+  margin-bottom: 2em;
+}
+
+.ayah-form-input,
+.kelme-form-input {
   border-color: #38c172;
 }
-.ayah-form-input::placeholder, .kelme-form-input::placeholder {
+.ayah-form-input::placeholder,
+.kelme-form-input::placeholder {
   color: #38c172;
   opacity: 1; /* Firefox */
 }
@@ -69,45 +75,3 @@
 }
 
 /* asas */
-
-@keyframes ldio-4rs3u70qdq {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(180deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-.ldio-4rs3u70qdq div {
-  position: absolute;
-  animation: ldio-4rs3u70qdq 1s linear infinite;
-  width: 160px;
-  height: 160px;
-  top: 20px;
-  left: 20px;
-  border-radius: 50%;
-  box-shadow: 0 4px 0 0 #b3c430;
-  transform-origin: 80px 82px;
-}
-.loadingio-spinner-eclipse-5rkdd8dfofv {
-  width: 200px;
-  height: 200px;
-  display: inline-block;
-  overflow: hidden;
-  // background: #f1f2f3;
-  background: #f8fafc;
-}
-.ldio-4rs3u70qdq {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform: translateZ(0) scale(1);
-  backface-visibility: hidden;
-  transform-origin: 0 0; /* see note above */
-}
-.ldio-4rs3u70qdq div {
-  box-sizing: content-box;
-}

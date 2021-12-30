@@ -1,8 +1,15 @@
-import Link from "next/link";
-import Highlighter from "react-highlight-words";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import Link from "next/link"
+import Highlighter from "react-highlight-words"
+import { FaExternalLinkAlt } from "react-icons/fa"
 
-const SoorahAyah = ({ ayah, mark="" }) => {
+import { AyahProps } from "../assets/types"
+
+export type SoorahAyahProps = {
+  ayah: AyahProps
+  mark?: string
+}
+
+const SoorahAyah = ({ ayah, mark = "" }): JSX.Element => {
   return (
     <li className="list-group-item text-top list-group-item-action d-flex w-100 justify-content-between">
       <div className="text-start mx-1">
@@ -15,7 +22,6 @@ const SoorahAyah = ({ ayah, mark="" }) => {
           autoEscape={true}
           highlightClassName="bg-warning"
         />
-        
       </div>
       <Link href={`/${ayah.s}/${ayah.a}`}>
         <a>
@@ -23,7 +29,7 @@ const SoorahAyah = ({ ayah, mark="" }) => {
         </a>
       </Link>
     </li>
-  );
-};
+  )
+}
 
-export default SoorahAyah;
+export default SoorahAyah

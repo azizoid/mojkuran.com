@@ -1,14 +1,14 @@
-import Link from "next/link";
-import dynamic from "next/dynamic";
+import Link from "next/link"
+import dynamic from "next/dynamic"
 
-import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
+import { MdNavigateBefore, MdNavigateNext } from "react-icons/md"
 
 const ColoredText = dynamic(() => import("./colored.text.component"), {
   ssr: false,
-});
+})
 
-const AyahView = ({ data }) => {
-  const { s, a, c, arabic, transliteration, prev, next } = data;
+const AyahView = ({ data }): JSX.Element => {
+  const { s, a, c, arabic, transliteration, prev, next } = data
 
   return (
     <>
@@ -66,7 +66,7 @@ const AyahView = ({ data }) => {
         </ul>
       </li>
     </>
-  );
-};
+  )
+}
 
-export default AyahView;
+export default AyahView
