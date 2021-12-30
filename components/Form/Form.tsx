@@ -26,7 +26,7 @@ export const Form = (): JSX.Element => {
       view: "empty",
     })
     context.setForm(form)
-  }, [router])
+  }, [context, router.query])
 
   const onHandleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
