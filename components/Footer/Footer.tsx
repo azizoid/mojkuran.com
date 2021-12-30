@@ -5,7 +5,7 @@ import classnames from "classnames"
 import styles from "./Footer.module.scss"
 
 export const Footer = (): JSX.Element => (
-  <nav className="navbar fixed-bottom navbar-dark bg-dark">
+  <nav className="navbar sticky-bottom navbar-dark bg-dark">
     <div className="container">
       <ol
         className={classnames(
