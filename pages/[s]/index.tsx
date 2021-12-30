@@ -2,12 +2,12 @@ import React from "react"
 import Head from "next/head"
 import { GetStaticPaths, GetStaticProps } from "next"
 
-import MainLayout from "../../layouts/main.layout"
-import SoorahAyah from "../../components/soorah.ayah.component"
+import { MainLayout } from "../../layouts/MainLayout"
+import { SoorahAyah } from "../../components/SoorahAyah/SoorahAyah"
 
 import SOORAH_LIST from "../../assets/soorahList"
 
-const Soorah = ({ out, data, error }) => {
+export const Soorah = ({ out, data, error }): JSX.Element => {
   if (error !== "") {
     return (
       <MainLayout>

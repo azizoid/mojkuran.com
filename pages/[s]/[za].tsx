@@ -1,16 +1,16 @@
+import { GetServerSideProps } from "next"
 import Head from "next/head"
 import Link from "next/link"
-import { GetServerSideProps } from "next"
-
-import MainLayout from "../../layouts/main.layout"
-
-import ColoredText from "../../components/colored.text.component"
+import { MdNavigateBefore, MdNavigateNext } from "react-icons/md"
+import { MainLayout } from "../../layouts/MainLayout"
+import { ColoredText } from "../../ui/ColoredText/ColoredText"
 
 import SOORAH_LIST from "../../assets/soorahList"
 
-import { MdNavigateBefore, MdNavigateNext } from "react-icons/md"
+import styles from "./za.module.scss"
+import classNames from "classnames"
 
-const Ayah = ({ out, data, error }) => {
+export const Ayah = ({ out, data, error }) => {
   if (error !== null) {
     return (
       <MainLayout>
@@ -70,12 +70,7 @@ const Ayah = ({ out, data, error }) => {
           {prev !== null && (
             <div className="page-item">
               <Link href={`/${data.s}/${prev}`}>
-                <a
-                  style={{
-                    fontSize: "3em",
-                    color: "#6cb2eb",
-                  }}
-                >
+                <a className={styles.navigateButton}>
                   <MdNavigateBefore />
                 </a>
               </Link>
@@ -89,12 +84,7 @@ const Ayah = ({ out, data, error }) => {
           {next !== null && (
             <div>
               <Link href={`/${data.s}/${next}`}>
-                <a
-                  style={{
-                    fontSize: "3em",
-                    color: "#6cb2eb",
-                  }}
-                >
+                <a className={styles.navigateButton}>
                   <MdNavigateNext />
                 </a>
               </Link>
@@ -102,16 +92,20 @@ const Ayah = ({ out, data, error }) => {
           )}
         </li>
         <li
-          className="list-group-item list-group-item-action"
-          style={{ padding: "2rem" }}
+          className={classNames(
+            "list-group-item list-group-item-action",
+            styles.ayahDetails
+          )}
         >
           <ColoredText key="transliteration" content={transliteration} />
         </li>
         <li
-          className="list-group-item list-group-item-action"
-          style={{ padding: "2rem" }}
+          className={classNames(
+            "list-group-item list-group-item-action",
+            styles.ayahDetails
+          )}
         >
-          <h2 className="text-end text-top arabic">{arabic}</h2>
+          <h2 className="text-end text-top">{arabic}</h2>
         </li>
         <li className="list-group-item">{paginateLinks}</li>
       </ul>
@@ -122,7 +116,6 @@ const Ayah = ({ out, data, error }) => {
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const soorah = query.s
   const ayah = query.za
-  // const t = query.t || 1;
 
   const response = await fetch(`https://mojkuran.com/api/${soorah}/${ayah}`)
   const propsData = await response.json()

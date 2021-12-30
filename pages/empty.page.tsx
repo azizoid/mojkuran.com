@@ -1,10 +1,10 @@
-import MainLayout from "../layouts/main.layout"
-import EmptyComponent from "../components/empty.component"
+import { MainLayout } from "../layouts/MainLayout"
+import { Empty } from "../components/Empty/Empty"
 
-const Empty = (): JSX.Element => (
+const EmptyPage = (): JSX.Element => (
   <MainLayout>
-    <EmptyComponent />
+    <Empty />
   </MainLayout>
 )
 
-export default Empty
+export default EmptyPage

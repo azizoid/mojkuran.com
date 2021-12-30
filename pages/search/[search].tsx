@@ -5,12 +5,12 @@ import Pagination from "react-js-pagination"
 
 import { PageStates, PaginationProps } from "../../assets/types"
 
-import MainLayout from "../../layouts/main.layout"
-import Empty from "../../components/empty.component"
+import { MainLayout } from "../../layouts/MainLayout"
+import { Empty } from "../../components/Empty/Empty"
 import Loader from "../../components/Loader/Loader"
-import SearchAyah from "../../components/search.ayah.component"
+import { SearchAyah } from "../../components/SearchAyah/SearchAyah"
 
-const Search = (): JSX.Element => {
+export const Search = (): JSX.Element => {
   const [paginate, setPaginate] = useState<PaginationProps>()
   const [out, setOut] = useState([])
   const [pageState, setPageState] = useState(PageStates.INIT)
@@ -26,7 +26,10 @@ const Search = (): JSX.Element => {
         .then(({ out, paginate }) => {
           if (out?.length > 0) {
             setOut(out)
-            setPaginate(paginate)
+            setPaginate({
+              ...paginate,
+              currentPage: Number(paginate.currentPage),
+            })
 
             setPageState(PageStates.SEARCH)
           } else {

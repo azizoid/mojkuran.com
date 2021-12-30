@@ -1,8 +1,8 @@
 import Head from "next/head"
-import MainLayout from "../layouts/main.layout"
-import Empty from "../components/empty.component"
+import { MainLayout } from "../layouts/MainLayout"
+import { Empty } from "../components/Empty/Empty"
 
-export const Home = () => (
+export const Home = (): JSX.Element => (
   <MainLayout>
     <Head>
       <title>Čitaj svoju knjigu | Mojkuran.com </title>
