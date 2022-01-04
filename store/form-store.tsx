@@ -1,5 +1,7 @@
-import React, { createContext, FC, useState } from "react"
+import { useRouter } from "next/router"
+import React, { createContext, FC, useEffect, useState } from "react"
 import { FormAyahProp, FormQueryProp, FormSoorahProp } from "../assets/types"
+import { getView } from "../utility/getView/getView"
 
 export type FormProps = {
   s?: FormSoorahProp
@@ -26,7 +28,18 @@ export const FormContext = createContext<{
 })
 
 export const FormContextProvider: FC = ({ children }) => {
+  const router = useRouter()
   const [state, setState] = useState<FormProps>(initialStateProps)
+
+  useEffect(() => {
+    const form = getView({
+      s: Number(router.query?.s?.toString()) || 0,
+      a: Number(router.query?.za?.toString()) || "",
+      q: router.query?.search?.toString() || "",
+      view: "empty",
+    })
+    setState(form)
+  }, [router.query?.s, router.query?.search, router.query?.za])
 
   return (
     <FormContext.Provider value={{ form: state, setForm: setState }}>

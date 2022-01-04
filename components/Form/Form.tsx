@@ -1,33 +1,16 @@
-import React, {
-  ChangeEvent,
-  SyntheticEvent,
-  useContext,
-  useEffect,
-  useRef,
-} from "react"
+import React, { ChangeEvent, SyntheticEvent, useContext } from "react"
 import { useRouter } from "next/router"
 
 import soorahList from "../../assets/soorahList"
 
 import { FormContext } from "../../store/form-store"
-import { getView } from "../../utility/getView/getView"
 import classNames from "classnames"
 
 import styles from "./Form.module.scss"
 
 export const Form = (): JSX.Element => {
   const router = useRouter()
-  const context = useRef(useContext(FormContext))
-
-  useEffect(() => {
-    const form = getView({
-      s: Number(router.query?.s?.toString()) || 0,
-      a: Number(router.query?.za?.toString()) || "",
-      q: router.query?.search?.toString() || "",
-      view: "empty",
-    })
-    context.current.setForm(form)
-  }, [router])
+  const context = useContext(FormContext)
 
   const onHandleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -36,7 +19,7 @@ export const Form = (): JSX.Element => {
 
     switch (name) {
       case "soorah":
-        context.current.setForm((prev) => ({
+        context.setForm((prev) => ({
           ...prev,
           s: Number(value),
           a: "",
@@ -45,15 +28,15 @@ export const Form = (): JSX.Element => {
         }))
         break
       case "ayah":
-        context.current.setForm((prev) => ({
+        context.setForm((prev) => ({
           ...prev,
           a: Number(value),
           q: "",
           view: name,
         }))
         break
-      case "query":
-        context.current.setForm((prev) => ({
+      case "search":
+        context.setForm((prev) => ({
           ...prev,
           s: 0,
           a: "",
@@ -69,8 +52,8 @@ export const Form = (): JSX.Element => {
   const onSubmit = (event: SyntheticEvent) => {
     event.preventDefault()
 
-    const form = getView(context.current.form)
-
+    // const form = getView(context.form)
+    const form = context.form
     switch (form.view) {
       case "search":
         router.push(`/search/${form.q}`)
@@ -84,7 +67,6 @@ export const Form = (): JSX.Element => {
       case "empty":
       default:
         router.push(`/`)
-        break
     }
   }
 
@@ -100,7 +82,7 @@ export const Form = (): JSX.Element => {
           <select
             className="form-select"
             name="soorah"
-            value={context.current.form?.s}
+            value={context.form?.s}
             onChange={onHandleChange}
           >
             {soorahList.map((soorah, index) => (
@@ -120,7 +102,7 @@ export const Form = (): JSX.Element => {
             min={1}
             max={286}
             name="ayah"
-            value={context.current.form?.a}
+            value={context.form?.a}
             onChange={onHandleChange}
           />
         </div>
@@ -135,8 +117,8 @@ export const Form = (): JSX.Element => {
             type="text"
             placeholder="Pretraživač"
             className="form-control"
-            name="query"
-            value={context.current.form?.q}
+            name="search"
+            value={context.form?.q}
             onChange={onHandleChange}
           />
         </div>
