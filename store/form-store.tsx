@@ -1,5 +1,12 @@
 import { useRouter } from "next/router"
-import React, { createContext, FC, useEffect, useState } from "react"
+import React, {
+  createContext,
+  Dispatch,
+  FC,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react"
 import { FormAyahProp, FormQueryProp, FormSoorahProp } from "../assets/types"
 import { getView } from "../utility/getView/getView"
 
@@ -19,13 +26,12 @@ export const initialStateProps: FormProps = {
   t: 1,
 }
 
-export const FormContext = createContext<{
+export type FormContextProps = {
   form: FormProps
-  setForm: React.Dispatch<React.SetStateAction<FormProps>>
-}>({
-  form: initialStateProps,
-  setForm: () => {},
-})
+  setForm: Dispatch<SetStateAction<FormProps>>
+}
+
+export const FormContext = createContext({} as FormContextProps)
 
 export const FormContextProvider: FC = ({ children }) => {
   const router = useRouter()
