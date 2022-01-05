@@ -13,7 +13,7 @@ const PrayerWidget = dynamic(
   }
 )
 const RandomAyah = dynamic(() => import("../components/sidebar/randomayah"), {
-  loading: () => <Loader />,
+  loading: () => <LoadingBoxes />,
   ssr: false,
 })
 const FacebookPage = dynamic(
@@ -26,7 +26,7 @@ const FacebookPage = dynamic(
 
 import { Footer } from "../components/Footer/Footer"
 import { Form } from "../components/Form/Form"
-import { Loader } from "../ui/Loader/Loader"
+import { LoadingBoxes } from "../ui/LoadingBoxes/LoadingBoxes"
 import classnames from "classnames"
 
 import styles from "./MainLayout.module.scss"
