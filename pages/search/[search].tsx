@@ -7,7 +7,7 @@ import { PageStates, PaginationProps } from "../../assets/types"
 
 import { MainLayout } from "../../layouts/MainLayout"
 import { Empty } from "../../components/Empty/Empty"
-import Loader from "../../components/Loader/Loader"
+import Loader from "../../ui/Loader/Loader"
 import { SearchAyah } from "../../components/SearchAyah/SearchAyah"
 
 export const Search = (): JSX.Element => {
@@ -19,25 +19,22 @@ export const Search = (): JSX.Element => {
   const router = useRouter()
   const query = router.query.search?.toString()
 
-  const getData = useCallback(
-    async () =>
-      await fetch(`https://mojkuran.com/api/search/${query}?page=${page}`)
-        .then((response) => response.json())
-        .then(({ out, paginate }) => {
-          if (out?.length > 0) {
-            setOut(out)
-            setPaginate({
-              ...paginate,
-              currentPage: Number(paginate.currentPage),
-            })
+  const getData = useCallback(async () => {
+    setPageState(PageStates.LOADING)
 
-            setPageState(PageStates.SEARCH)
-          } else {
-            setPageState(PageStates.LOADING)
-          }
-        }),
-    [page, query]
-  )
+    await fetch(`https://mojkuran.com/api/search/${query}?page=${page}`)
+      .then((response) => response.json())
+      .then(({ out, paginate }) => {
+        if (out?.length > 0) {
+          setOut(out)
+          setPaginate({
+            ...paginate,
+            currentPage: Number(paginate.currentPage),
+          })
+        }
+      })
+      .finally(() => setPageState(PageStates.SEARCH))
+  }, [page, query])
 
   useEffect(() => {
     if (query?.length > 2) {
