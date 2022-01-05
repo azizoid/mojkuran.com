@@ -1,16 +1,14 @@
 import React, { ChangeEvent, SyntheticEvent, useContext } from "react"
 import { useRouter } from "next/router"
-
-import soorahList from "../../assets/soorahList"
-
-import { FormContext } from "../../store/form-store"
 import classNames from "classnames"
+import { FormContext } from "../../store/form-store"
+import soorahList from "../../assets/soorahList"
 
 import styles from "./Form.module.scss"
 
 export const Form = (): JSX.Element => {
   const router = useRouter()
-  const context = useContext(FormContext)
+  const { form: formContext, setForm: setFormContext } = useContext(FormContext)
 
   const onHandleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -19,7 +17,7 @@ export const Form = (): JSX.Element => {
 
     switch (name) {
       case "soorah":
-        context.setForm((prev) => ({
+        setFormContext((prev) => ({
           ...prev,
           s: Number(value),
           a: "",
@@ -28,7 +26,7 @@ export const Form = (): JSX.Element => {
         }))
         break
       case "ayah":
-        context.setForm((prev) => ({
+        setFormContext((prev) => ({
           ...prev,
           a: Number(value),
           q: "",
@@ -36,7 +34,7 @@ export const Form = (): JSX.Element => {
         }))
         break
       case "search":
-        context.setForm((prev) => ({
+        setFormContext((prev) => ({
           ...prev,
           s: 0,
           a: "",
@@ -52,17 +50,15 @@ export const Form = (): JSX.Element => {
   const onSubmit = (event: SyntheticEvent) => {
     event.preventDefault()
 
-    // const form = getView(context.form)
-    const form = context.form
-    switch (form.view) {
+    switch (formContext.view) {
       case "search":
-        router.push(`/search/${form.q}`)
+        router.push(`/search/${formContext.q}`)
         break
       case "soorah":
-        router.push(`/${form.s}`)
+        router.push(`/${formContext.s}`)
         break
       case "ayah":
-        router.push(`/${form.s}/${form.a}`)
+        router.push(`/${formContext.s}/${formContext.a}`)
         break
       case "empty":
       default:
@@ -82,7 +78,7 @@ export const Form = (): JSX.Element => {
           <select
             className="form-select"
             name="soorah"
-            value={context.form?.s}
+            value={formContext?.s}
             onChange={onHandleChange}
           >
             {soorahList.map((soorah, index) => (
@@ -102,7 +98,7 @@ export const Form = (): JSX.Element => {
             min={1}
             max={286}
             name="ayah"
-            value={context.form?.a}
+            value={formContext?.a}
             onChange={onHandleChange}
           />
         </div>
@@ -118,7 +114,7 @@ export const Form = (): JSX.Element => {
             placeholder="Pretraživač"
             className="form-control"
             name="search"
-            value={context.form?.q}
+            value={formContext?.q}
             onChange={onHandleChange}
           />
         </div>
