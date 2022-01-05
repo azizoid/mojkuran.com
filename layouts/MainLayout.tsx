@@ -26,7 +26,7 @@ const FacebookPage = dynamic(
 
 import { Footer } from "../components/Footer/Footer"
 import { Form } from "../components/Form/Form"
-import { Loader } from "../components/Loader/Loader"
+import { Loader } from "../ui/Loader/Loader"
 import classnames from "classnames"
 
 import styles from "./MainLayout.module.scss"
