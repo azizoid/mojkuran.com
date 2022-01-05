@@ -34,7 +34,7 @@ import styles from "./MainLayout.module.scss"
 export const MainLayout: FC = ({ children }) => (
   <>
     <div className="container position-relative">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg">
         <Link href="/" passHref={true}>
           <a className="navbar-brand d-flex align-items-center text-muted">
             <Image
