@@ -6,9 +6,11 @@ import { MainLayout } from "../../layouts/MainLayout"
 import { SoorahAyah } from "../../components/SoorahAyah/SoorahAyah"
 
 import SOORAH_LIST from "../../assets/soorahList"
+import { getData } from "../../utility/getData/getDtata"
+import { DisplayData, PageStates } from "../../lib/types"
 
 export const Soorah = ({ out, data, error }): JSX.Element => {
-  if (error !== "") {
+  if (error === PageStates.NOT_FOUND) {
     return (
       <MainLayout>
         <div className="text-center">
@@ -24,13 +26,13 @@ export const Soorah = ({ out, data, error }): JSX.Element => {
     <MainLayout>
       <Head>
         <title>
-          Sura {SOORAH_LIST[data["s"]]} | Čitaj svoju knjigu | mojkuran.com
+          Sura {SOORAH_LIST[data.s]} | Čitaj svoju knjigu | mojkuran.com
         </title>
         <meta
           name="description"
           content={out
             .slice(0, 15)
-            .map((ayah) => ayah.c)
+            .map((ayah) => ayah.content)
             .join(" ")}
         />
       </Head>
@@ -40,8 +42,8 @@ export const Soorah = ({ out, data, error }): JSX.Element => {
             <h3 className="text-center">&#65021;</h3>
           </li>
         )}
-        {out.map((ayah) => (
-          <SoorahAyah ayah={ayah} key={ayah.id} />
+        {out.map((data: DisplayData) => (
+          <SoorahAyah data={data} key={data.id} />
         ))}
       </ul>
     </MainLayout>
@@ -50,31 +52,34 @@ export const Soorah = ({ out, data, error }): JSX.Element => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = Array.from({ length: 114 }, (_, i) => i + 1).map((soorah) => ({
-    params: { s: soorah.toString() },
+    params: { soorah: soorah.toString() },
   }))
 
-  return { paths, fallback: true }
+  return { paths, fallback: false }
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context
 
-  const res = await fetch(`https://mojkuran.com/api/${params.s}`)
-  const propsData = await res.json()
+  const res = await getData(`${process.env.NEXTAUTH_URL}/api/${params.soorah}`)
 
-  const props = {
-    error: "Not Found",
-    out: [],
-    data: { s: 0, a: "" },
+  if (!res?.out.length) {
+    return {
+      props: {
+        error: PageStates.NOT_FOUND,
+        out: [],
+        data: { s: 0, a: "" },
+      },
+    }
   }
-
-  if (propsData?.out?.length > 0) {
-    props.error = ""
-    props.out = propsData.out
-    props.data = propsData.data
+  console.log(res.data)
+  return {
+    props: {
+      error: "",
+      out: res.out,
+      data: res.data,
+    },
   }
-
-  return { props }
 }
 
 export default Soorah

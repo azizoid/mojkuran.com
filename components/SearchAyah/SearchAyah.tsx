@@ -13,16 +13,16 @@ export const SearchAyah = ({ ayah, mark = "" }): JSX.Element => (
   <li className="list-group-item text-top list-group-item-action d-flex w-100 justify-content-between">
     <div className="text-start mx-1">
       <span className="badge rounded-pill bg-primary">
-        {ayah.s}:{ayah.a}
+        {ayah.soorah}:{ayah.ayah}
       </span>{" "}
       <Highlighter
         searchWords={[mark]}
-        textToHighlight={ayah.c}
+        textToHighlight={ayah.content}
         autoEscape={true}
         highlightClassName="bg-warning"
       />
     </div>
-    <Link href={`/${ayah.s}/${ayah.a}`}>
+    <Link href={`/${ayah.soorah}/${ayah.ayah}`}>
       <a>
         <FaExternalLinkAlt />
       </a>

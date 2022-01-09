@@ -3,12 +3,12 @@ import { useRouter } from "next/router"
 
 import Pagination from "react-js-pagination"
 
-import { PageStates, PaginationProps } from "../../assets/types"
-
 import { MainLayout } from "../../layouts/MainLayout"
 import { Empty } from "../../components/Empty/Empty"
 import Loader from "../../ui/Loader/Loader"
 import { SearchAyah } from "../../components/SearchAyah/SearchAyah"
+import { PaginationProps } from "../../utility/paginate/paginate"
+import { PageStates } from "../../lib/types"
 
 export const Search = (): JSX.Element => {
   const [paginate, setPaginate] = useState<PaginationProps>()
@@ -22,7 +22,7 @@ export const Search = (): JSX.Element => {
   const getData = useCallback(async () => {
     setPageState(PageStates.LOADING)
 
-    await fetch(`https://mojkuran.com/api/search/${query}?page=${page}`)
+    await fetch(`/api/search/${query}?page=${page}`)
       .then((response) => response.json())
       .then(({ out, paginate }) => {
         if (out?.length > 0) {
@@ -64,7 +64,7 @@ export const Search = (): JSX.Element => {
     )
   }
 
-  const paginateLinks = paginate && (
+  const paginateLinks = paginate?.total > paginate?.perPage && (
     <li className="list-group-item">
       <Pagination
         activePage={paginate.currentPage}
@@ -84,7 +84,7 @@ export const Search = (): JSX.Element => {
       <ul className="list-group list-group-flush col-12">
         {paginateLinks}
 
-        {out.map((ayah) => (
+        {out?.map((ayah) => (
           <SearchAyah ayah={ayah} mark={query} key={ayah.id} />
         ))}
 
