@@ -37,8 +37,11 @@ export const Search = (): JSX.Element => {
   }, [page, query])
 
   useEffect(() => {
+    setPage(1)
+  }, [query])
+
+  useEffect(() => {
     if (query?.length > 2) {
-      setPage(1)
       getData()
     }
   }, [query, getData])
