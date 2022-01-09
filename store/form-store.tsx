@@ -7,24 +7,9 @@ import React, {
   useEffect,
   useState,
 } from "react"
-import { FormAyahProp, FormQueryProp, FormSoorahProp } from "../assets/types"
-import { getView } from "../utility/getView/getView"
+import { FormProps } from "../lib/types"
 
-export type FormProps = {
-  s?: FormSoorahProp
-  a?: FormAyahProp
-  t?: 1
-  q?: FormQueryProp
-  view: string
-}
-
-export const initialStateProps: FormProps = {
-  s: 0,
-  a: "",
-  q: "",
-  view: "empty",
-  t: 1,
-}
+import { getView, initialStateProps } from "../utility/getView/getView"
 
 export type FormContextProps = {
   form: FormProps
@@ -35,7 +20,7 @@ export const FormContext = createContext({} as FormContextProps)
 
 export const FormContextProvider: FC = ({ children }) => {
   const router = useRouter()
-  const [state, setState] = useState<FormProps>(initialStateProps)
+  const [state, setState] = useState(initialStateProps)
 
   useEffect(() => {
     const form = getView({
