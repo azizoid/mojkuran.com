@@ -1,12 +1,14 @@
-import { RouterForm, FormAyahProp } from "../../assets/types"
+import { FormProps } from "../../lib/types"
 
-export type GetViewProps = Omit<RouterForm, 'za'> & {
-  a?: FormAyahProp,
-  view: string
+export const initialStateProps: FormProps = {
+  s: 0,
+  a: "",
+  q: "",
+  view: "empty",
+  // t: 1,
 }
 
-export const getView = (form: GetViewProps): GetViewProps => {
-
+export const getView = (form: Partial<FormProps>): FormProps => {
   if (form?.s > 0 && form?.s < 115) {
     form.view = "soorah"
 
@@ -17,5 +19,5 @@ export const getView = (form: GetViewProps): GetViewProps => {
     form.view = "search"
   } else form.view = "empty"
 
-  return form
+  return { ...initialStateProps, ...form }
 }
