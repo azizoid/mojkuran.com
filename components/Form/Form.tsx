@@ -1,4 +1,9 @@
-import React, { ChangeEvent, SyntheticEvent, useContext } from "react"
+import React, {
+  ChangeEvent,
+  SyntheticEvent,
+  useContext,
+  useEffect,
+} from "react"
 import { useRouter } from "next/router"
 import classNames from "classnames"
 import { FormContext } from "../../store/form-store"
@@ -63,6 +68,10 @@ export const Form = (): JSX.Element => {
         router.push(`/`)
     }
   }
+
+  useEffect(() => {
+    console.warn(formContext)
+  }, [formContext])
 
   return (
     <form

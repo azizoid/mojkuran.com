@@ -16,12 +16,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
     />
     <Script id="google-analytics" strategy="afterInteractive">
       {`
-        window.dataLayer = window.dataLayer || []; 
-        function gtag() {window.dataLayer.push(arguments);}
-        gtag('js', new Date()); 
-        
-        gtag('config', 'UA-46216659-7');
-        `}
+      window.dataLayer = window.dataLayer || []; 
+      function gtag() {window.dataLayer.push(arguments);}
+      gtag('js', new Date()); 
+      
+      gtag('config', 'UA-46216659-7');
+      `}
     </Script>
 
     <NextNprogress />
