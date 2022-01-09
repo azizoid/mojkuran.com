@@ -13,7 +13,8 @@ import { getView, initialStateProps } from "../utility/getView/getView"
 
 export type FormContextProps = {
   form: FormProps
-  setForm: Dispatch<SetStateAction<FormProps>>
+  // setForm: Dispatch<SetStateAction<FormProps>>
+  setForm: (value: Partial<FormProps>) => void
 }
 
 export const FormContext = createContext({} as FormContextProps)
@@ -29,11 +30,16 @@ export const FormContextProvider: FC = ({ children }) => {
       q: router.query?.search?.toString() || "",
       view: "empty",
     })
+
     setState(form)
   }, [router.query?.s, router.query?.search, router.query?.za])
 
+  const setForm = (form: FormProps) => {
+    setState(getView(form))
+  }
+
   return (
-    <FormContext.Provider value={{ form: state, setForm: setState }}>
+    <FormContext.Provider value={{ form: state, setForm }}>
       {children}
     </FormContext.Provider>
   )

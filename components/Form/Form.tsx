@@ -17,30 +17,28 @@ export const Form = (): JSX.Element => {
 
     switch (name) {
       case "soorah":
-        setFormContext((prev) => ({
-          ...prev,
+        setFormContext({
           s: Number(value),
           a: "",
           q: "",
           view: name,
-        }))
+        })
         break
       case "ayah":
-        setFormContext((prev) => ({
-          ...prev,
+        setFormContext({
+          s: formContext.s,
           a: Number(value),
           q: "",
           view: name,
-        }))
+        })
         break
       case "search":
-        setFormContext((prev) => ({
-          ...prev,
+        setFormContext({
           s: 0,
           a: "",
           q: value,
           view: name,
-        }))
+        })
         break
       default:
         throw new Error("Invalid Form Element")
