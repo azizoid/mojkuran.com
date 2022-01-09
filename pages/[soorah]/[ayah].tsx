@@ -29,7 +29,7 @@ export const Ayah = ({ out, data, error }) => {
     <ul className="pagination justify-content-center">
       <li className="page-item">
         <Link href={`/${soorah}`}>
-          <a className="page-link">{`Sura ${SOORAH_LIST[ayah]}`}</a>
+          <a className="page-link">{`Sura ${SOORAH_LIST[soorah]}`}</a>
         </Link>
       </li>
       {prev !== null && (
