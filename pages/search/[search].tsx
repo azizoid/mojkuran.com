@@ -23,17 +23,18 @@ export const Search = (): JSX.Element => {
   const getData = useCallback(async () => {
     setPageState(PageStates.LOADING)
 
-    await getApiData(`/api/search/${query}?page=${page}`)
-      .then(({ out, paginate }) => {
+    await getApiData(`/api/search/${query}?page=${page}`).then(
+      ({ out, paginate }) => {
         if (out?.length > 0) {
           setOut(out)
           setPaginate({
             ...paginate,
             currentPage: Number(paginate.currentPage),
           })
-        }
-      })
-      .finally(() => setPageState(PageStates.SEARCH))
+          setPageState(PageStates.SEARCH)
+        } else setPageState(PageStates.EMPTY)
+      }
+    )
   }, [page, query])
 
   useEffect(() => {
