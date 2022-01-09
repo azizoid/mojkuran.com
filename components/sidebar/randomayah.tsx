@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from "react"
 
 import SOORAH_LIST from "../../assets/soorahList"
-import { AyahProps } from "../../assets/types"
-
-const fetchData = async () =>
-  await fetch("https://mojkuran.com/api/random").then((response) =>
-    response.json()
-  )
+import { DisplayData } from "../../lib/types"
+import { getApiData } from "../../utility/getApiData/getApiData"
 
 const RandomAyah = (): JSX.Element => {
-  const [out, setOut] = useState<AyahProps>({
-    id: 0,
-    s: 96,
-    a: 1,
-    c: "Čitaj, u ime Gospodara tvoga, koji stvara,",
-    t: 1,
+  const [out, setOut] = useState<DisplayData>({
+    id: "",
+    soorah: 96,
+    ayah: 1,
+    content: "Čitaj, u ime Gospodara tvoga, koji stvara,",
   })
 
   useEffect(() => {
-    fetchData().then((data) => setOut(data.out))
+    getApiData("/api/random").then((data) => setOut(data.out))
   }, [])
 
   return (
@@ -26,10 +21,10 @@ const RandomAyah = (): JSX.Element => {
       <div className="card-header">PROČITAJ JOŠ</div>
       <div className="card-body">
         <h6 className="card-title text-muted">
-          {`${SOORAH_LIST[out.s]}, ${out.a}`}
+          {`${SOORAH_LIST[out.soorah]}, ${out.ayah}`}
         </h6>
         <h6 className="card-title">
-          <a href={`/${out.s}/${out.a}?t=${out.t}`}>{out.c}</a>
+          <a href={`/${out.soorah}/${out.ayah}`}>{out.content}</a>
         </h6>
       </div>
     </div>
