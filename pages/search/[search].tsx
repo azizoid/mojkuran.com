@@ -8,11 +8,12 @@ import { Empty } from "../../components/Empty/Empty"
 import Loader from "../../ui/Loader/Loader"
 import { SearchAyah } from "../../components/SearchAyah/SearchAyah"
 import { PaginationProps } from "../../utility/paginate/paginate"
-import { PageStates } from "../../lib/types"
+import { DisplayData, PageStates } from "../../lib/types"
+import { getApiData } from "../../utility/getApiData/getApiData"
 
 export const Search = (): JSX.Element => {
   const [paginate, setPaginate] = useState<PaginationProps>()
-  const [out, setOut] = useState([])
+  const [out, setOut] = useState<DisplayData[]>()
   const [pageState, setPageState] = useState(PageStates.INIT)
   const [page, setPage] = useState(1)
 
@@ -22,8 +23,7 @@ export const Search = (): JSX.Element => {
   const getData = useCallback(async () => {
     setPageState(PageStates.LOADING)
 
-    await fetch(`/api/search/${query}?page=${page}`)
-      .then((response) => response.json())
+    await getApiData(`/api/search/${query}?page=${page}`)
       .then(({ out, paginate }) => {
         if (out?.length > 0) {
           setOut(out)

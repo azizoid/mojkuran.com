@@ -1,4 +1,4 @@
-export const getData = async (url: string) =>
+export const getApiData = async (url: string) =>
   await fetch(url)
     .then(response => {
       if (!response.ok) {

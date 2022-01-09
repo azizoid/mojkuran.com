@@ -6,7 +6,7 @@ import { MainLayout } from "../../layouts/MainLayout"
 import { SoorahAyah } from "../../components/SoorahAyah/SoorahAyah"
 
 import SOORAH_LIST from "../../assets/soorahList"
-import { getData } from "../../utility/getData/getDtata"
+import { getApiData } from "../../utility/getApiData/getApiData"
 import { DisplayData, PageStates } from "../../lib/types"
 
 export const Soorah = ({ out, data, error }): JSX.Element => {
@@ -61,7 +61,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context
 
-  const res = await getData(`${process.env.NEXTAUTH_URL}/api/${params.soorah}`)
+  const res = await getApiData(
+    `${process.env.NEXTAUTH_URL}/api/${params.soorah}`
+  )
 
   if (!res?.out.length) {
     return {

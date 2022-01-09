@@ -9,7 +9,7 @@ import SOORAH_LIST from "../../assets/soorahList"
 
 import styles from "../../styles/soorahAyah.module.scss"
 import classNames from "classnames"
-import { getData } from "../../utility/getData/getDtata"
+import { getApiData } from "../../utility/getApiData/getApiData"
 import { PageStates } from "../../lib/types"
 
 export const Ayah = ({ out, data, error }) => {
@@ -119,7 +119,9 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const soorah = query.soorah
   const ayah = query.ayah
 
-  const res = await getData(`${process.env.NEXTAUTH_URL}/api/${soorah}/${ayah}`)
+  const res = await getApiData(
+    `${process.env.NEXTAUTH_URL}/api/${soorah}/${ayah}`
+  )
 
   console.log(res)
 
