@@ -49,7 +49,7 @@ const handler = async (
           const next = await contentCollection.findOne({
             soorah_id, aya_id: ayah_id + 1
           }).then((data) => data?.aya_id ? data.aya_id : null)
-          console.log(prev, next)
+
           const detailsCollection = db.collection<DetailsTypes>('details')
           const details = await detailsCollection.findOne({
             soorah_id, aya_id: ayah_id

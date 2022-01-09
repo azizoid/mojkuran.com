@@ -42,10 +42,8 @@ export const Search = (): JSX.Element => {
   }, [query])
 
   useEffect(() => {
-    if (query?.length > 2) {
-      getData()
-    }
-  }, [query, getData])
+    getData()
+  }, [getData])
 
   if (pageState === PageStates.EMPTY) {
     return (

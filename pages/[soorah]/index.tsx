@@ -74,7 +74,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       },
     }
   }
-  console.log(res.data)
+
   return {
     props: {
       error: "",

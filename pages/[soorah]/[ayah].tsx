@@ -123,8 +123,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     `${process.env.NEXTAUTH_URL}/api/${soorah}/${ayah}`
   )
 
-  console.log(res)
-
   if (res.success === false) {
     return {
       props: {
