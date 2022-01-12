@@ -29,7 +29,7 @@ export const Empty = ({ alert = "success" }): JSX.Element => (
       <div className="col">
         <h6
           className={classnames(
-            "text-end",
+            "text-start",
             "alert",
             alert === "danger" ? "alert-info" : "alert-success"
           )}
