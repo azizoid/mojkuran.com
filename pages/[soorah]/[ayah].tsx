@@ -68,6 +68,7 @@ export const Ayah = ({ out, data, error }) => {
             <h3 className="text-center">&#65021;</h3>
           </li>
         )}
+        <li className="list-group-item">{paginateLinks}</li>
         <li className="list-group-item text-top list-group-item-action d-flex w-100 justify-content-between">
           {prev !== null && (
             <div className="page-item">
