@@ -96,7 +96,7 @@ export const Form = (): JSX.Element => {
           className={classNames("form-control", styles.ayah)}
           size={3}
           maxLength={3}
-          min={1}
+          min={0}
           max={286}
           name="ayah"
           value={formContext?.a}
