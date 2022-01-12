@@ -23,8 +23,8 @@ export const Search = (): JSX.Element => {
   const getData = useCallback(async () => {
     setPageState(PageStates.LOADING)
 
-    await getApiData(`/api/search/${query}?page=${page}`).then(
-      ({ out, paginate }) => {
+    await getApiData(`/api/search/${query}?page=${page}`)
+      .then(({ out, paginate }) => {
         if (out?.length > 0) {
           setOut(out)
           setPaginate({
@@ -32,9 +32,9 @@ export const Search = (): JSX.Element => {
             currentPage: Number(paginate.currentPage),
           })
           setPageState(PageStates.SEARCH)
-        } else setPageState(PageStates.EMPTY)
-      }
-    )
+        } else throw new Error("not found")
+      })
+      .catch(() => setPageState(PageStates.NOT_FOUND))
   }, [page, query])
 
   useEffect(() => {
@@ -45,15 +45,10 @@ export const Search = (): JSX.Element => {
     getData()
   }, [getData])
 
-  if (pageState === PageStates.EMPTY) {
+  if (pageState === PageStates.NOT_FOUND) {
     return (
       <MainLayout>
-        <div className="row">
-          <div className="col-sm-12 alert alert-danger">
-            Riječ nije pronađena
-          </div>
-          <Empty alert="danger" />
-        </div>
+        <div className="col-sm-12 alert alert-danger">Riječ nije pronađena</div>
       </MainLayout>
     )
   }
