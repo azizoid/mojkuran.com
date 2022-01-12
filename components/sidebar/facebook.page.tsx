@@ -1,5 +1,5 @@
 const FacebookPage = (): JSX.Element => (
-  <div className="card d-none d-lg-block">
+  <div className="card">
     <div className="card-header">PRIDRUŹI NAM SE</div>
     <div className="col">
       <div
