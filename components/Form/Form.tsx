@@ -80,56 +80,51 @@ export const Form = (): JSX.Element => {
       acceptCharset="UTF-8"
       onSubmit={onSubmit}
     >
-      <div className="row">
-        <div className="col-4 mb-3">
-          <select
-            className="form-select"
-            name="soorah"
-            value={formContext?.s}
-            onChange={onHandleChange}
-          >
-            {soorahList.map((soorah, index) => (
-              <option value={index} key={index}>
-                {soorah}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="col-3">
-          <input
-            type="number"
-            placeholder="Ajet"
-            className="form-control"
-            size={3}
-            maxLength={3}
-            min={1}
-            max={286}
-            name="ayah"
-            value={formContext?.a}
-            onChange={onHandleChange}
-          />
-        </div>
-        <div className="input-group-prepend col-5 text-center">
+      <div className={styles.formFirstLine}>
+        <select
+          className="form-select"
+          name="soorah"
+          value={formContext?.s}
+          onChange={onHandleChange}
+        >
+          {soorahList.map((soorah, index) => (
+            <option value={index} key={index}>
+              {soorah}
+            </option>
+          ))}
+        </select>
+
+        <input
+          type="number"
+          placeholder="Ajet"
+          className={classNames("form-control", styles.ayah)}
+          size={3}
+          maxLength={3}
+          min={1}
+          max={286}
+          name="ayah"
+          value={formContext?.a}
+          onChange={onHandleChange}
+        />
+
+        <div className={styles.translator}>
           <small className="nav-link">Besim&nbsp;Korkut</small>
         </div>
       </div>
 
-      <div className="form-group row">
-        <div className="input-group-prepend col-7">
-          <input
-            type="text"
-            placeholder="Pretraživač"
-            className="form-control"
-            name="search"
-            value={formContext?.q}
-            onChange={onHandleChange}
-          />
-        </div>
-        <div className="input-group-append col-5">
-          <button className="btn btn-success form-control" type="submit">
-            Pretraži
-          </button>
-        </div>
+      <div className={styles.formSecondLine}>
+        <input
+          type="text"
+          placeholder="Pretraživač"
+          className="form-control"
+          name="search"
+          value={formContext?.q}
+          onChange={onHandleChange}
+        />
+
+        <button className="btn btn-outline-success form-control" type="submit">
+          Pretraži
+        </button>
       </div>
     </form>
   )

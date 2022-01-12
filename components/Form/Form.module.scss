@@ -1,3 +1,33 @@
 .searchForm {
   margin-bottom: 2em;
+
+  .formFirstLine {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+
+    * {
+      margin-right: 8px;
+    }
+
+    .ayah {
+      width: 148px;
+    }
+
+    .translator {
+      width: 148px;
+    }
+  }
+
+  .formSecondLine {
+    display: flex;
+
+    input {
+      margin-right: 8px;
+    }
+
+    button {
+      width: 360px;
+    }
+  }
 }
