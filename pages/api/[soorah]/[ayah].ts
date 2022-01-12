@@ -33,6 +33,10 @@ const handler = async (
   const ayah_id = Number(query.ayah.toString())
   const data = getView({ s: soorah_id, a: ayah_id })
 
+  if (data.view === 'empty') {
+    return res.status(400).json({ success: false })
+  }
+
   switch (method) {
     case 'GET':
       try {
