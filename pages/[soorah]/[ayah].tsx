@@ -1,7 +1,6 @@
 import { GetServerSideProps } from "next"
 import Head from "next/head"
 import Link from "next/link"
-import { MdNavigateBefore, MdNavigateNext } from "react-icons/md"
 import { MainLayout } from "../../layouts/MainLayout"
 import { ColoredText } from "../../ui/ColoredText/ColoredText"
 
@@ -12,13 +11,11 @@ import classNames from "classnames"
 import { getApiData } from "../../utility/getApiData/getApiData"
 import { PageStates } from "../../lib/types"
 
-export const Ayah = ({ out, data, error }) => {
+export const Ayah = ({ out, error }) => {
   if (error === PageStates.NOT_FOUND) {
     return (
       <MainLayout>
-        <div className="text-center">
-          <div className="col-sm-12 alert alert-danger">Ajet nije pronađen</div>
-        </div>
+        <div className="col-sm-12 alert alert-danger">Ajet nije pronađen</div>
       </MainLayout>
     )
   }
@@ -69,30 +66,12 @@ export const Ayah = ({ out, data, error }) => {
           </li>
         )}
         <li className="list-group-item">{paginateLinks}</li>
-        <li className="list-group-item text-top list-group-item-action d-flex w-100 justify-content-between">
-          {prev !== null && (
-            <div className="page-item">
-              <Link href={`/${soorah}/${prev}`}>
-                <a className={styles.navigateButton}>
-                  <MdNavigateBefore />
-                </a>
-              </Link>
-            </div>
-          )}
+        <li className="list-group-item list-group-item-action">
           <div className="col">
             <strong>{`${soorah}:${ayah}`}</strong>
             <br />
             {content}
           </div>
-          {next !== null && (
-            <div>
-              <Link href={`/${soorah}/${next}`}>
-                <a className={styles.navigateButton}>
-                  <MdNavigateNext />
-                </a>
-              </Link>
-            </div>
-          )}
         </li>
         <li
           className={classNames(
