@@ -69,10 +69,6 @@ export const Form = (): JSX.Element => {
     }
   }
 
-  useEffect(() => {
-    console.warn(formContext)
-  }, [formContext])
-
   return (
     <form
       id="search"
