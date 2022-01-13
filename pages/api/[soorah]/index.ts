@@ -32,7 +32,7 @@ const handler = async (
           const collection = db.collection<DataProps>('qurans')
           return await collection.find({
             soorah_id,
-          }).toArray().then(data => data.map(({ _id, soorah_id, aya_id, content }) =>
+          }).sort(['soorah_id', 'aya_id']).toArray().then(data => data.map(({ _id, soorah_id, aya_id, content }) =>
             ({ id: _id, soorah: soorah_id, ayah: aya_id, content })))
         })
         return res.json({ out, data, success: true })
