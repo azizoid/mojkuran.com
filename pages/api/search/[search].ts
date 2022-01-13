@@ -29,7 +29,7 @@ const handler = async (
         const ayahs = await withMongo(async (db: Db) => {
           const collection = db.collection<DataProps>('qurans')
           return await collection.find({
-            content: { $regex: `.*${search_query}.*` }
+            content: new RegExp(search_query, 'i')
           }, {}).toArray()
         })
         const out = paginate(ayahs, initialPaginate.perPage, currentPage)
