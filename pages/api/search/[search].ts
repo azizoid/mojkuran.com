@@ -30,7 +30,7 @@ const handler = async (
           const collection = db.collection<DataProps>('qurans')
           return await collection.find({
             content: new RegExp(search_query, 'i')
-          }, {}).toArray()
+          }, {}).sort(['soorah_id', 'aya_id']).toArray()
         })
         const out = paginate(ayahs, initialPaginate.perPage, currentPage)
           .map(({ _id, soorah_id, aya_id, content }) =>
