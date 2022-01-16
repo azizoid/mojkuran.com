@@ -2,10 +2,6 @@
   margin-bottom: 2em;
 
   .formFirstLine {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5em;
-
     * {
       margin-right: 8px;
     }
@@ -17,6 +13,10 @@
     .translator {
       width: 148px;
     }
+
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
   }
 
   .formSecondLine {
