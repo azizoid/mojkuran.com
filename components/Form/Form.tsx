@@ -79,7 +79,7 @@ export const Form = (): JSX.Element => {
     }
   }
 
-  if (state?.view !== "search") {
+  if (state?.view === "init") {
     return <LoadingBoxes />
   }
 
@@ -94,7 +94,7 @@ export const Form = (): JSX.Element => {
         <select
           className="form-select"
           name="soorah"
-          value={state.s}
+          value={state?.s}
           onChange={onHandleChange}
         >
           {soorahList.map((soorah, index) => (
@@ -113,7 +113,7 @@ export const Form = (): JSX.Element => {
           maxLength={3}
           min={0}
           max={286}
-          value={state.a}
+          value={state?.a || ""}
           onChange={onHandleChange}
         />
 
@@ -128,7 +128,7 @@ export const Form = (): JSX.Element => {
           placeholder="Pretraživač"
           className="form-control"
           name="search"
-          value={state.q}
+          value={state?.q || ""}
           onChange={onHandleChange}
         />
 

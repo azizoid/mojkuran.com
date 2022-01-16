@@ -4,7 +4,7 @@ export const initialStateProps: FormProps = {
   s: 0,
   a: "",
   q: "",
-  view: "empty",
+  view: "init",
   t: 1,
 }
 
