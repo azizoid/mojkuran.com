@@ -7,7 +7,7 @@ export type FormProps = {
   s: FormSoorahProp
   a: FormAyahProp
   q: FormQueryProp
-  // t?: 1
+  t: 1
   view: FormViewProp
 }
 

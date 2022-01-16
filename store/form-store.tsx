@@ -16,6 +16,7 @@ export const FormContextProvider: FC = ({ children }) => {
         s: Number(query?.soorah?.toString()) || 0,
         a: Number(query?.ayah?.toString()) || "",
         q: query?.search?.toString() || "",
+        t: 1,
       }),
     [query?.ayah, query?.search, query?.soorah]
   )

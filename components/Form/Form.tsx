@@ -32,6 +32,7 @@ export const Form = (): JSX.Element => {
           s: Number(value),
           a: "",
           q: "",
+          t: 1,
           view: name,
         })
         break
@@ -40,6 +41,7 @@ export const Form = (): JSX.Element => {
           s: formContext.s,
           a: Number(value),
           q: "",
+          t: 1,
           view: name,
         })
         break
@@ -48,6 +50,7 @@ export const Form = (): JSX.Element => {
           s: 0,
           a: "",
           q: value,
+          t: 1,
           view: name,
         })
         break
