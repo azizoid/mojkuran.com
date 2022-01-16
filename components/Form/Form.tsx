@@ -12,6 +12,7 @@ import soorahList from "../../assets/soorahList"
 import styles from "./Form.module.scss"
 import { useRouter } from "next/router"
 import { FormProps } from "../../lib/types"
+import { LoadingBoxes } from "../../ui/LoadingBoxes/LoadingBoxes"
 
 export const Form = (): JSX.Element => {
   const router = useRouter()
@@ -78,6 +79,10 @@ export const Form = (): JSX.Element => {
     }
   }
 
+  if (state?.view !== "search") {
+    return <LoadingBoxes />
+  }
+
   return (
     <form
       id="search"
@@ -89,7 +94,7 @@ export const Form = (): JSX.Element => {
         <select
           className="form-select"
           name="soorah"
-          value={state?.s}
+          value={state.s}
           onChange={onHandleChange}
         >
           {soorahList.map((soorah, index) => (
@@ -108,7 +113,7 @@ export const Form = (): JSX.Element => {
           maxLength={3}
           min={0}
           max={286}
-          value={state?.a || ""}
+          value={state.a}
           onChange={onHandleChange}
         />
 
@@ -123,7 +128,7 @@ export const Form = (): JSX.Element => {
           placeholder="Pretraživač"
           className="form-control"
           name="search"
-          value={state?.q || ""}
+          value={state.q}
           onChange={onHandleChange}
         />
 
