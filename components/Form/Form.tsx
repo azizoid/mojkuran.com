@@ -103,12 +103,12 @@ export const Form = (): JSX.Element => {
           type="number"
           placeholder="Ajet"
           className={classNames("form-control", styles.ayah)}
+          name="ayah"
           size={3}
           maxLength={3}
           min={0}
           max={286}
-          name="ayah"
-          value={state?.a}
+          value={state?.a || ""}
           onChange={onHandleChange}
         />
 
@@ -123,7 +123,7 @@ export const Form = (): JSX.Element => {
           placeholder="Pretraživač"
           className="form-control"
           name="search"
-          value={state?.q}
+          value={state?.q || ""}
           onChange={onHandleChange}
         />
 
