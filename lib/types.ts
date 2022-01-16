@@ -15,7 +15,8 @@ export type DisplayData = {
   id: string
   soorah: number;
   ayah: number;
-  content: string
+  content: string;
+  content_latinized?: string;
 }
 
 export enum PageStates {

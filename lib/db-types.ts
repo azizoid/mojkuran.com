@@ -12,6 +12,17 @@ export type DataProps = {
   translator_id: number
 }
 
+export type DataPropsLatinized = {
+  _id: string,
+  id: string,
+  detail_id: number,
+  soorah: number,
+  ayah: number,
+  content: string,
+  content_latinized: string,
+  translator_id: number
+}
+
 export type DetailsTypes = {
   _id: string,
   soorah_id: number,

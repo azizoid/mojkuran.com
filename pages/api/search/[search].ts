@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Db } from 'mongodb'
 import { withMongo } from '../../../lib/mongodb'
-import { DataProps, ResponseData } from '../../../lib/db-types'
+import { DataPropsLatinized, ResponseData } from '../../../lib/db-types'
 import { initialPaginate, paginate } from '../../../utility/paginate/paginate'
 import { DisplayData } from '../../../lib/types'
 
@@ -20,21 +20,25 @@ const handler = async (
 ) => {
   const { query, method } = req
 
-  const search_query = (query.search.toString()).replace(/"/g, '\\\"');
+  const search_query = query.search
+    .toString()
+    .replace(/[-/\^$*+?.()|[]{}]/g, '\$&')
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
   const currentPage = Number(query.page?.toString()) || 1
 
   switch (method) {
     case 'GET':
       try {
         const ayahs = await withMongo(async (db: Db) => {
-          const collection = db.collection<DataProps>('qurans')
+          const collection = db.collection<DataPropsLatinized>('mojkuran')
           return await collection.find({
-            content: new RegExp(search_query, 'i')
-          }, {}).sort(['soorah_id', 'aya_id']).toArray()
+            // content: { $regex: new RegExp('/' + search_query + '/', 'i') }
+            content_latinized: new RegExp(search_query, 'i')
+          }, {}).sort(['soorah', 'aya']).toArray()
         })
         const out = paginate(ayahs, initialPaginate.perPage, currentPage)
-          .map(({ _id, soorah_id, aya_id, content }) =>
-            ({ id: _id, soorah: soorah_id, ayah: aya_id, content }))
+          .map(({ _id, soorah, ayah, content }) =>
+            ({ id: _id, soorah, ayah, content }))
 
         return res.json({
           out,

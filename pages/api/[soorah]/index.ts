@@ -5,7 +5,7 @@ import { FormProps } from '../../../lib/types'
 
 import { getView } from '../../../utility/getView/getView';
 import { DisplayData } from '../../../lib/types';
-import { DataProps, ResponseData } from '../../../lib/db-types';
+import { DataPropsLatinized, ResponseData } from '../../../lib/db-types';
 
 export type ReponseProps = {
   out?: DisplayData[],
@@ -18,8 +18,8 @@ const handler = async (
 ) => {
   const { query, method } = req
 
-  const soorah_id = Number(query.soorah.toString())
-  const data = getView({ s: soorah_id })
+  const soorah = Number(query.soorah.toString())
+  const data = getView({ s: soorah })
 
   if (data.view === 'empty') {
     return res.status(400).json({ success: false })
@@ -29,11 +29,8 @@ const handler = async (
     case 'GET':
       try {
         const out = await withMongo(async (db: Db) => {
-          const collection = db.collection<DataProps>('qurans')
-          return await collection.find({
-            soorah_id,
-          }).sort(['soorah_id', 'aya_id']).toArray().then(data => data.map(({ _id, soorah_id, aya_id, content }) =>
-            ({ id: _id, soorah: soorah_id, ayah: aya_id, content })))
+          const collection = db.collection<DataPropsLatinized>('mojkuran')
+          return await collection.find({ soorah }).sort(['soorah', 'ayah']).toArray()
         })
         return res.json({ out, data, success: true })
       } catch (error) {

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Db } from 'mongodb'
 import { withMongo } from '../../../lib/mongodb'
-import { DetailsTypes, ResponseData } from '../../../lib/db-types'
+import { DataPropsLatinized, DetailsTypes, ResponseData } from '../../../lib/db-types'
 import { DataProps } from '../../../lib/db-types'
 import { FormProps } from '../../../lib/types'
 import { getView } from '../../../utility/getView/getView'
@@ -11,6 +11,7 @@ export type AyahResponseType = {
   soorah: number,
   ayah: number,
   content: string,
+  content_latinized: string,
   arabic: string,
   transliteration: string,
   juz: number
@@ -29,9 +30,9 @@ const handler = async (
 ) => {
   const { query, method } = req
 
-  const soorah_id = Number(query.soorah.toString())
-  const ayah_id = Number(query.ayah.toString())
-  const data = getView({ s: soorah_id, a: ayah_id })
+  const soorah = Number(query.soorah.toString())
+  const ayah = Number(query.ayah.toString())
+  const data = getView({ s: soorah, a: ayah })
 
   if (data.view === 'empty') {
     return res.status(400).json({ success: false })
@@ -41,22 +42,21 @@ const handler = async (
     case 'GET':
       try {
         const ayahs = await withMongo(async (db: Db) => {
-          const contentCollection = db.collection<DataProps>('qurans')
+          const contentCollection = db.collection<DataPropsLatinized>('mojkuran')
           const content = await contentCollection.findOne({
-            soorah_id, aya_id: ayah_id
-          }).then(({ _id, soorah_id, aya_id, content }) =>
-            ({ id: _id, soorah: soorah_id, ayah: aya_id, content }))
+            soorah, ayah
+          });
 
           const prev = await contentCollection.findOne({
-            soorah_id, aya_id: ayah_id - 1
-          }).then((data) => data?.aya_id ? data.aya_id : null)
+            soorah, ayah: ayah - 1
+          }).then((data) => data?.ayah ? data.ayah : null)
           const next = await contentCollection.findOne({
-            soorah_id, aya_id: ayah_id + 1
-          }).then((data) => data?.aya_id ? data.aya_id : null)
+            soorah, ayah: ayah + 1
+          }).then((data) => data?.ayah ? data.ayah : null)
 
           const detailsCollection = db.collection<DetailsTypes>('details')
           const details = await detailsCollection.findOne({
-            soorah_id, aya_id: ayah_id
+            soorah_id: soorah, aya_id: ayah
           }).then(({ content, transliteration, juz }) => ({ arabic: content, transliteration, juz }))
 
           return { ...content, ...details, prev, next }
