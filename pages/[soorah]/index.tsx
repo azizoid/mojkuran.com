@@ -32,7 +32,7 @@ export const Soorah = ({ out, data, error }): JSX.Element => {
           name="description"
           content={out
             .slice(0, 15)
-            .map((ayah) => ayah.content)
+            .map(({ content }) => content)
             .join(" ")}
         />
       </Head>
