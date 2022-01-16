@@ -7,5 +7,4 @@ module.exports = {
   devIndicators: {
     buildActivity: false,
   },
-  experimental: { granularChunks: true },
 }
