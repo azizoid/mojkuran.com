@@ -1,6 +1,5 @@
 import React from "react"
 import Link from "next/link"
-import classnames from "classnames"
 
 export const Footer = (): JSX.Element => (
   <nav className="py-4 bg-gray-700 text-slate-300">

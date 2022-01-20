@@ -6,8 +6,6 @@ import { ColoredText } from "../../ui/ColoredText/ColoredText"
 
 import SOORAH_LIST from "../../assets/soorahList"
 
-import styles from "../../styles/soorahAyah.module.scss"
-import classNames from "classnames"
 import { getApiData } from "../../utility/getApiData/getApiData"
 import { PageStates } from "../../lib/types"
 
