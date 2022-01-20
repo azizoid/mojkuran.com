@@ -1,10 +1,6 @@
 import Link from "next/link"
 import { Card } from "../../ui/Card/Card"
 
-export type EmptyProps = {
-  alert: "danger" | "success"
-}
-
 export const Empty = (): JSX.Element => (
   <div className="space-y-4">
     <ol className="py-2 w-full flex justify-center text-gray-500 space-x-5 md:text-sm">
