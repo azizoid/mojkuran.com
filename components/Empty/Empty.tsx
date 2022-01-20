@@ -3,18 +3,20 @@ import { Card } from "../../ui/Card/Card"
 
 export const Empty = (): JSX.Element => (
   <div className="space-y-4">
-    <ol className="py-2 w-full flex justify-center text-gray-500 space-x-5 md:text-sm">
-      <li className="">Čitaj:</li>
-      <li className="">
+    <ol className="py-2 w-full flex justify-center text-gray-500 space-x-5 text-sm md:text-base">
+      <li>
+        <Link href="/1">Sura El-Fatiha</Link>
+      </li>
+      <li>
         <Link href="/36">Sura Ja-sin</Link>
       </li>
-      <li className="">
+      <li>
         <Link href="/55">Sura Er-Rahman</Link>
       </li>
-      <li className="">
+      <li>
         <Link href="/67">Sura El-Mulk</Link>
       </li>
-      <li className="">
+      <li>
         <Link href="/2/255">Ajetul-Kursi</Link>
       </li>
     </ol>
