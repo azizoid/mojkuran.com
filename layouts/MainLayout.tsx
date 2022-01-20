@@ -2,7 +2,11 @@ import React, { FC } from "react"
 import dynamic from "next/dynamic"
 import Link from "next/link"
 
-import { TiSocialFacebookCircular, TiSocialInstagram } from "react-icons/ti"
+import {
+  TiSocialFacebookCircular,
+  TiSocialInstagram,
+  TiSocialGithub,
+} from "react-icons/ti"
 
 const PrayerWidget = dynamic(
   () => import("../components/sidebar/prayer.widget"),
@@ -40,8 +44,8 @@ export const MainLayout: FC = ({ children }) => (
           </a>
         </Link>
 
-        <ul className="flex items-center">
-          <li className="mr-4">
+        <ul className="flex items-center space-x-2">
+          <li>
             <a
               href="https://facebook.com/mojkuran"
               target="_blank"
@@ -57,6 +61,15 @@ export const MainLayout: FC = ({ children }) => (
               rel="noreferrer"
             >
               <TiSocialInstagram color="#E1306C" size="24" />
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/azizoid/mojkuran.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <TiSocialGithub color="#333" size="32" />
             </a>
           </li>
         </ul>
