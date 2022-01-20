@@ -20,17 +20,23 @@ export const ColoredText = ({ content }: ColoredTextProps): JSX.Element => {
   let randomColor = 0
 
   return (
-    <>
+    <div className="flex flex-wrap">
       {text.map((word, index) => {
-        if (randomColor === colors.length) randomColor = 0
+        if (randomColor === colors.length) {
+          randomColor = 0
+        }
 
         return (
-          <span style={{ color: colors[randomColor++] }} key={index}>
+          <span
+            style={{ color: colors[randomColor++] }}
+            className="px-1 py-0.5 hover:bg-gray-100 hover:cursor-pointer"
+            key={index}
+          >
             {word + " "}
           </span>
         )
       })}
-    </>
+    </div>
   )
 }
 

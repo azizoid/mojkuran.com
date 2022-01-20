@@ -23,26 +23,24 @@ export const Ayah = ({ out, error }) => {
   const { soorah, ayah, content, arabic, transliteration, prev, next } = out
 
   const paginateLinks = (
-    <ul className="pagination justify-content-center">
-      <li className="page-item">
+    <ul className="pagination">
+      <li className="pagination-item">
         <Link href={`/${soorah}`}>
-          <a className="page-link">{`Sura ${SOORAH_LIST[soorah]}`}</a>
+          <a>{`Sura ${SOORAH_LIST[soorah]}`}</a>
         </Link>
       </li>
       {prev !== null && (
-        <li className="page-item">
+        <li className="pagination-item">
           <Link href={`/${soorah}/${prev}`}>
-            <a className="page-link">{prev}</a>
+            <a>{prev}</a>
           </Link>
         </li>
       )}
-      <li className="page-item disabled">
-        <span className="page-link">{ayah}</span>
-      </li>
+      <li className="pagination-disabled">{ayah}</li>
       {next !== null && (
-        <li className="page-item">
+        <li className="pagination-item">
           <Link href={`/${soorah}/${next}`}>
-            <a className="page-link">{next}</a>
+            <a>{next}</a>
           </Link>
         </li>
       )}
@@ -59,37 +57,24 @@ export const Ayah = ({ out, error }) => {
         <meta name="description" content={content} />
       </Head>
 
-      <ul className="list-group list-group-flush col-12">
+      <ul className="list-none divide-y divide-gray-100 bg-white text-gray-700 mb-4">
         {soorah !== 1 && ayah !== 1 && (
-          <li className="list-group-item">
-            <h3 className="text-center">&#65021;</h3>
+          <li className="ayah-list-item text-center text-4xl font-mono">
+            &#65021;
           </li>
         )}
-        <li className="list-group-item">{paginateLinks}</li>
-        <li className="list-group-item list-group-item-action">
-          <div className="col">
-            <strong>{`${soorah}:${ayah}`}</strong>
-            <br />
-            {content}
-          </div>
+        <li>{paginateLinks}</li>
+        <li className="ayah-list-item flex flex-col">
+          <span className="text-gray-400">{`${soorah}:${ayah}`}</span>
+          {content}
         </li>
-        <li
-          className={classNames(
-            "list-group-item list-group-item-action",
-            styles.ayahDetails
-          )}
-        >
+        <li className="ayah-list-item ">
           <ColoredText key="transliteration" content={transliteration} />
         </li>
-        <li
-          className={classNames(
-            "list-group-item list-group-item-action",
-            styles.ayahDetails
-          )}
-        >
-          <h2 className="text-end text-top">{arabic}</h2>
+        <li className="ayah-list-item text-3xl font-serif text-right" dir="rtl">
+          {arabic}
         </li>
-        <li className="list-group-item">{paginateLinks}</li>
+        <li>{paginateLinks}</li>
       </ul>
     </MainLayout>
   )
