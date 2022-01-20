@@ -10,9 +10,8 @@ And makes accessible a search system by verses.
 
 First version of the app was written in HTML in 2005, then PHP, then Moved to Laravel, React, Nextjs
 
-Frontend is built on Next.js + Bootstrap
+Frontend is built on Next.js + Tailwind
 
 Future plan is to move it completely to Typescript
 
-# Backend is made on Nodejs + MySQL, it generates API.
-
+# Backend is made on Nextjs Server + Mongodb.
