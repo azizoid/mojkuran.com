@@ -36,11 +36,9 @@ export const Soorah = ({ out, data, error }): JSX.Element => {
             .join(" ")}
         />
       </Head>
-      <ul className="list-group list-group-flush">
+      <ul className="list-none divide-y divide-gray-100 bg-white text-gray-700">
         {data.s !== 9 && (
-          <li className="list-group-item">
-            <h3 className="text-center">&#65021;</h3>
-          </li>
+          <li className="py-4 text-center text-4xl font-mono">&#65021;</li>
         )}
         {out.map((data: DisplayData) => (
           <SoorahAyah data={data} key={data.id} />
