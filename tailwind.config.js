@@ -6,7 +6,11 @@ module.exports = {
     "./ui/**/*.{jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        Nunito: ["Nunito"],
+      },
+    },
   },
   plugins: [require("@tailwindcss/forms")],
 }

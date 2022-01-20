@@ -57,7 +57,7 @@ export const Ayah = ({ out, error }) => {
 
       <ul className="list-none divide-y divide-gray-100 bg-white text-gray-700 mb-4">
         {soorah !== 1 && ayah !== 1 && (
-          <li className="ayah-list-item text-center text-4xl font-mono">
+          <li className="ayah-list-item text-center text-4xl font-Nunito">
             &#65021;
           </li>
         )}
@@ -69,7 +69,10 @@ export const Ayah = ({ out, error }) => {
         <li className="ayah-list-item ">
           <ColoredText key="transliteration" content={transliteration} />
         </li>
-        <li className="ayah-list-item text-3xl font-serif text-right" dir="rtl">
+        <li
+          className="ayah-list-item text-3xl font-Nunito text-right"
+          dir="rtl"
+        >
           {arabic}
         </li>
         <li>{paginateLinks}</li>
