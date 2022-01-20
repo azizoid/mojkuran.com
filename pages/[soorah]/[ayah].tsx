@@ -23,23 +23,17 @@ export const Ayah = ({ out, error }) => {
   const paginateLinks = (
     <ul className="pagination">
       <li className="pagination-item">
-        <Link href={`/${soorah}`}>
-          <a>{`Sura ${SOORAH_LIST[soorah]}`}</a>
-        </Link>
+        <Link href={`/${soorah}`}>{`Sura ${SOORAH_LIST[soorah]}`}</Link>
       </li>
       {prev !== null && (
         <li className="pagination-item">
-          <Link href={`/${soorah}/${prev}`}>
-            <a>{prev}</a>
-          </Link>
+          <Link href={`/${soorah}/${prev}`}>{prev}</Link>
         </li>
       )}
       <li className="pagination-disabled">{ayah}</li>
       {next !== null && (
         <li className="pagination-item">
-          <Link href={`/${soorah}/${next}`}>
-            <a>{next}</a>
-          </Link>
+          <Link href={`/${soorah}/${next}`}>{next}</Link>
         </li>
       )}
     </ul>
