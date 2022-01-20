@@ -8,6 +8,7 @@ import SOORAH_LIST from "../../assets/soorahList"
 
 import { getApiData } from "../../utility/getApiData/getApiData"
 import { PageStates } from "../../lib/types"
+import { Bismillah } from "../../ui/Bismillah/Bismillah"
 
 export const Ayah = ({ out, error }) => {
   if (error === PageStates.NOT_FOUND) {
@@ -56,11 +57,7 @@ export const Ayah = ({ out, error }) => {
       </Head>
 
       <ul className="list-none divide-y divide-gray-100 bg-white text-gray-700 mb-4">
-        {soorah !== 1 && ayah !== 1 && (
-          <li className="ayah-list-item text-center text-4xl font-Nunito">
-            &#65021;
-          </li>
-        )}
+        {soorah !== 1 && ayah !== 1 && <Bismillah />}
         <li>{paginateLinks}</li>
         <li className="ayah-list-item flex flex-col">
           <span className="text-gray-400">{`${soorah}:${ayah}`}</span>
