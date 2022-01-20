@@ -2,30 +2,21 @@ import React from "react"
 import Link from "next/link"
 import classnames from "classnames"
 
-import styles from "./Footer.module.scss"
-
 export const Footer = (): JSX.Element => (
-  <nav className="navbar sticky-bottom navbar-dark bg-dark">
-    <div className="container">
-      <ol
-        className={classnames(
-          "breadcrumb justify-content-center",
-          styles.footer
-        )}
-      >
-        <li className="breadcrumb-item active" aria-current="page">
-          &copy; {new Date().getFullYear()}
-        </li>
-        <li className="breadcrumb-item">
-          <Link href="/">Mojkuran.com</Link>
-        </li>
-        <li className="breadcrumb-item">
-          <a href="https://vaktija.ba" target="_blank" rel="noreferrer">
-            Vaktija.ba
-          </a>
-        </li>
-      </ol>
-    </div>
+  <nav className="py-4 bg-gray-700 text-slate-300">
+    <ol className="container mx-auto w-lg flex">
+      <li className="active mr-6" aria-current="page">
+        &copy; {new Date().getFullYear()}
+      </li>
+      <li className="mr-6">
+        <Link href="/">Mojkuran.com</Link>
+      </li>
+      <li>
+        <a href="https://vaktija.ba" target="_blank" rel="noreferrer">
+          Vaktija.ba
+        </a>
+      </li>
+    </ol>
   </nav>
 )
 

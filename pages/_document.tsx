@@ -9,7 +9,7 @@ export default class MyDocument extends Document {
           <meta name="author" content="Aziz" />
           <meta httpEquiv="content-language" content="bs,sr,sh,hr" />
         </Head>
-        <body className="d-flex flex-column h-100">
+        <body className="bg-gray-50">
           <Main />
           <NextScript />
         </body>
