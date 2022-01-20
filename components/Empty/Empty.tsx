@@ -5,19 +5,29 @@ export const Empty = (): JSX.Element => (
   <div className="space-y-4">
     <ol className="py-2 w-full flex justify-center text-gray-500 space-x-5 text-sm md:text-base">
       <li>
-        <Link href="/1">Sura El-Fatiha</Link>
+        <Link href="/1">
+          <a>Sura El-Fatiha</a>
+        </Link>
       </li>
       <li>
-        <Link href="/36">Sura Ja-sin</Link>
+        <Link href="/36">
+          <a>Sura Ja-sin</a>
+        </Link>
       </li>
       <li>
-        <Link href="/55">Sura Er-Rahman</Link>
+        <Link href="/55">
+          <a>Sura Er-Rahman</a>
+        </Link>
       </li>
       <li>
-        <Link href="/67">Sura El-Mulk</Link>
+        <Link href="/67">
+          <a>Sura El-Mulk</a>
+        </Link>
       </li>
       <li>
-        <Link href="/2/255">Ajetul-Kursi</Link>
+        <Link href="/2/255">
+          <a>Ajetul-Kursi</a>
+        </Link>
       </li>
     </ol>
 

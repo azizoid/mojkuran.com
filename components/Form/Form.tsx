@@ -36,13 +36,13 @@ export const Form = (): JSX.Element => {
         })
         break
       case "ayah":
-        setState({
-          s: formContext.s,
+        setState((prev) => ({
+          s: prev.s,
           a: Number(value),
           q: "",
           t: 1,
           view: name,
-        })
+        }))
         break
       case "search":
         setState({
