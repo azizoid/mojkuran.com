@@ -4,7 +4,7 @@
 
 @layer components {
   .btn {
-    @apply bg-green-200 py-2 px-3 rounded-md shadow hover:bg-green-300 hover:transition-transform hover:-translate-y-0.5 active:-translate-y-0;
+    @apply bg-green-200 py-2 px-3 rounded-md shadow text-green-900 hover:bg-green-300 hover:transition-transform hover:-translate-y-0.5 active:-translate-y-0;
   }
 
   .alert {
@@ -59,7 +59,7 @@
   }
 
   .form-control {
-    @apply border-gray-400 bg-gray-50 text-sm rounded-md text-gray-700 focus:border-gray-200;
+    @apply border-gray-400 bg-gray-50 text-sm rounded-md text-gray-700 focus:border-gray-200 focus:transition-none;
   }
 
   .card {
