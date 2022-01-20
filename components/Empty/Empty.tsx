@@ -26,7 +26,7 @@ export const Empty = (): JSX.Element => (
       </h6>
     </div>
 
-    <div className="grid grid-cols-3 gap-2 py-4">
+    <div className="grid grid-1 md:grid-cols-3 gap-2 py-4">
       <Card
         title="Uslovi korištenja"
         className="flex flex-col space-y-4"
