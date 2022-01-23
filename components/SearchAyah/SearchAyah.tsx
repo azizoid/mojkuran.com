@@ -9,11 +9,12 @@ export type SearchAyahProps = {
 }
 
 export const SearchAyah = ({ ayah, mark = "" }): JSX.Element => (
-  <li className="list-group-item text-top list-group-item-action d-flex w-100 justify-content-between">
+  <li className="soorah-list-item">
     <div className="text-start mx-1">
-      <span className="badge rounded-pill bg-primary">
+      <span className="badge">
         {ayah.soorah}:{ayah.ayah}
       </span>{" "}
+      {ayah.content}
       <Highlighter
         searchWords={[mark]}
         textToHighlight={ayah.content}
@@ -22,7 +23,7 @@ export const SearchAyah = ({ ayah, mark = "" }): JSX.Element => (
       />
     </div>
     <Link href={`/${ayah.soorah}/${ayah.ayah}`}>
-      <a>
+      <a className="ml-2 text-blue-500">
         <FaExternalLinkAlt />
       </a>
     </Link>

@@ -6,7 +6,7 @@ import NextNprogress from "nextjs-progressbar"
 
 import { FormContextProvider } from "../store/form-store"
 
-import "../styles/app.scss"
+import "../styles/global.css"
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {

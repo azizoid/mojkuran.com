@@ -68,17 +68,18 @@ export const Search = (): JSX.Element => {
         itemsCountPerPage={paginate.perPage}
         totalItemsCount={paginate.total}
         pageRangeDisplayed={5}
-        innerClass="pagination justify-content-center"
-        itemClass="page-item"
-        linkClass="page-link"
+        innerClass="pagination"
+        itemClass="pagination-item"
+        activeClass="pagination-active"
         onChange={setPage}
+        hideDisabled={true}
       />
     </li>
   )
 
   return (
     <MainLayout>
-      <ul className="list-group list-group-flush col-12">
+      <ul className="list-none divide-y divide-gray-100 bg-white text-gray-700">
         {paginateLinks}
 
         {out?.map((ayah) => (

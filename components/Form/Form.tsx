@@ -5,11 +5,9 @@ import React, {
   useEffect,
   useState,
 } from "react"
-import classNames from "classnames"
 import { FormContext } from "../../store/form-store"
 import soorahList from "../../assets/soorahList"
 
-import styles from "./Form.module.scss"
 import { useRouter } from "next/router"
 import { FormProps } from "../../lib/types"
 import { LoadingBoxes } from "../../ui/LoadingBoxes/LoadingBoxes"
@@ -38,13 +36,13 @@ export const Form = (): JSX.Element => {
         })
         break
       case "ayah":
-        setState({
-          s: formContext.s,
+        setState((prev) => ({
+          s: prev.s,
           a: Number(value),
           q: "",
           t: 1,
           view: name,
-        })
+        }))
         break
       case "search":
         setState({
@@ -86,13 +84,21 @@ export const Form = (): JSX.Element => {
   return (
     <form
       id="search"
-      className={classNames("card", "card-header", styles.searchForm)}
+      className="space-y-2 mb-6 alert alert-gray"
       acceptCharset="UTF-8"
       onSubmit={onSubmit}
     >
-      <div className={styles.formFirstLine}>
+      <div className="form-row">
         <select
-          className="form-select"
+          className="
+            form-control
+            col-span-7
+            focus:outline-none 
+            focus:bg-white 
+            focus:border-gray-500
+            active:outline-none 
+            active:border-gray-500
+          "
           name="soorah"
           value={state?.s}
           onChange={onHandleChange}
@@ -107,7 +113,7 @@ export const Form = (): JSX.Element => {
         <input
           type="number"
           placeholder="Ajet"
-          className={classNames("form-control", styles.ayah)}
+          className="form-control col-span-2"
           name="ayah"
           size={3}
           maxLength={3}
@@ -117,22 +123,22 @@ export const Form = (): JSX.Element => {
           onChange={onHandleChange}
         />
 
-        <div className={styles.translator}>
-          <small className="nav-link">Besim&nbsp;Korkut</small>
+        <div className="col-span-3 text-center ">
+          <small>Besim&nbsp;Korkut</small>
         </div>
       </div>
 
-      <div className={styles.formSecondLine}>
+      <div className="form-row">
         <input
           type="text"
           placeholder="Pretraživač"
-          className="form-control"
+          className="form-control col-span-7"
           name="search"
           value={state?.q || ""}
           onChange={onHandleChange}
         />
 
-        <button className="btn btn-outline-success form-control" type="submit">
+        <button className="btn btn-success col-span-5" type="submit">
           Pretraži
         </button>
       </div>

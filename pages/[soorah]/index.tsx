@@ -1,6 +1,6 @@
 import React from "react"
 import Head from "next/head"
-import { GetStaticPaths, GetStaticProps } from "next"
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next"
 
 import { MainLayout } from "../../layouts/MainLayout"
 import { SoorahAyah } from "../../components/SoorahAyah/SoorahAyah"
@@ -8,6 +8,7 @@ import { SoorahAyah } from "../../components/SoorahAyah/SoorahAyah"
 import SOORAH_LIST from "../../assets/soorahList"
 import { getApiData } from "../../utility/getApiData/getApiData"
 import { DisplayData, PageStates } from "../../lib/types"
+import { Bismillah } from "../../ui/Bismillah/Bismillah"
 
 export const Soorah = ({ out, data, error }): JSX.Element => {
   if (error === PageStates.NOT_FOUND) {
@@ -36,12 +37,8 @@ export const Soorah = ({ out, data, error }): JSX.Element => {
             .join(" ")}
         />
       </Head>
-      <ul className="list-group list-group-flush">
-        {data.s !== 9 && (
-          <li className="list-group-item">
-            <h3 className="text-center">&#65021;</h3>
-          </li>
-        )}
+      <ul className="list-none divide-y divide-gray-100 bg-white text-gray-700">
+        {data.s !== 9 && <Bismillah />}
         {out.map((data: DisplayData) => (
           <SoorahAyah data={data} key={data.id} />
         ))}
@@ -50,15 +47,41 @@ export const Soorah = ({ out, data, error }): JSX.Element => {
   )
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = Array.from({ length: 114 }, (_, i) => i + 1).map((soorah) => ({
-    params: { soorah: soorah.toString() },
-  }))
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   const paths = Array.from({ length: 114 }, (_, i) => i + 1).map((soorah) => ({
+//     params: { soorah: soorah.toString() },
+//   }))
 
-  return { paths, fallback: false }
-}
+//   return { paths, fallback: false }
+// }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+// export const getStaticProps: GetStaticProps = async (context) => {
+//   const { params } = context
+
+//   const res = await getApiData(
+//     `${process.env.NEXTAUTH_URL}/api/${params.soorah}`
+//   )
+
+//   if (!res?.out.length) {
+//     return {
+//       props: {
+//         error: PageStates.NOT_FOUND,
+//         out: [],
+//         data: { s: 0, a: "" },
+//       },
+//     }
+//   }
+
+//   return {
+//     props: {
+//       error: "",
+//       out: res.out,
+//       data: res.data,
+//     },
+//   }
+// }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { params } = context
 
   const res = await getApiData(

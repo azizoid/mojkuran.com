@@ -30,13 +30,12 @@ const PrayerWidget = (): JSX.Element => {
   }, [])
 
   return (
-    <table className="table table-borderless table-sm">
-      <thead className="table-dark">
+    <table className="w-full table-auto text-sm" cellPadding={7}>
+      <thead className="bg-gray-700 text-white">
         <tr>
-          <td align="center" colSpan={3}>
-            {hijri}
+          <td align="center" colSpan={4}>
+            {hijri}, Sarajevo
           </td>
-          <td align="center">Sarajevo</td>
         </tr>
       </thead>
       <tbody>
