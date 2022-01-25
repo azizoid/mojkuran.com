@@ -8,10 +8,6 @@ export default class MyDocument extends Document {
           <link rel="shortcut icon" href="/static/favicon.ico" />
           <meta name="author" content="Aziz" />
           <meta httpEquiv="content-language" content="bs,sr,sh,hr" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
-          />
         </Head>
         <body className="bg-gray-50">
           <Main />
