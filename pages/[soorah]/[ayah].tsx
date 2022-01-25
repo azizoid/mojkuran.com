@@ -1,6 +1,5 @@
 import { GetServerSideProps } from "next"
 import Head from "next/head"
-import Link from "next/link"
 import { MainLayout } from "../../layouts/MainLayout"
 import { ColoredText } from "../../ui/ColoredText/ColoredText"
 
@@ -9,6 +8,7 @@ import SOORAH_LIST from "../../assets/soorahList"
 import { getApiData } from "../../utility/getApiData/getApiData"
 import { PageStates } from "../../lib/types"
 import { Bismillah } from "../../ui/Bismillah/Bismillah"
+import { PaginateLinks } from "../../ui/PaginateLinks/PaginateLinks"
 
 export const Ayah = ({ out, error }) => {
   if (error === PageStates.NOT_FOUND) {
@@ -20,31 +20,6 @@ export const Ayah = ({ out, error }) => {
   }
 
   const { soorah, ayah, content, arabic, transliteration, prev, next } = out
-
-  const paginateLinks = (
-    <ul className="pagination">
-      <li className="pagination-item">
-        <Link href={`/${soorah}`}>
-          <a>{`Sura ${SOORAH_LIST[soorah]}`}</a>
-        </Link>
-      </li>
-      {prev !== null && (
-        <li className="pagination-item">
-          <Link href={`/${soorah}/${prev}`}>
-            <a>{prev}</a>
-          </Link>
-        </li>
-      )}
-      <li className="pagination-disabled">{ayah}</li>
-      {next !== null && (
-        <li className="pagination-item">
-          <Link href={`/${soorah}/${next}`}>
-            <a>{next}</a>
-          </Link>
-        </li>
-      )}
-    </ul>
-  )
 
   return (
     <MainLayout>
@@ -58,7 +33,9 @@ export const Ayah = ({ out, error }) => {
 
       <ul className="list-none divide-y divide-gray-100 bg-white text-gray-700 mb-4">
         {soorah !== 1 && ayah !== 1 && <Bismillah />}
-        <li>{paginateLinks}</li>
+        <li>
+          <PaginateLinks {...{ soorah, ayah, prev, next }} />
+        </li>
         <li className="ayah-list-item flex flex-col">
           <span className="text-gray-400">{`${soorah}:${ayah}`}</span>
           {content}
@@ -72,7 +49,9 @@ export const Ayah = ({ out, error }) => {
         >
           {arabic}
         </li>
-        <li>{paginateLinks}</li>
+        <li>
+          <PaginateLinks {...{ soorah, ayah, prev, next }} />
+        </li>
       </ul>
     </MainLayout>
   )
