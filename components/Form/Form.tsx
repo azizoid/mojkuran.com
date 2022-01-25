@@ -11,6 +11,7 @@ import soorahList from "../../assets/soorahList"
 import { useRouter } from "next/router"
 import { FormProps } from "../../lib/types"
 import { LoadingBoxes } from "../../ui/LoadingBoxes/LoadingBoxes"
+import { getView } from "../../utility/getView/getView"
 
 export const Form = (): JSX.Element => {
   const router = useRouter()
@@ -61,7 +62,9 @@ export const Form = (): JSX.Element => {
   const onSubmit = (event: SyntheticEvent) => {
     event.preventDefault()
 
-    switch (state?.view) {
+    const submitValue = getView(state)
+
+    switch (submitValue.view) {
       case "search":
         router.push(`/search/${state.q}`)
         break
