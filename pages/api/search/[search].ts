@@ -50,7 +50,8 @@ const handler = async (
             ...initialPaginate,
             total: ayahs.length,
             currentPage
-          }
+          },
+          success: true
         })
       } catch (error) {
         res.status(400).json({ success: false })
