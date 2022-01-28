@@ -61,9 +61,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const soorah = query.soorah
   const ayah = query.ayah
 
-  const res = await getApiData(
-    `${process.env.NEXTAUTH_URL}/api/${soorah}/${ayah}`
-  )
+  const res = await getApiData(`/api/${soorah}/${ayah}`)
 
   if (res.success === false) {
     return {

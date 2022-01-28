@@ -44,19 +44,19 @@ const handler = async (
         const ayahs = await withMongo(async (db: Db) => {
           const contentCollection = db.collection<DataPropsLatinized>('mojkuran')
           const content = await contentCollection.findOne({
-            soorah, ayah
+            soorah: data.s, ayah: Number(data.a)
           });
 
           const prev = await contentCollection.findOne({
-            soorah, ayah: ayah - 1
+            soorah: data.s, ayah: Number(data.a) - 1
           }).then((data) => data?.ayah ? data.ayah : null)
           const next = await contentCollection.findOne({
-            soorah, ayah: ayah + 1
+            soorah: data.s, ayah: Number(data.a) + 1
           }).then((data) => data?.ayah ? data.ayah : null)
 
           const detailsCollection = db.collection<DetailsTypes>('details')
           const details = await detailsCollection.findOne({
-            soorah_id: soorah, aya_id: ayah
+            soorah_id: data.s, aya_id: Number(data.a)
           }).then(({ content, transliteration, juz }) => ({ arabic: content, transliteration, juz }))
 
           return { ...content, ...details, prev, next }

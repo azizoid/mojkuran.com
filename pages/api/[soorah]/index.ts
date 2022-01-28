@@ -30,7 +30,7 @@ const handler = async (
       try {
         const out = await withMongo(async (db: Db) => {
           const collection = db.collection<DataPropsLatinized>('mojkuran')
-          return await collection.find({ soorah }).sort(['soorah', 'ayah']).toArray()
+          return await collection.find({ soorah: data.s }).sort(['soorah', 'ayah']).toArray()
         })
         return res.json({ out, data, success: true })
       } catch (error) {

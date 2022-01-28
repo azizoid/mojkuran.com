@@ -3,10 +3,12 @@ import { Db } from 'mongodb'
 import { withMongo } from '../../../lib/mongodb'
 import { DataPropsLatinized, ResponseData } from '../../../lib/db-types'
 import { initialPaginate, paginate } from '../../../utility/paginate/paginate'
-import { DisplayData } from '../../../lib/types'
+import { DisplayData, FormProps } from '../../../lib/types'
+import { getView } from '../../../utility/getView/getView'
 
 export type ReponseProps = {
   out: DisplayData[],
+  data: FormProps,
   paginate: {
     total: number;
     perPage: number;
@@ -25,6 +27,7 @@ const handler = async (
     .replace(/[-/\^$*+?.()|[]{}]/g, '\$&')
     .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
   const currentPage = Number(query.page?.toString()) || 1
+  const data = getView({ q: search_query })
 
   switch (method) {
     case 'GET':
@@ -33,7 +36,7 @@ const handler = async (
           const collection = db.collection<DataPropsLatinized>('mojkuran')
           return await collection.find({
             // content: { $regex: new RegExp('/' + search_query + '/', 'i') }
-            content_latinized: new RegExp(search_query, 'i')
+            content_latinized: new RegExp(data.q, 'i')
           }, {}).sort(['soorah', 'aya']).toArray()
         })
         const out = paginate(ayahs, initialPaginate.perPage, currentPage)
@@ -42,6 +45,7 @@ const handler = async (
 
         return res.json({
           out,
+          data,
           paginate: {
             ...initialPaginate,
             total: ayahs.length,

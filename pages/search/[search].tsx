@@ -4,7 +4,6 @@ import { useRouter } from "next/router"
 import Pagination from "react-js-pagination"
 
 import { MainLayout } from "../../layouts/MainLayout"
-import { Empty } from "../../components/Empty/Empty"
 import Loader from "../../ui/Loader/Loader"
 import { SearchAyah } from "../../components/SearchAyah/SearchAyah"
 import { PaginationProps } from "../../utility/paginate/paginate"
@@ -24,8 +23,8 @@ export const Search = (): JSX.Element => {
     setPageState(PageStates.LOADING)
 
     await getApiData(`/api/search/${query}?page=${page}`)
-      .then(({ out, paginate }) => {
-        if (out?.length > 0) {
+      .then(({ out, paginate, success }) => {
+        if (success === true) {
           setOut(out)
           setPaginate({
             ...paginate,
