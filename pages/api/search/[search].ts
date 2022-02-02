@@ -51,7 +51,7 @@ const handler = async (
             total: ayahs.length,
             currentPage
           },
-          success: true
+          success: out.length > 0
         })
       } catch (error) {
         res.status(400).json({ success: false })
