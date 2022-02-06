@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 
 const prayersListEmpty = [
   { id: 1, title: "Zora", time: "--:--" },
@@ -13,21 +13,22 @@ const PrayerWidget = (): JSX.Element => {
   const [prayers, setPrayers] = useState(prayersListEmpty)
   const [hijri, setHijri] = useState("")
 
-  useEffect(() => {
-    async function fetchData() {
-      await fetch("https://api.vaktija.ba/vaktija/v1/77")
-        .then((response) => response.json())
-        .then((data) => {
-          const out = prayersListEmpty.map((prayer, i) => ({
-            ...prayer,
-            time: data["vakat"][i],
-          }))
-          setHijri(data.datum[1])
-          setPrayers(out)
-        })
-    }
-    fetchData()
+  const fetchData = useCallback(async () => {
+    await fetch("https://api.vaktija.ba/vaktija/v1/77")
+      .then((response) => response.json())
+      .then((data) => {
+        const out = prayersListEmpty.map((prayer, i) => ({
+          ...prayer,
+          time: data["vakat"][i],
+        }))
+        setHijri(data.datum[0])
+        setPrayers(out)
+      })
   }, [])
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
 
   return (
     <table className="w-full table-auto text-sm" cellPadding={7}>
