@@ -7,12 +7,15 @@ export type SoorahAyahProps = {
 }
 
 export const SoorahAyah = ({ data }: SoorahAyahProps): JSX.Element => (
-  <li className="soorah-list-item">
+  <li className="group soorah-list-item">
     <div>
-      <span className="badge">{data.ayah}</span> {data.content}
+      <span className="badge bg-blue-200 group-hover:bg-blue-500">
+        {data.ayah}
+      </span>{" "}
+      {data.content}
     </div>
     <Link href={`/${data.soorah}/${data.ayah}`}>
-      <a className="ml-2 text-blue-500">
+      <a className="ml-2 text-gray-200 group-hover:text-blue-500">
         <FaExternalLinkAlt />
       </a>
     </Link>
