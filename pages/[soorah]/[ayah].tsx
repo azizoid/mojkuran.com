@@ -1,3 +1,4 @@
+import { ReactElement } from "react"
 import { GetServerSideProps } from "next"
 import Head from "next/head"
 import { MainLayout } from "../../layouts/MainLayout"
@@ -14,16 +15,14 @@ import { SoorahCaption } from "../../ui/SoorahCaption/SoorahCaption"
 export const Ayah = ({ out, error }) => {
   if (error === PageStates.NOT_FOUND) {
     return (
-      <MainLayout>
-        <div className="col-sm-12 alert alert-danger">Ajet nije pronađen</div>
-      </MainLayout>
+      <div className="col-sm-12 alert alert-danger">Ajet nije pronađen</div>
     )
   }
 
   const { soorah, ayah, content, arabic, transliteration, prev, next } = out
 
   return (
-    <MainLayout>
+    <>
       <Head>
         <title>
           {`Ajet  ${ayah}, Sura ${soorahList[out.soorah].id}. ${
@@ -57,8 +56,12 @@ export const Ayah = ({ out, error }) => {
           <PaginateLinks {...{ soorah, ayah, prev, next }} />
         </li>
       </ul>
-    </MainLayout>
+    </>
   )
+}
+
+Ayah.getLayout = (page: ReactElement) => {
+  return <MainLayout>{page}</MainLayout>
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {

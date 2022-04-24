@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react"
+import { useEffect, useState, useCallback, ReactElement } from "react"
 import { useRouter } from "next/router"
 
 import Pagination from "react-js-pagination"
@@ -46,18 +46,12 @@ export const Search = (): JSX.Element => {
 
   if (pageState === PageStates.NOT_FOUND) {
     return (
-      <MainLayout>
-        <div className="col-sm-12 alert alert-danger">Riječ nije pronađena</div>
-      </MainLayout>
+      <div className="col-sm-12 alert alert-danger">Riječ nije pronađena</div>
     )
   }
 
   if (pageState === PageStates.LOADING) {
-    return (
-      <MainLayout>
-        <Loader />
-      </MainLayout>
-    )
+    return <Loader />
   }
 
   const paginateLinks = paginate?.total > paginate?.perPage && (
@@ -77,7 +71,7 @@ export const Search = (): JSX.Element => {
   )
 
   return (
-    <MainLayout>
+    <>
       <ul className="list-none divide-y divide-gray-100 bg-white text-gray-700">
         {paginateLinks}
 
@@ -87,8 +81,12 @@ export const Search = (): JSX.Element => {
 
         {paginateLinks}
       </ul>
-    </MainLayout>
+    </>
   )
+}
+
+Search.getLayout = (page: ReactElement) => {
+  return <MainLayout>{page}</MainLayout>
 }
 
 export default Search

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactElement } from "react"
 import Head from "next/head"
 import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next"
 
@@ -14,18 +14,14 @@ import { SoorahCaption } from "../../ui/SoorahCaption/SoorahCaption"
 export const Soorah = ({ out, data, error }): JSX.Element => {
   if (error === PageStates.NOT_FOUND) {
     return (
-      <MainLayout>
-        <div className="text-center">
-          <div className="col-sm-12 alert alert-danger">
-            Sura nije pronađena
-          </div>
-        </div>
-      </MainLayout>
+      <div className="text-center">
+        <div className="col-sm-12 alert alert-danger">Sura nije pronađena</div>
+      </div>
     )
   }
 
   return (
-    <MainLayout>
+    <>
       <Head>
         <title>
           {`Sura ${soorahList[data.s].id}. ${soorahList[data.s].title}
@@ -46,8 +42,12 @@ export const Soorah = ({ out, data, error }): JSX.Element => {
           <SoorahAyah data={data} key={data.id} />
         ))}
       </ul>
-    </MainLayout>
+    </>
   )
+}
+
+Soorah.getLayout = (page: ReactElement) => {
+  return <MainLayout>{page}</MainLayout>
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
