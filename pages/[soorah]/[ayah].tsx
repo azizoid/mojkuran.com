@@ -9,6 +9,7 @@ import { getApiData } from "../../utility/getApiData/getApiData"
 import { PageStates } from "../../lib/types"
 import { Bismillah } from "../../ui/Bismillah/Bismillah"
 import { PaginateLinks } from "../../ui/PaginateLinks/PaginateLinks"
+import { SoorahCaption } from "../../ui/SoorahCaption/SoorahCaption"
 
 export const Ayah = ({ out, error }) => {
   if (error === PageStates.NOT_FOUND) {
@@ -32,6 +33,7 @@ export const Ayah = ({ out, error }) => {
       </Head>
 
       <ul className="list-none divide-y divide-gray-100 bg-white text-gray-700 mb-4">
+        <SoorahCaption soorah={soorah} />
         {soorah !== 1 && ayah !== 1 && <Bismillah />}
         <li>
           <PaginateLinks {...{ soorah, ayah, prev, next }} />
