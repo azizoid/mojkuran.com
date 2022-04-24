@@ -3,7 +3,7 @@ import Head from "next/head"
 import { MainLayout } from "../../layouts/MainLayout"
 import { ColoredText } from "../../ui/ColoredText/ColoredText"
 
-import SOORAH_LIST from "../../assets/soorahList"
+import { metadata as soorahList } from "../../assets/metadata"
 
 import { getApiData } from "../../utility/getApiData/getApiData"
 import { PageStates } from "../../lib/types"
@@ -26,7 +26,9 @@ export const Ayah = ({ out, error }) => {
     <MainLayout>
       <Head>
         <title>
-          {`Ajet ${ayah}, Sura ${SOORAH_LIST[soorah]}
+          {`Ajet  ${ayah}, Sura ${soorahList[out.soorah].id}. ${
+            soorahList[out.soorah].title
+          }
            | Čitaj svoju knjigu | mojkuran.com`}
         </title>
         <meta name="description" content={content} />

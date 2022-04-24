@@ -5,7 +5,7 @@ import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next"
 import { MainLayout } from "../../layouts/MainLayout"
 import { SoorahAyah } from "../../components/SoorahAyah/SoorahAyah"
 
-import SOORAH_LIST from "../../assets/soorahList"
+import { metadata as soorahList } from "../../assets/metadata"
 import { getApiData } from "../../utility/getApiData/getApiData"
 import { DisplayData, PageStates } from "../../lib/types"
 import { Bismillah } from "../../ui/Bismillah/Bismillah"
@@ -28,7 +28,8 @@ export const Soorah = ({ out, data, error }): JSX.Element => {
     <MainLayout>
       <Head>
         <title>
-          Sura {SOORAH_LIST[data.s]} | Čitaj svoju knjigu | mojkuran.com
+          {`Sura ${soorahList[data.s].id}. ${soorahList[data.s].title}
+           | Čitaj svoju knjigu | mojkuran.com`}
         </title>
         <meta
           name="description"

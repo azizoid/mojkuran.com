@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react"
 import { FormContext } from "../../store/form-store"
-import soorahList from "../../assets/soorahList"
+import { metadata as soorahList } from "../../assets/metadata"
 
 import { useRouter } from "next/router"
 import { FormProps } from "../../lib/types"
@@ -106,9 +106,9 @@ export const Form = (): JSX.Element => {
           value={state?.s}
           onChange={onHandleChange}
         >
-          {soorahList.map((soorah, index) => (
+          {soorahList.map(({ id, title }, index) => (
             <option value={index} key={index}>
-              {soorah}
+              {`${id}. ${title}`}
             </option>
           ))}
         </select>

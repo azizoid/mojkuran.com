@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 
-import SOORAH_LIST from "../../assets/soorahList"
+import { metadata as soorahList } from "../../assets/metadata"
 import { DisplayData } from "../../lib/types"
 import { Card } from "../../ui/Card/Card"
 import { getApiData } from "../../utility/getApiData/getApiData"
@@ -24,7 +24,9 @@ const RandomAyah = (): JSX.Element => {
   return (
     <Card title="PROČITAJ JOŠ">
       <h6 className="text-gray-500">
-        {`${SOORAH_LIST[out.soorah]}, ${out.ayah}`}
+        {`Sura ${soorahList[out.soorah].id}. ${soorahList[out.soorah].title}, ${
+          out.ayah
+        }`}
       </h6>
       <h6 className="text-gray-700 hover:underline">
         <a href={`/${out.soorah}/${out.ayah}`}>{out.content}</a>
