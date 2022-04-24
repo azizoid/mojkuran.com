@@ -33,14 +33,18 @@ import { LoadingBoxes } from "../ui/LoadingBoxes/LoadingBoxes"
 
 import { Logo } from "../components/Logo/Logo"
 
-export const MainLayout: FC = ({ children }) => (
+type MainLayoutProps = {
+  children?: React.ReactNode
+}
+
+export const MainLayout: FC<MainLayoutProps> = ({ children }) => (
   <div className="flex flex-col h-screen justify-between">
     <div className="bg-[url('/img/ornament.gif')] bg-gray-50 bg-repeat-x bg-bottom pb-[33px] px-3">
       <nav className="h-12 container mx-auto flex justify-between">
         <Link href="/" passHref={true}>
           <a className="py-3 flex items-center content-start text-gray-500 hover:opacity-75">
             <Logo />
-            &nbsp; Mojkuran.com
+            &nbsp; Mojkur&apos;an.com
           </a>
         </Link>
 

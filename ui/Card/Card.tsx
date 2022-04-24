@@ -6,6 +6,7 @@ export type CardProps = {
   contentClass?: string | null
   className?: string
   size?: "small" | "medium"
+  children?: ReactNode
 }
 
 enum cardSize {
