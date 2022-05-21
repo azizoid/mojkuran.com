@@ -106,6 +106,7 @@ export const Form = (): JSX.Element => {
           value={state?.s}
           onChange={onHandleChange}
         >
+          <option value={0}>Izaberi Suru</option>
           {soorahList.map(({ id, title }, index) => (
             <option value={index} key={index}>
               {`${id}. ${title}`}
