@@ -9,18 +9,30 @@ import {
 } from "react-icons/ti"
 
 const PrayerWidget = dynamic(
-  () => import("../components/sidebar/prayer.widget"),
+  () =>
+    import("../components/sidebar/prayer.widget").then(
+      ({ PrayerWidget }) => PrayerWidget
+    ),
   {
     // loading: () => <Loader />,
     ssr: false,
   }
 )
-const RandomAyah = dynamic(() => import("../components/sidebar/randomayah"), {
-  loading: () => <LoadingBoxes />,
-  ssr: false,
-})
+const RandomAyah = dynamic(
+  () =>
+    import("../components/sidebar/randomayah").then(
+      ({ RandomAyah }) => RandomAyah
+    ),
+  {
+    loading: () => <LoadingBoxes />,
+    ssr: false,
+  }
+)
 const FacebookPage = dynamic(
-  () => import("../components/sidebar/facebook.page"),
+  () =>
+    import("../components/sidebar/facebook.page").then(
+      ({ FacebookPage }) => FacebookPage
+    ),
   {
     // loading: () => <Loader />,
     ssr: false,
@@ -110,5 +122,3 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => (
     <Footer />
   </div>
 )
-
-export default MainLayout

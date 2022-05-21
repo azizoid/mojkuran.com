@@ -9,7 +9,7 @@ const prayersListEmpty = [
   { id: 6, title: "Jatsija", time: "--:--" },
 ]
 
-const PrayerWidget = (): JSX.Element => {
+export const PrayerWidget = (): JSX.Element => {
   const [prayers, setPrayers] = useState(prayersListEmpty)
   const [hijri, setHijri] = useState("")
 
@@ -62,4 +62,3 @@ const PrayerWidget = (): JSX.Element => {
     </table>
   )
 }
-export default PrayerWidget

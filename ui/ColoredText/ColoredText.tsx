@@ -39,5 +39,3 @@ export const ColoredText = ({ content }: ColoredTextProps): JSX.Element => {
     </div>
   )
 }
-
-export default ColoredText

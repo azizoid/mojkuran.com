@@ -29,5 +29,3 @@ export const SearchAyah = ({ ayah, mark = "" }): JSX.Element => (
     </Link>
   </li>
 )
-
-export default SearchAyah

@@ -65,5 +65,3 @@ export const Empty = (): JSX.Element => (
     </div>
   </div>
 )
-
-export default Empty

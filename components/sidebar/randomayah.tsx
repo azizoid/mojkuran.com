@@ -5,7 +5,7 @@ import { DisplayData } from "../../lib/types"
 import { Card } from "../../ui/Card/Card"
 import { getApiData } from "../../utility/getApiData/getApiData"
 
-const RandomAyah = (): JSX.Element => {
+export const RandomAyah = (): JSX.Element => {
   const [out, setOut] = useState<DisplayData>({
     id: "",
     soorah: 96,
@@ -34,4 +34,3 @@ const RandomAyah = (): JSX.Element => {
     </Card>
   )
 }
-export default RandomAyah

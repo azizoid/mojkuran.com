@@ -4,7 +4,7 @@ import { useRouter } from "next/router"
 import Pagination from "react-js-pagination"
 
 import { MainLayout } from "../../layouts/MainLayout"
-import Loader from "../../ui/Loader/Loader"
+import { Loader } from "../../ui/Loader/Loader"
 import { SearchAyah } from "../../components/SearchAyah/SearchAyah"
 import { PaginationProps } from "../../utility/paginate/paginate"
 import { DisplayData, PageStates } from "../../lib/types"
@@ -89,4 +89,5 @@ Search.getLayout = (page: ReactElement) => {
   return <MainLayout>{page}</MainLayout>
 }
 
+// eslint-disable-next-line import/no-default-export
 export default Search

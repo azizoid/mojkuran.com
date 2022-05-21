@@ -149,5 +149,3 @@ export const Form = (): JSX.Element => {
     </form>
   )
 }
-
-export default Form
