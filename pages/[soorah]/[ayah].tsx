@@ -12,22 +12,21 @@ import { Bismillah } from "../../ui/Bismillah/Bismillah"
 import { PaginateLinks } from "../../ui/PaginateLinks/PaginateLinks"
 import { SoorahCaption } from "../../ui/SoorahCaption/SoorahCaption"
 
-export const Ayah = ({ out, error }) => {
+export const Ayah = ({
+  out: { soorah, ayah, content, arabic, transliteration, prev, next },
+  error,
+}) => {
   if (error === PageStates.NOT_FOUND) {
     return (
       <div className="col-sm-12 alert alert-danger">Ajet nije pronađen</div>
     )
   }
 
-  const { soorah, ayah, content, arabic, transliteration, prev, next } = out
-
   return (
     <>
       <Head>
         <title>
-          {`Ajet  ${ayah}, Sura ${soorahList[out.soorah].id}. ${
-            soorahList[out.soorah].title
-          }
+          {`Ajet  ${ayah}, Sura ${soorahList[soorah].id}. ${soorahList[soorah].title}
            | Čitaj svoju knjigu | mojkuran.com`}
         </title>
         <meta name="description" content={content} />
@@ -64,10 +63,9 @@ Ayah.getLayout = (page: ReactElement) => {
   return <MainLayout>{page}</MainLayout>
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const soorah = query.soorah
-  const ayah = query.ayah
-
+export const getServerSideProps: GetServerSideProps = async ({
+  query: { soorah, ayah },
+}) => {
   const res = await getApiData(`/api/${soorah}/${ayah}`)
 
   if (res.success === false) {

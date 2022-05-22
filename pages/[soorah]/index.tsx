@@ -50,12 +50,10 @@ Soorah.getLayout = (page: ReactElement) => {
   return <MainLayout>{page}</MainLayout>
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { params } = context
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const result = await getApiData(`/api/${params.soorah}`)
 
-  const res = await getApiData(`/api/${params.soorah}`)
-
-  if (res.success === false) {
+  if (result.success === false) {
     return {
       props: {
         error: PageStates.NOT_FOUND,
@@ -68,8 +66,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       error: "",
-      out: res.out,
-      data: res.data,
+      out: result.out,
+      data: result.data,
     },
   }
 }

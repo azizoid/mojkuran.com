@@ -12,9 +12,7 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<ReponseProps>
 ) => {
-  const { method } = req
-
-  switch (method) {
+  switch (req.method) {
     case "GET":
       try {
         const random = await withMongo(async (db: Db) =>

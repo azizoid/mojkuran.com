@@ -6,7 +6,6 @@ import {
   DetailsTypes,
   ResponseData,
 } from "../../../lib/db-types"
-import { DataProps } from "../../../lib/db-types"
 import { FormProps } from "../../../lib/types"
 import { getView } from "../../../utility/getView/getView"
 
