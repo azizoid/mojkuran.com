@@ -18,7 +18,7 @@ export const CityAndSize = ({
   devider = true,
   size = "sm",
 }: CityAndSizeProps): JSX.Element => (
-  <>
+  <div className="flex flex-col md:flex-row">
     <span className="flex gap-1 align-middle whitespace-nowrap">
       {city === "Mecca" ? (
         <>
@@ -38,9 +38,9 @@ export const CityAndSize = ({
         </>
       )}
     </span>
-    {devider && "/"}
+    {devider && <span className="hidden mx-3 md:inline-block">/</span>}
     <span>{`${ayahCount} ${
       [11, 111].includes(ayahCount) || ayahCount % 10 !== 1 ? "ajeta" : "ajet"
     }`}</span>
-  </>
+  </div>
 )

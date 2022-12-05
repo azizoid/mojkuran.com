@@ -30,7 +30,7 @@ export const SoorahListItem = ({
           </p>
         </div>
       </div>
-      <div className="flex w-40 items-center justify-center px-5 text-right whitespace-nowrap text-lg text-gray-600 bg-emerald-50 group-hover:bg-emerald-500 group-hover:text-white">
+      <div className="flex w-32 items-center justify-center px-5 text-right whitespace-nowrap text-lg text-gray-600 bg-emerald-50 group-hover:bg-emerald-500 group-hover:text-white">
         {soorah.arabic}
       </div>
     </a>
