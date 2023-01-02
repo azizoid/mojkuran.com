@@ -1,86 +1,95 @@
-import { useEffect, useState, useCallback, ReactElement } from "react"
+import { useEffect, useState, ReactElement } from "react"
 import { useRouter } from "next/router"
+import Head from "next/head"
+
+import { useQuery } from "react-query"
 
 import Pagination from "react-js-pagination"
 
 import { MainLayout } from "../../layouts/MainLayout"
 import { Loader } from "../../ui/Loader/Loader"
 import { SearchAyah } from "../../components/SearchAyah/SearchAyah"
-import { PaginationProps } from "../../utility/paginate/paginate"
-import { DisplayData, PageStates } from "../../lib/types"
-import { getApiData } from "../../utility/getApiData/getApiData"
+import { ReponseProps } from "../api/search/[search]"
 
-export const Search = (): JSX.Element => {
-  const [paginate, setPaginate] = useState<PaginationProps>()
-  const [out, setOut] = useState<DisplayData[]>()
-  const [pageState, setPageState] = useState(PageStates.INIT)
-  const [page, setPage] = useState(1)
+export const Search = () => {
+  const { query } = useRouter()
 
-  const router = useRouter()
-  const query = router.query.search?.toString()
+  const [currentPage, setCurrentPage] = useState(1)
 
-  const getData = useCallback(async () => {
-    setPageState(PageStates.LOADING)
+  const searchQuery =
+    typeof query?.search === "string" && query?.search?.length > 2
+      ? query?.search
+      : undefined
 
-    await getApiData(`/api/search/${query}?page=${page}`)
-      .then(({ out, paginate, success }) => {
-        if (success === true) {
-          setOut(out)
-          setPaginate({
-            ...paginate,
-            currentPage: Number(paginate.currentPage),
-          })
-          setPageState(PageStates.SEARCH)
-        } else throw new Error("not found")
-      })
-      .catch(() => setPageState(PageStates.NOT_FOUND))
-  }, [page, query])
+  const { data, isLoading, error, refetch } = useQuery<ReponseProps>(
+    ["out", { page: currentPage, perPage: 30 }],
+    () =>
+      fetch(`/api/search/${searchQuery}?page=${currentPage}`).then((res) =>
+        res.json()
+      ),
+    {
+      enabled: !!searchQuery,
+    }
+  )
 
   useEffect(() => {
-    setPage(1)
-  }, [query])
+    if (!!searchQuery) {
+      refetch()
+    }
+  }, [refetch, searchQuery])
 
-  useEffect(() => {
-    getData()
-  }, [getData])
-
-  if (pageState === PageStates.NOT_FOUND) {
+  if (error) {
     return (
       <div className="col-sm-12 alert alert-danger">Riječ nije pronađena</div>
     )
   }
 
-  if (pageState === PageStates.LOADING) {
-    return <Loader />
+  if (isLoading) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    )
   }
 
-  const paginateLinks = paginate?.total > paginate?.perPage && (
-    <li className="list-group-item">
-      <Pagination
-        activePage={paginate.currentPage}
-        itemsCountPerPage={paginate.perPage}
-        totalItemsCount={paginate.total}
-        pageRangeDisplayed={5}
-        innerClass="pagination"
-        itemClass="pagination-item"
-        activeClass="pagination-active"
-        onChange={setPage}
-        hideDisabled={true}
-      />
-    </li>
-  )
+  const paginateLinks = data?.paginate &&
+    data.paginate?.total > data.paginate?.perPage && (
+      <li className="list-group-item">
+        <Pagination
+          activePage={data.paginate.currentPage}
+          itemsCountPerPage={data.paginate.perPage}
+          totalItemsCount={data.paginate.total}
+          pageRangeDisplayed={5}
+          innerClass="pagination"
+          itemClass="pagination-item"
+          activeClass="pagination-active"
+          onChange={setCurrentPage}
+          hideDisabled={true}
+        />
+      </li>
+    )
 
   return (
     <>
-      <ul className="list-none divide-y divide-gray-100 bg-white text-gray-700">
-        {paginateLinks}
+      <Head>
+        <title>Čitaj svoju knjigu | Mojkuran.com </title>
+      </Head>
 
-        {out?.map((ayah) => (
-          <SearchAyah ayah={ayah} mark={query} key={ayah.id} />
-        ))}
+      {data?.out.length === 0 && (
+        <div className="col-sm-12 alert alert-danger">Riječ nije pronađena</div>
+      )}
 
-        {paginateLinks}
-      </ul>
+      {data?.out.length > 0 && (
+        <ul className="list-none divide-y divide-gray-100 bg-white text-gray-700">
+          {paginateLinks}
+
+          {data.out.map((ayah) => (
+            <SearchAyah ayah={ayah} mark={searchQuery} key={ayah.id} />
+          ))}
+
+          {paginateLinks}
+        </ul>
+      )}
     </>
   )
 }
