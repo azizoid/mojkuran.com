@@ -1,7 +1,10 @@
-import React, { ReactElement, ReactNode, useEffect } from "react"
+import { ReactElement, ReactNode, useEffect, useState } from "react"
 import type { AppProps } from "next/app"
 import { NextPage } from "next"
 import TagManager from "react-gtm-module"
+
+import { Hydrate, QueryClient, QueryClientProvider } from "react-query"
+import { ReactQueryDevtools } from "react-query/devtools"
 
 import NextNprogress from "nextjs-progressbar"
 
@@ -20,15 +23,22 @@ type MyAppWithLayout = AppProps & {
 const MyApp = ({ Component, pageProps }: MyAppWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page)
 
+  const [queryClient] = useState(() => new QueryClient())
+
   useEffect(() => {
     TagManager.initialize({ gtmId: "GTM-NVN95DH" })
   }, [])
-  return getLayout(
-    <FormContextProvider>
-      <NextNprogress />
 
-      <Component {...pageProps} />
-    </FormContextProvider>
+  return getLayout(
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <FormContextProvider>
+          <NextNprogress />
+
+          <Component {...pageProps} />
+        </FormContextProvider>
+      </Hydrate>
+    </QueryClientProvider>
   )
 }
 
