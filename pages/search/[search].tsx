@@ -1,8 +1,8 @@
-import { useEffect, useState, ReactElement } from "react"
+import { useState, ReactElement } from "react"
 import { useRouter } from "next/router"
 import Head from "next/head"
 
-import { useQuery } from "react-query"
+import { useFetch } from "usehooks-ts"
 
 import Pagination from "react-js-pagination"
 
@@ -21,22 +21,9 @@ export const Search = () => {
       ? query?.search
       : undefined
 
-  const { data, isLoading, error, refetch } = useQuery<ReponseProps>(
-    ["out", { page: currentPage, perPage: 30 }],
-    () =>
-      fetch(`/api/search/${searchQuery}?page=${currentPage}`).then((res) =>
-        res.json()
-      ),
-    {
-      enabled: !!searchQuery,
-    }
+  const { data, error } = useFetch<ReponseProps>(
+    `/api/search/${searchQuery}?page=${currentPage}`
   )
-
-  useEffect(() => {
-    if (!!searchQuery) {
-      refetch()
-    }
-  }, [refetch, searchQuery])
 
   if (error) {
     return (
@@ -44,7 +31,7 @@ export const Search = () => {
     )
   }
 
-  if (isLoading) {
+  if (!data) {
     return (
       <div>
         <Loader />
@@ -75,7 +62,7 @@ export const Search = () => {
         <title>Čitaj svoju knjigu | Mojkuran.com </title>
       </Head>
 
-      {data?.out.length === 0 && (
+      {data?.out && data.out.length === 0 && (
         <div className="col-sm-12 alert alert-danger">Riječ nije pronađena</div>
       )}
 
