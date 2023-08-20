@@ -4,14 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 4225",
-    "build": "NODE_OPTIONS=--max-old-space-size=4096 next build",
+    "build": "next build",
     "start": "next start -p 4225",
     "lint": "next lint",
     "lint:fix": "eslint --fix --ext .ts,.tsx .",
     "type-check": "tsc"
   },
   "dependencies": {
-    "mongoose": "^6.1.5",
+    "mongodb": "^5.7.0",
     "next": "^12.0.7",
     "nextjs-progressbar": "^0.0.14",
     "react": "^18.0.0",
