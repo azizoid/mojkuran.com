@@ -33,3 +33,10 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# Yarn v berry
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
