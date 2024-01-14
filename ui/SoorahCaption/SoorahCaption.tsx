@@ -14,19 +14,21 @@ export const SoorahCaption = ({ soorah }: SoorahCaptionProps): JSX.Element => {
     <li
       className={`ayah-list-item text-center text-lg md:text-2xl font-thin ${styles.header} flex align-middle justify-center whitespace-nowrap`}
     >
-      <Link href={`/${soorah}`}>
-        <a className="text-gray-400 hover:text-black decoration-1">
-          {`${soorah}. ${title}`}
-          <span className="flex flex-row justify-center gap-1 text-xs">
-            <CityAndSize
-              city={city}
-              ayahCount={ayahCount}
-              devider={true}
-              size="sm"
-            />
-          </span>
-        </a>
+      <Link
+        href={`/${soorah}`}
+        className="text-gray-400 hover:text-black decoration-1">
+
+        {`${soorah}. ${title}`}
+        <span className="flex flex-row justify-center gap-1 text-xs">
+          <CityAndSize
+            city={city}
+            ayahCount={ayahCount}
+            devider={true}
+            size="sm"
+          />
+        </span>
+
       </Link>
     </li>
-  )
+  );
 }

@@ -22,10 +22,10 @@ export const SearchAyah = ({ ayah, mark = "" }): JSX.Element => (
         highlightClassName="bg-warning"
       />
     </div>
-    <Link href={`/${ayah.soorah}/${ayah.ayah}`}>
-      <a className="ml-2 text-blue-500">
-        <FaExternalLinkAlt />
-      </a>
+    <Link href={`/${ayah.soorah}/${ayah.ayah}`} className="ml-2 text-blue-500">
+
+      <FaExternalLinkAlt />
+
     </Link>
   </li>
 )

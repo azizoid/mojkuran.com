@@ -15,18 +15,18 @@ export const PaginateLinks = ({
   next,
 }: PaginateLinksProps): JSX.Element => (
   <div className="pagination">
-    <Link href={`/${soorah}`}>
-      <a className="pagination-item">{`Sura ${soorahList[soorah].id}. ${soorahList[soorah].title}`}</a>
+    <Link href={`/${soorah}`} className="pagination-item">
+      {`Sura ${soorahList[soorah].id}. ${soorahList[soorah].title}`}
     </Link>
     {prev !== null && (
-      <Link href={`/${soorah}/${prev}`}>
-        <a className="pagination-item">{prev}</a>
+      <Link href={`/${soorah}/${prev}`} className="pagination-item">
+        {prev}
       </Link>
     )}
     <span className="pagination-disabled">{ayah}</span>
     {next !== null && (
-      <Link href={`/${soorah}/${next}`}>
-        <a className="pagination-item">{next}</a>
+      <Link href={`/${soorah}/${next}`} className="pagination-item">
+        {next}
       </Link>
     )}
   </div>
