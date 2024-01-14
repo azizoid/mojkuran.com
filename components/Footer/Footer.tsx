@@ -9,7 +9,7 @@ export const Footer = (): JSX.Element => (
       </li>
       <li className="mr-6">
         <Link href="/">
-          <a>Mojkuran.com</a>
+          Mojkuran.com
         </Link>
       </li>
       <li>

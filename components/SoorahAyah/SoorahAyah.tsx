@@ -14,10 +14,12 @@ export const SoorahAyah = ({ data }: SoorahAyahProps): JSX.Element => (
       </span>{" "}
       {data.content}
     </div>
-    <Link href={`/${data.soorah}/${data.ayah}`}>
-      <a className="ml-2 text-gray-200 group-hover:text-blue-500">
-        <FaExternalLinkAlt />
-      </a>
+    <Link
+      href={`/${data.soorah}/${data.ayah}`}
+      className="ml-2 text-gray-200 group-hover:text-blue-500">
+
+      <FaExternalLinkAlt />
+
     </Link>
   </li>
 )

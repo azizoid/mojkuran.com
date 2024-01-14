@@ -20,22 +20,22 @@
     "react-highlight-words": "^0.20.0",
     "react-icons": "^5.0.1",
     "react-js-pagination": "^3.0.3",
-    "usehooks-ts": "^2.9.1"
+    "usehooks-ts": "^2.9.4"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.4",
-    "@testing-library/react": "^14.0.0",
-    "@types/node": "^20.5.1",
-    "@types/react": "^18.2.20",
-    "@types/react-gtm-module": "^2.0.1",
-    "@types/react-highlight-words": "^0.16.4",
-    "@types/react-js-pagination": "^3.0.4",
-    "autoprefixer": "^10.4.15",
-    "eslint": "^8.47.0",
+    "@tailwindcss/forms": "^0.5.7",
+    "@testing-library/react": "^14.1.2",
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.47",
+    "@types/react-gtm-module": "^2.0.3",
+    "@types/react-highlight-words": "^0.16.7",
+    "@types/react-js-pagination": "^3.0.7",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.56.0",
     "eslint-config-next": "^14.0.4",
-    "postcss": "^8.4.28",
-    "sass": "^1.66.1",
-    "tailwindcss": "^3.3.3",
+    "postcss": "^8.4.33",
+    "sass": "^1.69.7",
+    "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
   }
 }
