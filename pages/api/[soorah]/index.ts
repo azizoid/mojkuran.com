@@ -29,7 +29,7 @@ const handler = async (
     case "GET":
       try {
         const out = await withMongo(async (db: Db) => {
-          const collection = db.collection<DataPropsLatinized>("mojkuran")
+          const collection = db.collection<DataPropsLatinized>(process.env.MONGODB_TABLE)
           return await collection
             .find({ soorah: data.s })
             .sort(["soorah", "ayah"])

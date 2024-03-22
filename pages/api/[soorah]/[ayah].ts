@@ -46,7 +46,7 @@ const handler = async (
       try {
         const ayahs = await withMongo(async (db: Db) => {
           const contentCollection =
-            db.collection<DataPropsLatinized>("mojkuran")
+            db.collection<DataPropsLatinized>(process.env.MONGODB_TABLE)
           const content = await contentCollection.findOne({
             soorah: data.s,
             ayah: Number(data.a),
@@ -65,7 +65,7 @@ const handler = async (
             })
             .then((data) => (data?.ayah ? data.ayah : null))
 
-          const detailsCollection = db.collection<DetailsTypes>("details")
+          const detailsCollection = db.collection<DetailsTypes>("metadata")
           const details = await detailsCollection
             .findOne({
               soorah_id: data.s,

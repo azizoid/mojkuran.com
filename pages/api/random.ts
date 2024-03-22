@@ -17,13 +17,13 @@ const handler = async (
       try {
         const random = await withMongo(async (db: Db) =>
           db
-            .collection<DataProps>("qurans")
+            .collection<DataProps>(process.env.MONGODB_TABLE)
             .aggregate([{ $sample: { size: 1 } }])
             .toArray()
             .then((data) => ({
               id: data[0]["_id"],
-              soorah: data[0]["soorah_id"],
-              ayah: data[0]["aya_id"],
+              soorah: data[0]["soorah"],
+              ayah: data[0]["aya"],
               content: data[0]["content"],
             }))
         )
