@@ -7,4 +7,7 @@ module.exports = {
   devIndicators: {
     buildActivity: false,
   },
+  experimental: {
+    largePageDataBytes: 160 * 100000,
+  }
 }
