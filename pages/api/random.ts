@@ -1,11 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { Db } from "mongodb"
-import { DisplayData } from "../../lib/types"
-import { DataProps, ResponseData } from "../../lib/db-types"
+import { BaseAyahProps, DataProps, ResponseData } from "../../lib/db-types"
 import { withMongo } from "../../lib/mongodb"
 
 export type ReponseProps = {
-  out?: DisplayData
+  out?: BaseAyahProps
 } & ResponseData
 
 const handler = async (
@@ -17,13 +16,12 @@ const handler = async (
       try {
         const random = await withMongo(async (db: Db) =>
           db
-            .collection<DataProps>(process.env.MONGODB_TABLE)
+            .collection<BaseAyahProps>(process.env.MONGODB_TABLE)
             .aggregate([{ $sample: { size: 1 } }])
             .toArray()
             .then((data) => ({
-              id: data[0]["_id"],
               soorah: data[0]["soorah"],
-              ayah: data[0]["aya"],
+              ayah: data[0]["ayah"],
               content: data[0]["content"],
             }))
         )
