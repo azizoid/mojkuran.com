@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next"
 import { Db } from "mongodb"
 import { BaseAyahProps, DataProps, ResponseData } from "../../lib/db-types"
 import { withMongo } from "../../lib/mongodb"
+import { NextResponse } from "next/server"
 
 export type ReponseProps = {
   out?: BaseAyahProps
@@ -14,24 +15,21 @@ const handler = async (
   switch (req.method) {
     case "GET":
       try {
-        const random = await withMongo(async (db: Db) =>
-          db
-            .collection<BaseAyahProps>(process.env.MONGODB_TABLE)
-            .aggregate([{ $sample: { size: 1 } }])
-            .toArray()
-            .then((data) => ({
-              soorah: data[0]["soorah"],
-              ayah: data[0]["ayah"],
-              content: data[0]["content"],
-            }))
-        )
-        return res.json({ out: random, success: true })
+        const randomAyah = await withMongo(async (db: Db) => {
+          const pipeline = [{ $sample: { size: 1 } }]
+          const collection = db.collection<BaseAyahProps>('mojkuran')
+          return await collection.aggregate(pipeline).next()
+        })
+
+        const { soorah, ayah, content } = randomAyah
+
+        return res.json({ out: { soorah, ayah, content }, success: true })
       } catch (error) {
         res.status(400).json({ success: false })
       }
       break
     default:
-      res.status(400).json({ success: false })
+      res.status(405).json({ success: false })
       break
   }
 }
