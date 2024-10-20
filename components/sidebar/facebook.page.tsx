@@ -13,8 +13,8 @@ export const FacebookPage = () => (
           height={160}
         />
         <div className="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent w-full">
-          <h1 className="text-l font-bold">Moj Kur'an</h1>
-          <h1 className="text-2xl">PRIDRUŹI NAM SE</h1>
+          <h1 className="text-l font-bold">Moj Kur&apos;an</h1>
+          <h1 className="text-xl">PRIDRUŹI NAM SE</h1>
         </div>
       </div>
     </Link>
