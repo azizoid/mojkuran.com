@@ -1,23 +1,22 @@
-import { Card } from "../../ui/Card/Card"
+import Image from 'next/image';
+import Link from 'next/link';
 
-export const FacebookPage = (): JSX.Element => (
-  <Card title="PRIDRUŹI NAM SE" className={"px-0 py-0"}>
-    <div
-      className="fb-page object-fill w-full"
-      data-href="https://www.facebook.com/mojkuran/"
-      data-width="500"
-      data-small-header="false"
-      data-adapt-container-width="true"
-      data-hide-cover="false"
-      data-show-facepile="true"
-      data-lazy="true"
-    >
-      <blockquote
-        cite="https://www.facebook.com/mojkuran/"
-        className="fb-xfbml-parse-ignore"
-      >
-        <a href="https://www.facebook.com/mojkuran/">Moj Kur&#039;an</a>
-      </blockquote>
-    </div>
-  </Card>
+export const FacebookPage = () => (
+  <div className="relative w-full bg-gray-900 text-white rounded-lg shadow-lg">
+    <Link href="https://facebook.com/mojkuran" target="_blank">
+      <div className="relative">
+        <Image
+          src="/img/kuran.jpg"
+          alt="Quran"
+          className="w-full h-40 object-cover object-top rounded-t-lg"
+          width={640}
+          height={160}
+        />
+        <div className="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent w-full">
+          <h1 className="text-l font-bold">Moj Kur'an</h1>
+          <h1 className="text-2xl">PRIDRUŹI NAM SE</h1>
+        </div>
+      </div>
+    </Link>
+  </div>
 )
