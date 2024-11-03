@@ -28,7 +28,7 @@ export const RandomAyah = (): JSX.Element => {
           }`}
       </h6>
 
-      <a href={`/${out.soorah}/${out.ayah}`}><span className="prose prose-sm hover:underline">{out.content}</span></a>
+      <a href={`/${out.soorah}/${out.ayah}`}><span className="prose prose-sm !max-w-none hover:underline">{out.content}</span></a>
     </Card>
   )
 }
