@@ -27,9 +27,8 @@ export const RandomAyah = (): JSX.Element => {
         {`Sura ${soorahList[out.soorah].id}. ${soorahList[out.soorah].title}, ${out.ayah
           }`}
       </h6>
-      <h6 className="text-gray-700 hover:underline">
-        <a href={`/${out.soorah}/${out.ayah}`}>{out.content}</a>
-      </h6>
+
+      <a href={`/${out.soorah}/${out.ayah}`}><span className="prose prose-sm hover:underline">{out.content}</span></a>
     </Card>
   )
 }

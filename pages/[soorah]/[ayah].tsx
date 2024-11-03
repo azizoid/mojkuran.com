@@ -38,7 +38,7 @@ export const Ayah = ({
         <li>
           <PaginateLinks {...{ soorah, ayah, prev, next }} />
         </li>
-        <li className="ayah-list-item flex flex-col">
+        <li className="prose ayah-list-item flex flex-col">
           <span className="text-gray-400">{`${soorah}:${ayah}`}</span>
           {content}
         </li>
