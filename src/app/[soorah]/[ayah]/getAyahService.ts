@@ -52,8 +52,6 @@ export const getAyahService = async ({ soorah, ayah }: GetAyahServiceProps) => {
         { projection: { content: 1, transliteration: 1, juz: 1 } }
       )
 
-    console.log({ content, metadata })
-
     const prevAndNext = await contentCollection
       .find(
         { soorah, ayah: { $in: [content.ayah - 1, content.ayah + 1] } },

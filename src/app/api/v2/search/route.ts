@@ -60,8 +60,6 @@ export const POST = async (req: Request) => {
 
       ayahsCount = await collection.countDocuments(searchQuery)
 
-      console.log({ ayahsCount })
-
       const result = await collection
         .find(searchQuery, { projection: { _id: 0 } })
         .sort({ soorah: 1, ayah: 1 }) // Sort by soorah in ascending order, then by ayah in ascending order
