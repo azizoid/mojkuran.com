@@ -7,7 +7,7 @@ import { getView } from '@/utility/getView'
 import { getAyahService } from './getAyahService'
 import { soorahAyahTitle } from '@/helpers/soorahAyahTitle'
 import { ColoredText } from '@/components/ColoredText/ColoredText'
-import { PaginateAyah } from '@/components/PaginateAyah/PaginateAyah'
+import { PaginateAyah } from './PaginateAyah'
 import { Bismillah } from '@/components/Bismillah/Bismillah'
 
 type AyahProps = {

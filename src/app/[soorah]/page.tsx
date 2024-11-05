@@ -1,12 +1,12 @@
 import { notFound } from 'next/navigation'
 
 import { soorahList } from '@/assets/soorah-list-object'
-
+import { Bismillah } from '@/components/Bismillah/Bismillah'
 import { getView } from '@/utility/getView'
 
 import { getSoorahService } from './getSoorahService'
-import { SoorahAyah } from '@/components/SoorahAyah/SoorahAyah'
-import { Bismillah } from '@/components/Bismillah/Bismillah'
+import { SoorahAyah } from './SoorahAyah'
+
 
 type SoorahProps = {
   params: Promise<{
