@@ -1,4 +1,4 @@
-export type MetadataProps = {
+export type SoorahListProps = {
   id: number
   title: string
   ayahCount: number
@@ -9,8 +9,16 @@ export type MetadataProps = {
   sajda?: number[]
 }
 
-export const metadata: MetadataProps[] = [
-  ,
+export const SOORAH_LIST: Array<SoorahListProps> = [
+  {
+    id: 0,
+    title: "",
+    ayahCount: 0,
+    order: 0,
+    arabic: "",
+    city: "Mecca",
+    juz: [],
+  },
   {
     id: 1,
     title: "El-Fatiha",
@@ -1051,4 +1059,6 @@ export const metadata: MetadataProps[] = [
     city: "Mecca",
     juz: [30],
   },
-]
+] as const
+
+export const soorahList = SOORAH_LIST.slice(1)
