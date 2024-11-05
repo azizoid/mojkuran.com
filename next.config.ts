@@ -1,5 +1,6 @@
-module.exports = {
-  swcMinify: true,
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   compress: false,
   poweredByHeader: false,
   generateEtags: false,
@@ -7,7 +8,6 @@ module.exports = {
   devIndicators: {
     buildActivity: false,
   },
-  experimental: {
-    largePageDataBytes: 160 * 100000,
-  }
-}
+};
+
+export default nextConfig;
