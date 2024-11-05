@@ -27,7 +27,7 @@ export const generateMetadata = async (props: SoorahProps) => {
 
   if (!soorahTitle) return
 
-  const title = `Sura ${soorahTitle.id} ${soorahTitle.title}`
+  const title = `Sura ${soorahTitle.id}. ${soorahTitle.title}`
 
   return {
     title,
