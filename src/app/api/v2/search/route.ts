@@ -3,9 +3,9 @@ import { NextResponse } from 'next/server'
 import { Db } from 'mongodb'
 
 import { DataPropsLatinized, DisplayData, ResponseErrorType } from '@/helpers/types'
-import { FormProps, getView } from '@/utility/getView/getView'
+import { FormProps, getView } from '@/utility/getView'
 import { withMongo } from '@/utility/mongodb'
-import { initialPaginate } from '@/utility/paginate'
+import { initialPaginate } from '@/helpers/paginate'
 
 export type ResponseProps = {
   out: DisplayData[]

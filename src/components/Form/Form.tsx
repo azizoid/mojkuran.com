@@ -4,7 +4,7 @@ import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 
 import { soorahList } from '@/assets/soorah-list-object'
-import { FormProps, getView } from '@/utility/getView/getView'
+import { FormProps, getView } from '@/utility/getView'
 
 export const Form = (): JSX.Element => {
   const router = useRouter()

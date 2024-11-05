@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 
 import { soorahList } from '@/assets/soorah-list-object'
 
-import { getView } from '@/utility/getView/getView'
+import { getView } from '@/utility/getView'
 
 import { getSoorahService } from './getSoorahService'
 import { SoorahAyah } from '@/components/SoorahAyah/SoorahAyah'

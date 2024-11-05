@@ -3,7 +3,7 @@ import { FaExternalLinkAlt } from 'react-icons/fa'
 
 import { DisplayData } from '@/helpers/types'
 
-import { buildUrl } from '@/utility/buildUrl'
+import { buildUrl } from '@/helpers/buildUrl'
 import { Sajda } from '../Sajda/Sajda'
 
 export type SoorahAyahProps = {

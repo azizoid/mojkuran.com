@@ -4,7 +4,7 @@ import { SOORAH_LIST } from '@/assets/soorah-list-object'
 
 import styles from './SoorahCaption.module.css'
 import { CityAndSize } from '../CityAndSize/CityAndSize'
-import { buildUrl } from '@/utility/buildUrl'
+import { buildUrl } from '@/helpers/buildUrl'
 
 type SoorahCaptionProps = {
   soorah: number
