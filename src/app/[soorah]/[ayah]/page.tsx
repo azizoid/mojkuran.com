@@ -71,7 +71,7 @@ const AyahPage = async (props: AyahProps) => {
       <li className="ayah-list-item text-3xl font-Nunito text-right" dir="rtl">
         {arabic}
       </li>
-      <li>
+      <li className="py-2">
         <PaginateAyah {...{ soorah, ayah }} />
       </li>
     </WithSoorahCaptionProvider>

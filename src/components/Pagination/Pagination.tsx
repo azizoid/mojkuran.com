@@ -4,7 +4,6 @@ import {
   PaginationEllipsis,
   PaginationItem,
   PaginationLink,
-
 } from "@/components/ui/pagination"
 
 import { calculatePageBounds } from '@/utility/calculatePageBounds'
