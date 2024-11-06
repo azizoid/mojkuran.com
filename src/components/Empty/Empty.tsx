@@ -25,7 +25,7 @@ export const Empty = (): JSX.Element => (
 
     <SoorahList />
 
-    <div className="prose col">
+    <div className="prose !max-w-none col">
       <h6 className="alert alert-success">
         Kako biste imali <strong>uspješnu</strong> pretragu pratite slijedeća{" "}
         <strong>pravila</strong>:
@@ -35,20 +35,19 @@ export const Empty = (): JSX.Element => (
     <div className="grid grid-1 md:grid-cols-3 gap-2 py-4">
       <Card
         title="Uslovi korištenja"
-        className="flex flex-col space-y-4"
-        size="small"
+        className="flex flex-col"
       >
         <code>mojkuran.com/96/1</code>
         <code>mojkuran.com/23</code>
       </Card>
-      <Card title="Greške:" size="small">
+      <Card title="Greške:">
         Gramatičke greške vašeg unosa mogu biti razlog da ne dobijete nikakav
         rezultat pretrage.
         <br />
         Na primjer: Umjesto <code>Mekka</code> napišete <code>Mekku</code> ili{" "}
         <code>Mekke</code>
       </Card>
-      <Card title="Različite rečenice:" size="small">
+      <Card title="Različite rečenice:" >
         Riječi i rečenice koje se možda ne nalaze u ovom prevodu. Na primjer: U
         pretraživač NE unosite rečenice kao što su:{" "}
         <code>&quot;Kako obaviti namaz&quot;</code>

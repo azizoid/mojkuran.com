@@ -61,7 +61,7 @@ export const Pagination = ({
           const isCurrPage = page === activePage
 
           return (
-            <PaginationItem>
+            <PaginationItem key={page}>
               <PaginationLink onClick={() => handleClick(page)} href="#" isActive={isCurrPage}>{page}</PaginationLink>
             </PaginationItem>
           )
