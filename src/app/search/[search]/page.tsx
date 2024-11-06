@@ -50,14 +50,14 @@ const Search = () => {
     return (
       <>
         <Form />
-        <div className="prose !max-w-none col-sm-12 alert alert-danger">Kəlmə tapılmamışdır</div>
+        <div className="prose !max-w-none col-sm-12 alert alert-danger">Riječ nije pronađena</div>
       </>
     )
   }
 
   const paginateLinks =
     data?.paginate?.total && data.paginate.total > data?.paginate?.perPage ? (
-      <li className="list-group-item">
+      <li className="list-group-item py-2">
         <Pagination
           activePage={data?.paginate.currentPage}
           itemsCountPerPage={data?.paginate.perPage}
