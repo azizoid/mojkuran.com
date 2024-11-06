@@ -9,6 +9,8 @@ import {
 import { SoorahList } from '../SoorahList/SoorahList'
 import { Card } from '../Card/Card'
 import { ScrollArea } from "../ui/scroll-area"
+import { Alert, AlertDescription } from "../ui/alert"
+import { TerminalIcon } from "lucide-react"
 
 const topLinks = [
   ['/1', 'Sura El-Fatiha'],
@@ -39,14 +41,18 @@ export const Empty = (): JSX.Element => (
     </ScrollArea>
 
 
-    <div className="prose !max-w-none col">
-      <h6 className="alert alert-success">
-        Kako biste imali <strong>uspješnu</strong> pretragu pratite slijedeća{" "}
-        <strong>pravila</strong>:
-      </h6>
+    <div className="prose !max-w-none flex">
+      <Alert variant="default">
+        <TerminalIcon className="h-4 w-4" />
+
+        <AlertDescription>
+          Kako biste imali <strong>uspješnu</strong> pretragu pratite slijedeća{" "}
+          <strong>pravila</strong>:
+        </AlertDescription>
+      </Alert>
     </div>
 
-    <div className="grid grid-1 md:grid-cols-3 gap-2 py-4">
+    <div className="grid grid-1 md:grid-cols-3 gap-2">
       <Card
         title="Uslovi korištenja"
         className="flex flex-col"

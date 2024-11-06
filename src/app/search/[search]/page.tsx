@@ -14,6 +14,8 @@ import { WithFormProvider } from '@/providers/WithFormProvider'
 import { fetcher } from '@/utility/fetcher'
 import { Pagination } from '@/components/Pagination/Pagination'
 import { SearchAyah } from './SearchAyah'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { TerminalIcon } from 'lucide-react'
 
 const Search = () => {
   const params = useParams()
@@ -50,7 +52,14 @@ const Search = () => {
     return (
       <>
         <Form />
-        <div className="prose !max-w-none col-sm-12 alert alert-danger">Riječ nije pronađena</div>
+
+        <Alert variant="destructive">
+          <TerminalIcon className="h-4 w-4" />
+
+          <AlertDescription>
+            Riječ nije pronađena
+          </AlertDescription>
+        </Alert>
       </>
     )
   }
