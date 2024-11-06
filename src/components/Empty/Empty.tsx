@@ -1,7 +1,13 @@
-import Link from 'next/link'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+
 import { SoorahList } from '../SoorahList/SoorahList'
 import { Card } from '../Card/Card'
-
 
 const topLinks = [
   ['/1', 'Sura El-Fatiha'],
@@ -13,15 +19,19 @@ const topLinks = [
 
 export const Empty = (): JSX.Element => (
   <div className="space-y-4">
-    <ol className="py-2 w-full flex justify-center text-gray-500 space-x-5 text-sm md:text-base">
-      {topLinks.map(([url, urlText]) => (
-        <li key={url}>
-          <Link href={url} prefetch={false}>
-            {urlText}
-          </Link>
-        </li>
-      ))}
-    </ol>
+
+    <Breadcrumb className='py-2 w-full flex justify-center text-gray-500 space-x-5 text-sm md:text-base'>
+      <BreadcrumbList>
+        {topLinks.map(([url, text], index) => (
+          <>
+            {index > 0 && <BreadcrumbSeparator />}
+            <BreadcrumbItem>
+              <BreadcrumbLink href={url}>{text}</BreadcrumbLink>
+            </BreadcrumbItem>
+          </>
+        ))}
+      </BreadcrumbList >
+    </Breadcrumb>
 
     <SoorahList />
 
