@@ -8,6 +8,7 @@ import {
 
 import { SoorahList } from '../SoorahList/SoorahList'
 import { Card } from '../Card/Card'
+import { ScrollArea } from "../ui/scroll-area"
 
 const topLinks = [
   ['/1', 'Sura El-Fatiha'],
@@ -20,20 +21,23 @@ const topLinks = [
 export const Empty = (): JSX.Element => (
   <div className="space-y-4">
 
-    <Breadcrumb className='py-2 w-full flex justify-center text-gray-500 space-x-5 text-sm md:text-base'>
-      <BreadcrumbList>
-        {topLinks.map(([url, text], index) => (
-          <>
-            {index > 0 && <BreadcrumbSeparator />}
-            <BreadcrumbItem>
-              <BreadcrumbLink href={url}>{text}</BreadcrumbLink>
-            </BreadcrumbItem>
-          </>
-        ))}
-      </BreadcrumbList >
-    </Breadcrumb>
+    <ScrollArea className="h-svh w-full">
+      <Breadcrumb className='py-2 w-full flex justify-center text-gray-500 space-x-5 text-sm md:text-base'>
+        <BreadcrumbList>
+          {topLinks.map(([url, text], index) => (
+            <>
+              {index > 0 && <BreadcrumbSeparator />}
+              <BreadcrumbItem>
+                <BreadcrumbLink href={url}>{text}</BreadcrumbLink>
+              </BreadcrumbItem>
+            </>
+          ))}
+        </BreadcrumbList >
+      </Breadcrumb>
 
-    <SoorahList />
+      <SoorahList />
+    </ScrollArea>
+
 
     <div className="prose !max-w-none col">
       <h6 className="alert alert-success">
