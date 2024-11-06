@@ -28,7 +28,7 @@
   }
 
   .badge {
-    @apply mr-2 px-2 py-1 text-sm rounded-r text-black bg-gray-50;
+    @apply mr-2 px-2 py-1 text-sm rounded-r text-black bg-gray-50 flex flex-col;
   }
 
   .soorah-list-item {

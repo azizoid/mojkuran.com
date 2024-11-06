@@ -18,7 +18,7 @@ export const SearchAyah = ({ data, sajda, mark = '' }: SearchAyahProps) => (
   <li className="soorah-list-item">
     <div className="flex flex-row">
       <span className="badge">
-        {data.soorah}:{data.ayah}
+        <span>{data.soorah}:{data.ayah}</span>
         {sajda?.includes(data.ayah) && <Sajda />}
       </span>{' '}
       <Highlighter
