@@ -16,6 +16,7 @@ import { Pagination } from '@/components/Pagination/Pagination'
 import { SearchAyah } from './SearchAyah'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { TerminalIcon } from 'lucide-react'
+import { LoaderDots } from '@/components/LoaderDots'
 
 const Search = () => {
   const params = useParams()
@@ -28,7 +29,7 @@ const Search = () => {
     page: String(currentPage)
   }
 
-  const { data, error, mutate } = useSWR<ResponseProps>(
+  const { data, error, isLoading, mutate } = useSWR<ResponseProps>(
     ['/api/v2/search', searchBody],
     searchQuery?.length > 2 ? (url: [string, string]) => fetcher(url, searchBody, 'POST') : null,
     {
@@ -47,6 +48,14 @@ const Search = () => {
   useEffect(() => {
     mutate()
   }, [mutate, currentPage, params?.search])
+
+  if (isLoading) {
+    return <>
+      <Form />
+
+      <LoaderDots />
+    </>
+  }
 
   if (error || data?.out === null) {
     return (

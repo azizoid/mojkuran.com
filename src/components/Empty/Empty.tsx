@@ -11,6 +11,7 @@ import { Card } from '../Card/Card'
 import { ScrollArea } from "../ui/scroll-area"
 import { Alert, AlertDescription } from "../ui/alert"
 import { TerminalIcon } from "lucide-react"
+import { Fragment } from "react"
 
 const topLinks = [
   ['/1', 'Sura El-Fatiha'],
@@ -27,12 +28,12 @@ export const Empty = (): JSX.Element => (
       <Breadcrumb className='py-2 w-full flex justify-center text-gray-500 space-x-5 text-sm md:text-base'>
         <BreadcrumbList>
           {topLinks.map(([url, text], index) => (
-            <>
+            <Fragment key={url}>
               {index > 0 && <BreadcrumbSeparator />}
               <BreadcrumbItem>
                 <BreadcrumbLink href={url}>{text}</BreadcrumbLink>
               </BreadcrumbItem>
-            </>
+            </Fragment>
           ))}
         </BreadcrumbList >
       </Breadcrumb>
