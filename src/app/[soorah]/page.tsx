@@ -7,6 +7,7 @@ import { getView } from '@/utility/getView/getView'
 
 import { getSoorahService } from './getSoorahService'
 import { SoorahAyah } from '@/components/SoorahAyah/SoorahAyah'
+import { Bismillah } from '@/components/Bismillah/Bismillah'
 
 type SoorahProps = {
   params: Promise<{
@@ -53,11 +54,13 @@ const SoorahPage = async (props: SoorahProps) => {
   const sajda = soorahList.find((soorahItem) => soorahItem.id === soorah)?.sajda
 
   return (
-    <WithSoorahCaptionProvider soorah={soorah} bismillah={soorah !== 9}>
+    <>
+      {soorah !== 9 ? <Bismillah /> : null}
+
       {out.map((outData) => (
         <SoorahAyah data={outData} key={outData.id} sajda={sajda} />
       ))}
-    </WithSoorahCaptionProvider>
+    </>
   )
 }
 

@@ -1,5 +1,6 @@
-import { LoadingBoxes } from "@/components/LoadingBoxes/LoadingBoxes"
+import { LoaderDots } from "@/components/LoaderDots"
 
-export const SoorahLoader = () => <LoadingBoxes />
+
+export const SoorahLoader = () => <LoaderDots />
 
 export default SoorahLoader
