@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation'
 
 import { soorahList } from '@/assets/soorah-list-object'
 
-import { WithSoorahCaptionProvider } from '@/providers/WithSoorahCaptionProvider'
 import { getView } from '@/utility/getView/getView'
 
 import { getSoorahService } from './getSoorahService'
