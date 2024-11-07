@@ -14,7 +14,7 @@ import { WithFormProvider } from '@/providers/WithFormProvider'
 import { fetcher } from '@/utility/fetcher'
 import { Pagination } from '@/components/Pagination/Pagination'
 import { SearchAyah } from './SearchAyah'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Alert, AlertDescription } from '@/components/ui/alert'
 import { TerminalIcon } from 'lucide-react'
 
 const Search = () => {

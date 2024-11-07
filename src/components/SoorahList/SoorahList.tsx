@@ -7,6 +7,7 @@ export const SoorahList = () => (
   <div className="mt-2 border-t border-gray-300">
     {soorahList.map((soorah) => (
       <Link
+        key={soorah.id}
         href={`/${soorah.id}`}
         className="group flex w-full my-4 mx-auto overflow-hidden bg-white shadow-md">
 
