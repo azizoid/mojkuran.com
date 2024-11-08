@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/pagination"
 
 import { soorahList } from '@/assets/soorah-list-object'
-import { PaginationLink } from '@/components/PaginationLink/PaginationLink'
 import { buildUrl } from '@/helpers/buildUrl'
 
 export type PaginateAyahProps = {
