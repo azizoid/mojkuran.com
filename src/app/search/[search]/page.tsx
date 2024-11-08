@@ -7,9 +7,6 @@ import useSWR from 'swr'
 
 import { ResponseProps } from '@/app/api/v2/search/route'
 import { SOORAH_LIST } from '@/assets/soorah-list-object'
-import { Form } from '@/components/Form/Form'
-
-import { WithFormProvider } from '@/providers/WithFormProvider'
 
 import { fetcher } from '@/utility/fetcher'
 import { Pagination } from '@/components/Pagination/Pagination'
@@ -50,26 +47,18 @@ const Search = () => {
   }, [mutate, currentPage, params?.search])
 
   if (isLoading) {
-    return <>
-      <Form />
-
-      <LoaderDots />
-    </>
+    return <LoaderDots />
   }
 
   if (error || data?.out === null) {
     return (
-      <>
-        <Form />
+      <Alert variant="destructive">
+        <TerminalIcon className="h-4 w-4" />
 
-        <Alert variant="destructive">
-          <TerminalIcon className="h-4 w-4" />
-
-          <AlertDescription>
-            Riječ nije pronađena
-          </AlertDescription>
-        </Alert>
-      </>
+        <AlertDescription>
+          Riječ nije pronađena
+        </AlertDescription>
+      </Alert>
     )
   }
 
@@ -87,18 +76,16 @@ const Search = () => {
     ) : null
 
   return (
-    <WithFormProvider>
-      <ul className="list-none divide-y divide-gray-100 bg-white text-gray-700">
-        {paginateLinks}
+    <ul className="list-none divide-y divide-gray-100 bg-white text-gray-700">
+      {paginateLinks}
 
-        {data?.out?.map((ayah) => {
-          const sajda = SOORAH_LIST[ayah.soorah]?.sajda
-          return <SearchAyah data={ayah} sajda={sajda} mark={searchQuery} key={ayah.id} />
-        })}
+      {data?.out?.map((ayah) => {
+        const sajda = SOORAH_LIST[ayah.soorah]?.sajda
+        return <SearchAyah data={ayah} sajda={sajda} mark={searchQuery} key={ayah.id} />
+      })}
 
-        {paginateLinks}
-      </ul>
-    </WithFormProvider>
+      {paginateLinks}
+    </ul>
   )
 }
 

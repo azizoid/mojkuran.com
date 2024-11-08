@@ -6,7 +6,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { soorahList } from '@/assets/soorah-list-object'
 import { FormProps, getView } from '@/utility/getView'
 
-export const Form = (): JSX.Element => {
+export const Form = () => {
   const router = useRouter()
 
   const params = useParams()
@@ -92,6 +92,7 @@ export const Form = (): JSX.Element => {
           name="soorah"
           value={state?.s ?? 0}
           onChange={onHandleChange}
+          suppressHydrationWarning
         >
           <option value="0">Izaberi Suru:</option>
           {soorahList.map(({ id, title }) => (
@@ -112,6 +113,7 @@ export const Form = (): JSX.Element => {
           max={286}
           value={state?.a || ''}
           onChange={onHandleChange}
+          suppressHydrationWarning
         />
 
         <div className="col-span-3 text-center ">
@@ -127,9 +129,10 @@ export const Form = (): JSX.Element => {
           name="search"
           value={state?.q || ''}
           onChange={onHandleChange}
+          suppressHydrationWarning
         />
 
-        <button className="btn btn-success col-span-5" type="submit">
+        <button className="btn btn-success col-span-5" type="submit" suppressHydrationWarning>
           Pretraži
         </button>
       </div>

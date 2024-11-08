@@ -6,6 +6,7 @@ import { TiSocialFacebookCircular, TiSocialInstagram } from "react-icons/ti";
 import { Footer } from "@/components/Footer/Footer";
 import { MainMetadata, MainViewport } from "./metadata";
 import { Sidebar } from "@/components/Sidebar/Sidebar";
+import { Form } from "@/components/Form/Form";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -17,7 +18,6 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
-
 
 export const metadata = MainMetadata
 export const viewport = MainViewport
@@ -61,14 +61,16 @@ export default function RootLayout({
 
           <div className="flex-grow container mx-auto mt-10 pb-2">
             <div className="grid grid-cols-12">
-              <div className="col-span-12 lg:col-span-7 mx-0 lg:mx-4 mb-4">{children}</div>
+              <div className="col-span-12 lg:col-span-7 mx-0 lg:mx-4 mb-4">
+                <Form />
+
+                {children}
+              </div>
 
               <div className="col-span-12 lg:col-span-4 mx-4 text-small flex flex-col justify-items-start space-y-4">
                 <Sidebar />
               </div>
             </div>
-
-
           </div>
 
           <Footer />
