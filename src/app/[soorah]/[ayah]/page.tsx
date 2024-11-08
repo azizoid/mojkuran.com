@@ -2,14 +2,13 @@ import { notFound, redirect } from 'next/navigation'
 
 import { soorahList } from '@/assets/soorah-list-object'
 
-import { WithSoorahCaptionProvider } from '@/providers/WithSoorahCaptionProvider'
-
 import { getView } from '@/utility/getView/getView'
 
 import { getAyahService } from './getAyahService'
 import { soorahAyahTitle } from '@/utility/soorahAyahTitle'
 import { ColoredText } from '@/components/ColoredText/ColoredText'
 import { PaginateAyah } from '@/components/PaginateAyah/PaginateAyah'
+import { Bismillah } from '@/components/Bismillah/Bismillah'
 
 type AyahProps = {
   params: Promise<{
@@ -60,7 +59,9 @@ const AyahPage = async (props: AyahProps) => {
   const { content, arabic, transliteration } = out
 
   return (
-    <WithSoorahCaptionProvider soorah={soorah} >
+    <>
+      <Bismillah />
+
       <li className="prose !max-w-none ayah-list-item flex flex-col">
         <span className="text-gray-400">{soorahAyahTitle(soorah, ayah)}</span>
         {content}
@@ -71,10 +72,10 @@ const AyahPage = async (props: AyahProps) => {
       <li className="ayah-list-item text-3xl font-Nunito text-right" dir="rtl">
         {arabic}
       </li>
-      <li>
+      <li className="py-2">
         <PaginateAyah {...{ soorah, ayah }} />
       </li>
-    </WithSoorahCaptionProvider>
+    </>
   )
 }
 

@@ -14,6 +14,9 @@ import { WithFormProvider } from '@/providers/WithFormProvider'
 import { fetcher } from '@/utility/fetcher'
 import { Pagination } from '@/components/Pagination/Pagination'
 import { SearchAyah } from './SearchAyah'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { TerminalIcon } from 'lucide-react'
+import { LoaderDots } from '@/components/LoaderDots'
 
 const Search = () => {
   const params = useParams()
@@ -26,7 +29,7 @@ const Search = () => {
     page: String(currentPage)
   }
 
-  const { data, error, mutate } = useSWR<ResponseProps>(
+  const { data, error, isLoading, mutate } = useSWR<ResponseProps>(
     ['/api/v2/search', searchBody],
     searchQuery?.length > 2 ? (url: [string, string]) => fetcher(url, searchBody, 'POST') : null,
     {
@@ -46,18 +49,33 @@ const Search = () => {
     mutate()
   }, [mutate, currentPage, params?.search])
 
+  if (isLoading) {
+    return <>
+      <Form />
+
+      <LoaderDots />
+    </>
+  }
+
   if (error || data?.out === null) {
     return (
       <>
         <Form />
-        <div className="prose !max-w-none col-sm-12 alert alert-danger">Kəlmə tapılmamışdır</div>
+
+        <Alert variant="destructive">
+          <TerminalIcon className="h-4 w-4" />
+
+          <AlertDescription>
+            Riječ nije pronađena
+          </AlertDescription>
+        </Alert>
       </>
     )
   }
 
   const paginateLinks =
     data?.paginate?.total && data.paginate.total > data?.paginate?.perPage ? (
-      <li className="list-group-item">
+      <li className="list-group-item py-2">
         <Pagination
           activePage={data?.paginate.currentPage}
           itemsCountPerPage={data?.paginate.perPage}

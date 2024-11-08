@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export const FacebookPage = () => (
   <div className="relative w-full bg-gray-900 text-white rounded-lg shadow-lg">
-    <Link href="https://facebook.com/mojkuran" target="_blank">
+    <Link href="https://instagram.com/mojkuran" target="_blank">
       <div className="relative">
         <Image
           src="/img/kuran.jpg"
