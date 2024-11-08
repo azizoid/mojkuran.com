@@ -1,9 +1,9 @@
 import useSWR from 'swr'
-import { buildUrl } from '@/utility/buildUrl'
+import { buildUrl } from '@/helpers/buildUrl'
 import { fetcher } from '@/utility/fetcher'
-import { LoadingBoxes } from '../LoadingBoxes/LoadingBoxes'
 import { Card } from '../Card/Card'
-import { soorahAyahTitle } from '@/utility/soorahAyahTitle'
+import { soorahAyahTitle } from '@/helpers/soorahAyahTitle'
+import { LoaderDots } from '../LoaderDots'
 
 
 export const RandomAyah = () => {
@@ -17,7 +17,7 @@ export const RandomAyah = () => {
   })
 
   if (isLoading || isError) {
-    return <LoadingBoxes />
+    return <LoaderDots />
   }
 
   const { soorah, ayah, content } = data

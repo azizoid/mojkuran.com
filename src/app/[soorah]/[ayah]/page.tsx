@@ -2,12 +2,12 @@ import { notFound, redirect } from 'next/navigation'
 
 import { soorahList } from '@/assets/soorah-list-object'
 
-import { getView } from '@/utility/getView/getView'
+import { getView } from '@/utility/getView'
 
 import { getAyahService } from './getAyahService'
-import { soorahAyahTitle } from '@/utility/soorahAyahTitle'
+import { soorahAyahTitle } from '@/helpers/soorahAyahTitle'
 import { ColoredText } from '@/components/ColoredText/ColoredText'
-import { PaginateAyah } from '@/components/PaginateAyah/PaginateAyah'
+import { PaginateAyah } from './PaginateAyah'
 import { Bismillah } from '@/components/Bismillah/Bismillah'
 
 type AyahProps = {

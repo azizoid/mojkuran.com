@@ -7,7 +7,7 @@ const metadataTitle = {
 const metadataUrl = new URL('https://mojkuran.com')
 
 export const MainMetadata: Metadata = {
-  icons: './favicon.ico',
+  icons: '/static/favicon.ico',
   title: metadataTitle,
   // description: metadataDescription,
   keywords: [

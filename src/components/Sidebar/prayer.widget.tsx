@@ -1,4 +1,7 @@
-import React, { useState, useEffect, useCallback } from "react"
+import { fetcher } from "@/utility/fetcher"
+import React from "react"
+import useSWR from "swr"
+import { LoaderDots } from "../LoaderDots"
 
 const prayersListEmpty = [
   { id: 1, title: "Zora", time: "--:--" },
@@ -10,54 +13,43 @@ const prayersListEmpty = [
 ]
 
 export const PrayerWidget = (): JSX.Element => {
-  const [prayers, setPrayers] = useState(prayersListEmpty)
-  const [hijri, setHijri] = useState("")
+  const { data, error } = useSWR(
+    ["https://api.vaktija.ba/vaktija/v1/77", 'vaktija'],
+    fetcher, {
+    revalidateOnMount: true,
+    dedupingInterval: 60 * 60 * 1000, // TTL of 1 hour
+  })
 
-  const fetchData = useCallback(async () => {
-    await fetch("https://api.vaktija.ba/vaktija/v1/77")
-      .then((response) => response.json())
-      .then((data) => {
-        const out = prayersListEmpty.map((prayer, i) => ({
-          ...prayer,
-          time: data["vakat"][i],
-        }))
-        setHijri(data.datum[0])
-        setPrayers(out)
-      })
-  }, [])
+  if (error) return <div />
+  if (!data) return <LoaderDots />
 
-  useEffect(() => {
-    fetchData()
-  }, [fetchData])
+  const updatedPrayers = prayersListEmpty.map((prayer, i) => ({
+    ...prayer,
+    time: data.vakat[i] || "--:--",
+  }))
 
   return (
     <table className="w-full table-auto text-sm" cellPadding={7}>
       <thead className="bg-gray-700 text-white">
         <tr>
           <td align="center" colSpan={4}>
-            {hijri}, Sarajevo
+            {data.datum[0]}, Sarajevo
           </td>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td align="right">{prayers[0]["title"]}</td>
-          <td>{prayers[0]["time"]}</td>
-          <td align="right">{prayers[1]["title"]}</td>
-          <td>{prayers[1]["time"]}</td>
-        </tr>
-        <tr>
-          <td align="right">{prayers[2]["title"]}</td>
-          <td>{prayers[2]["time"]}</td>
-          <td align="right">{prayers[3]["title"]}</td>
-          <td>{prayers[3]["time"]}</td>
-        </tr>
-        <tr>
-          <td align="right">{prayers[4]["title"]}</td>
-          <td>{prayers[4]["time"]}</td>
-          <td align="right">{prayers[5]["title"]}</td>
-          <td>{prayers[5]["time"]}</td>
-        </tr>
+        {updatedPrayers.map((prayer, index) => (
+          <React.Fragment key={prayer.id}>
+            {index % 2 === 0 && (
+              <tr>
+                <td align="right">{prayer.title}</td>
+                <td>{prayer.time}</td>
+                <td align="right">{updatedPrayers[index + 1]?.title || ""}</td>
+                <td>{updatedPrayers[index + 1]?.time || ""}</td>
+              </tr>
+            )}
+          </React.Fragment>
+        ))}
       </tbody>
     </table>
   )

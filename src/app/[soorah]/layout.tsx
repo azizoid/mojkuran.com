@@ -1,6 +1,5 @@
 import { PropsWithChildren } from 'react'
 
-import { WithFormProvider } from '@/providers/WithFormProvider'
 import { SoorahCaption } from '@/components/SoorahCaption/SoorahCaption'
 
 type SoorahLayoutProps = PropsWithChildren<{
@@ -13,16 +12,16 @@ const SoorahLayout = async ({
   params,
   children,
 }: SoorahLayoutProps) => {
-  const { soorah } = await params
+  const { soorah: soorahParam } = await params
+
+  const sooran = Number(soorahParam)
 
   return (
-    <WithFormProvider>
-      <ul className="page-template-list">
-        <SoorahCaption soorah={Number(soorah)} />
+    <ul className="page-template-list">
+      {sooran ? <SoorahCaption soorah={sooran} /> : null}
 
-        {children}
-      </ul>
-    </WithFormProvider>
+      {children}
+    </ul>
   )
 }
 
