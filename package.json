@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "ci": "pnpm install --frozen-lockfile"
   },
   "dependencies": {
     "@radix-ui/react-scroll-area": "^1.2.0",
