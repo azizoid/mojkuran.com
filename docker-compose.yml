@@ -11,8 +11,11 @@ services:
         MONGODB_DB: ${MONGODB_DB}
     env_file:
       - .env
-    depends_on:
-      mojkuran-db:
-        condition: service_healthy
     ports:
       - "${PORT}:${PORT}"
+    networks:
+      - main-network
+
+networks:
+  main-network:
+    external: true

@@ -40,6 +40,8 @@ jobs:
             --tag $IMAGE_NAME:latest \
             --cache-from=type=local,src=/tmp/.buildx-cache \
             --cache-to=type=local,dest=/tmp/.buildx-cache \
+            --build-arg MONGODB_URI=${{ secrets.MONGODB_URI }} \
+            --build-arg MONGODB_DB=${{ secrets.MONGODB_DB }} \
             .
 
   pull-and-restart:
