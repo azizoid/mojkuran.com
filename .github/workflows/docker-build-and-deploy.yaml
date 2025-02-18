@@ -14,6 +14,16 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Get GitHub Actions Runner IP
+        run: echo "RUNNER_IP=$(curl -s ifconfig.me)" >> $GITHUB_ENV
+
+      - name: Add GitHub Runner IP to MongoDB Atlas Whitelist
+        run: |
+          curl -X POST "https://cloud.mongodb.com/api/atlas/v1.0/groups/${{ secrets.MONGO_PROJECT_ID }}/accessList" \
+          -u "${{ secrets.MONGO_ATLAS_PUBLIC_KEY }}:${{ secrets.MONGO_ATLAS_PRIVATE_KEY }}" \
+          -H "Content-Type: application/json" \
+          --data "{\"ipAddress\": \"${{ env.RUNNER_IP }}\"}"
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -43,6 +53,11 @@ jobs:
             --build-arg MONGODB_URI=${{ secrets.MONGODB_URI }} \
             --build-arg MONGODB_DB=${{ secrets.MONGODB_DB }} \
             .
+
+      - name: Remove GitHub Runner IP from MongoDB Atlas Whitelist
+        run: |
+          curl -X DELETE "https://cloud.mongodb.com/api/atlas/v1.0/groups/${{ secrets.MONGO_PROJECT_ID }}/accessList/${{ env.RUNNER_IP }}" \
+          -u "${{ secrets.MONGO_ATLAS_PUBLIC_KEY }}:${{ secrets.MONGO_ATLAS_PRIVATE_KEY }}"
 
   pull-and-restart:
     name: Pull & Restart on Server
