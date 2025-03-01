@@ -9,7 +9,7 @@ import { Link } from '@/components/Link'
 
 export const TopbarLinks = () => {
   const { data: topLinks } = useSWR<SoorahListProps[]>(
-    [`${process.env.NEXT_PUBLIC_BASE_API_URL}/random/topbar`, 'topbarLinks'],
+    [`/api/v2/random/topbar`, 'topbarLinks'],
     (url: [string, string]) => fetcher(url),
     {
       refreshInterval: 0,
