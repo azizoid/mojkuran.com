@@ -100,7 +100,7 @@ jobs:
             docker pull $IMAGE_NAME:latest
 
             echo "Restarting only the Next.js container..."
-            docker compose up -d --no-deps --force-recreate teklif-app
+            docker compose up -d --no-deps --force-recreate mojkuran-app
 
             echo "Cleaning up old images..."
             docker image prune -a -f
