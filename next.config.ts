@@ -6,9 +6,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   generateEtags: false,
   reactStrictMode: true,
-  devIndicators: {
-    buildActivity: false,
-  },
+  devIndicators: false
 };
 
 export default nextConfig;
