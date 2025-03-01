@@ -1,5 +1,5 @@
 import React from "react"
-import Link from "next/link"
+import { Link } from "@/components/Link";
 
 export const Footer = () => (
   <nav className="py-4 bg-gray-700 text-slate-300">

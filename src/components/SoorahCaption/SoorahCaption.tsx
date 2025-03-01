@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from "@/components/Link";
 
 import { SOORAH_LIST } from '@/assets/soorah-list-object'
 

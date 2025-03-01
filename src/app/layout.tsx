@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 import "../styles/globals.css";
-import Link from "next/link";
+import { Link } from "@/components/Link";
 import { Logo } from "@/components/Logo/Logo";
 import { TiSocialFacebookCircular, TiSocialInstagram } from "react-icons/ti";
 import { Footer } from "@/components/Footer/Footer";
