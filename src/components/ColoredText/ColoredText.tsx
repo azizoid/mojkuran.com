@@ -13,7 +13,7 @@ type ColoredTextProps = {
   content: string
 }
 
-export const ColoredText = ({ content }: ColoredTextProps): JSX.Element => {
+export const ColoredText = ({ content }: ColoredTextProps) => {
   const text = content.split(' ')
   let randomColor = 0
 

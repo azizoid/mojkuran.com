@@ -17,7 +17,7 @@ export const CityAndSize = ({
   ayahCount,
   devider = true,
   size = "sm",
-}: CityAndSizeProps): JSX.Element => (
+}: CityAndSizeProps) => (
   <>
     <span className="flex gap-1 align-middle whitespace-nowrap">
       {city === "Mecca" ? (
@@ -39,8 +39,7 @@ export const CityAndSize = ({
       )}
     </span>
     {devider && "/"}
-    <span>{`${ayahCount} ${
-      [11, 111].includes(ayahCount) || ayahCount % 10 !== 1 ? "ajeta" : "ajet"
-    }`}</span>
+    <span>{`${ayahCount} ${[11, 111].includes(ayahCount) || ayahCount % 10 !== 1 ? "ajeta" : "ajet"
+      }`}</span>
   </>
 )

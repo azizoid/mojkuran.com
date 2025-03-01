@@ -11,7 +11,7 @@ export type SoorahAyahProps = {
   sajda?: number[]
 }
 
-export const SoorahAyah = ({ data, sajda }: SoorahAyahProps): JSX.Element => (
+export const SoorahAyah = ({ data, sajda }: SoorahAyahProps) => (
   <li className="soorah-list-item">
     <div className="flex flex-row">
       <span className="badge">

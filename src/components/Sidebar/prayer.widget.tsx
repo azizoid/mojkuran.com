@@ -12,7 +12,7 @@ const prayersListEmpty = [
   { id: 6, title: "Jatsija", time: "--:--" },
 ]
 
-export const PrayerWidget = (): JSX.Element => {
+export const PrayerWidget = () => {
   const { data, error } = useSWR(
     ["https://api.vaktija.ba/vaktija/v1/77", 'vaktija'],
     fetcher, {
