@@ -428,7 +428,7 @@ export const SOORAH_LIST: Array<SoorahListProps> = [
   },
   {
     id: 45,
-    title: "El-Gašije",
+    title: "El-Džasija",
     ayahCount: 37,
     order: 65,
     arabic: "الجاثية",
