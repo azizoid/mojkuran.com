@@ -1,5 +1,5 @@
 export const TRANSLATOR_LIST: string[] = [
-  'Tərcüməçilər',
+  'Prevod',
   'Besim&nbsp;Korkut',
 ] as const
 
