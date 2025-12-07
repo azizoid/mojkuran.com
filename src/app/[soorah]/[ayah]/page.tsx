@@ -17,6 +17,10 @@ type AyahProps = {
   }>
 }
 
+// Enable dynamic rendering to prevent NoFallbackError
+// This allows on-demand generation of ayah pages
+export const dynamic = 'force-dynamic'
+
 export const generateMetadata = async (props: AyahProps) => {
   const { soorah, ayah } = await props.params;
   const soorahTitle = soorahList.find((soorahItem) => soorahItem.id === Number(soorah))
@@ -54,7 +58,13 @@ const AyahPage = async (props: AyahProps) => {
     notFound()
   }
 
-  const out = await getAyahService({ soorah, ayah })
+  let out
+  try {
+    out = await getAyahService({ soorah, ayah })
+  } catch (error) {
+    // If ayah is not found or database error, return 404
+    notFound()
+  }
 
   const { content, arabic, transliteration } = out
 
