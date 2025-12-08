@@ -11,8 +11,8 @@ services:
         MONGODB_DB: ${MONGODB_DB}
     env_file:
       - .env
-    ports:
-      - "${PORT}:${PORT}"
+    expose:
+      - ${PORT}
     networks:
       - main-network
 
