@@ -7,7 +7,14 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**", "!**/node_modules", "!**/.next", "!**/build", "!**/coverage", "!**/dist"]
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/.next",
+      "!**/build",
+      "!**/coverage",
+      "!**/dist"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -43,7 +50,10 @@
   },
   "overrides": [
     {
-      "includes": ["**/*.json", "**/*.jsonc"]
+      "includes": [
+        "**/*.json",
+        "**/*.jsonc"
+      ]
     }
   ]
 }
