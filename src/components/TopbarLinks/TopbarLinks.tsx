@@ -2,10 +2,9 @@
 
 import useSWR from 'swr'
 
-import { SoorahListProps } from '@/assets/soorah-list-object'
-
-import { fetcher } from '@/utility/fetcher'
+import type { SoorahListProps } from '@/assets/soorah-list-object'
 import { Link } from '@/components/Link'
+import { fetcher } from '@/utility/fetcher'
 
 export const TopbarLinks = () => {
   const { data: topLinks } = useSWR<SoorahListProps[]>(

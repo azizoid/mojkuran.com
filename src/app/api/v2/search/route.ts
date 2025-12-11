@@ -1,11 +1,9 @@
+import type { Db } from 'mongodb'
 import { NextResponse } from 'next/server'
-
-import { Db } from 'mongodb'
-
-import { DataPropsLatinized, DisplayData, ResponseErrorType } from '@/helpers/types'
-import { FormProps, getView } from '@/utility/getView'
-import { withMongo } from '@/utility/mongodb'
 import { initialPaginate } from '@/helpers/paginate'
+import type { DataPropsLatinized, DisplayData, ResponseErrorType } from '@/helpers/types'
+import { type FormProps, getView } from '@/utility/getView'
+import { withMongo } from '@/utility/mongodb'
 
 export type ResponseProps = {
   out: DisplayData[]
@@ -17,7 +15,7 @@ export type ResponseProps = {
   }
 }
 
-const REGEX_SANITIZE = /[-\/\\^$*+?.()|[\]{}]/g
+const REGEX_SANITIZE = /[-/\\^$*+?.()|[\]{}]/g
 const REGEX_DIACRITICS = /[\u0300-\u036f]/g
 
 export const POST = async (req: Request) => {
@@ -55,7 +53,7 @@ export const POST = async (req: Request) => {
       if (!data.q) return [] // very rare edge case
 
       const searchQuery = {
-        content_latinized: { $regex: data.q, $options: 'i' }
+        content_latinized: { $regex: data.q, $options: 'i' },
       }
 
       ayahsCount = await collection.countDocuments(searchQuery)

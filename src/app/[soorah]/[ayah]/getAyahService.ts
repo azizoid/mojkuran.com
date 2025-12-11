@@ -1,9 +1,9 @@
-import { Db } from 'mongodb'
+import type { Db } from 'mongodb'
 
-import { DataPropsLatinized } from '@/helpers/types'
+import type { DataPropsLatinized } from '@/helpers/types'
 import { withMongo } from '@/utility/mongodb'
 
-import { GetSoorahServiceProps } from '../getSoorahService'
+import type { GetSoorahServiceProps } from '../getSoorahService'
 
 interface GetAyahServiceProps extends GetSoorahServiceProps {
   ayah: number
@@ -64,9 +64,9 @@ export const getAyahService = async ({ soorah, ayah }: GetAyahServiceProps) => {
 
     return {
       ...content,
-      arabic: metadata!.content,
-      transliteration: metadata!.transliteration,
-      juz: metadata!.juz,
+      arabic: metadata?.content,
+      transliteration: metadata?.transliteration,
+      juz: metadata?.juz,
       prev,
       next,
     }

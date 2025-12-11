@@ -1,10 +1,9 @@
 import useSWR from 'swr'
 import { buildUrl } from '@/helpers/buildUrl'
+import { soorahAyahTitle } from '@/helpers/soorahAyahTitle'
 import { fetcher } from '@/utility/fetcher'
 import { Card } from '../Card/Card'
-import { soorahAyahTitle } from '@/helpers/soorahAyahTitle'
 import { LoaderDots } from '../LoaderDots'
-
 
 export const RandomAyah = () => {
   const {

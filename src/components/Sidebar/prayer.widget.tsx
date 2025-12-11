@@ -1,9 +1,9 @@
 'use client'
 
-import { fetcher } from '@/utility/fetcher'
-import useSWR from 'swr'
-import { LoaderDots } from '../LoaderDots'
 import { MapPinnedIcon } from 'lucide-react'
+import useSWR from 'swr'
+import { fetcher } from '@/utility/fetcher'
+import { LoaderDots } from '../LoaderDots'
 
 const prayersListEmpty = [
   { id: 1, title: 'Zora', time: '--:--' },

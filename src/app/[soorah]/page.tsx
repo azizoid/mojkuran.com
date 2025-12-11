@@ -1,73 +1,70 @@
-import { notFound } from "next/navigation";
+import { notFound } from 'next/navigation'
 
-import { soorahList } from "@/assets/soorah-list-object";
-import { Bismillah } from "@/components/Bismillah/Bismillah";
-import { getView } from "@/utility/getView";
+import { soorahList } from '@/assets/soorah-list-object'
+import { Bismillah } from '@/components/Bismillah/Bismillah'
+import type { DisplayData } from '@/helpers/types'
+import { getView } from '@/utility/getView'
 
-import { getSoorahService } from "./getSoorahService";
-import { SoorahAyah } from "./SoorahAyah";
+import { getSoorahService } from './getSoorahService'
+import { SoorahAyah } from './SoorahAyah'
 
 type SoorahProps = {
-	params: Promise<{
-		soorah: string;
-	}>;
-};
+  params: Promise<{
+    soorah: string
+  }>
+}
 
-export const dynamicParams = false;
+export const dynamicParams = false
 
 export const generateStaticParams = async () =>
-	soorahList.map((item) => ({
-		soorah: item.id.toString(),
-	}));
+  soorahList.map((item) => ({
+    soorah: item.id.toString(),
+  }))
 
 export const generateMetadata = async (props: SoorahProps) => {
-	const { soorah } = await props.params;
-	const soorahTitle = soorahList.find(
-		(soorahItem) => soorahItem.id === Number(soorah),
-	);
+  const { soorah } = await props.params
+  const soorahTitle = soorahList.find((soorahItem) => soorahItem.id === Number(soorah))
 
-	if (!soorahTitle) return;
+  if (!soorahTitle) return
 
-	const title = `Sura ${soorahTitle.id}. ${soorahTitle.title}`;
+  const title = `Sura ${soorahTitle.id}. ${soorahTitle.title}`
 
-	return {
-		title,
-		openGraph: { title },
-		twitter: { title },
-	};
-};
+  return {
+    title,
+    openGraph: { title },
+    twitter: { title },
+  }
+}
 
 const SoorahPage = async (props: SoorahProps) => {
-	const { soorah: soorahParam } = await props.params;
+  const { soorah: soorahParam } = await props.params
 
-	const { s: soorah, view } = getView({ s: Number(soorahParam) });
+  const { s: soorah, view } = getView({ s: Number(soorahParam) })
 
-	if (view !== "soorah") {
-		notFound();
-	}
+  if (view !== 'soorah') {
+    notFound()
+  }
 
-	let out;
-	try {
-		out = await getSoorahService({ soorah });
-	} catch (error) {
-		// If soorah is not found or database error, return 404
-		console.error("Error loading soorah:", error);
-		notFound();
-	}
+  let out: DisplayData[]
+  try {
+    out = await getSoorahService({ soorah })
+  } catch (error) {
+    // If soorah is not found or database error, return 404
+    console.error('Error loading soorah:', error)
+    notFound()
+  }
 
-	const sajda = soorahList.find(
-		(soorahItem) => soorahItem.id === soorah,
-	)?.sajda;
+  const sajda = soorahList.find((soorahItem) => soorahItem.id === soorah)?.sajda
 
-	return (
-		<>
-			{soorah !== 9 ? <Bismillah /> : null}
+  return (
+    <>
+      {soorah !== 9 ? <Bismillah /> : null}
 
-			{out.map((outData) => (
-				<SoorahAyah data={outData} key={outData.id} sajda={sajda} />
-			))}
-		</>
-	);
-};
+      {out.map((outData) => (
+        <SoorahAyah data={outData} key={outData.id} sajda={sajda} />
+      ))}
+    </>
+  )
+}
 
-export default SoorahPage;
+export default SoorahPage

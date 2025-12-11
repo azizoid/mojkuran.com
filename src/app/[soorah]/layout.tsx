@@ -1,8 +1,7 @@
-import type { PropsWithChildren } from 'react'
-
-import { SoorahCaption } from '@/components/SoorahCaption/SoorahCaption'
-import { Sidebar } from '@/components/Sidebar/Sidebar'
 import { notFound } from 'next/navigation'
+import type { PropsWithChildren } from 'react'
+import { Sidebar } from '@/components/Sidebar/Sidebar'
+import { SoorahCaption } from '@/components/SoorahCaption/SoorahCaption'
 
 type SoorahLayoutProps = PropsWithChildren<{
   params: Promise<{

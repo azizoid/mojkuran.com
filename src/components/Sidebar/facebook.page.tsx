@@ -1,7 +1,6 @@
-import { Link } from '@/components/Link'
-import Image from 'next/image'
-import { Card } from '../Card/Card'
 import { FaFacebookSquare, FaInstagramSquare } from 'react-icons/fa'
+import { Link } from '@/components/Link'
+import { Card } from '../Card/Card'
 
 export const FacebookPage = () => (
   <Card title="BİZİ BƏYƏN" className='relative bg-[url("/img/kuran.jpg")] bg-cover'>

@@ -1,14 +1,13 @@
 import localFont from 'next/font/local'
 import '../styles/globals.css'
-import { Link } from '@/components/Link'
-import { Logo } from '@/components/Logo/Logo'
+import { Suspense } from 'react'
 import { TiSocialFacebookCircular, TiSocialInstagram } from 'react-icons/ti'
 import { Footer } from '@/components/Footer/Footer'
-import { MainMetadata, MainViewport } from './metadata'
-import { Sidebar } from '@/components/Sidebar/Sidebar'
 import { Form } from '@/components/Form/Form'
-import { Suspense } from 'react'
+import { Link } from '@/components/Link'
+import { Logo } from '@/components/Logo/Logo'
 import { PrayerWidget } from '@/components/Sidebar/prayer.widget'
+import { MainMetadata, MainViewport } from './metadata'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',

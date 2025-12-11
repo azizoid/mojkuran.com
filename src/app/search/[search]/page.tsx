@@ -1,50 +1,57 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { TerminalIcon } from 'lucide-react'
 
 import { useParams } from 'next/navigation'
-
+import { useEffect, useMemo, useRef, useState } from 'react'
 import useSWR from 'swr'
-
-import { ResponseProps } from '@/app/api/v2/search/route'
+import type { ResponseProps } from '@/app/api/v2/search/route'
 import { SOORAH_LIST } from '@/assets/soorah-list-object'
-
-import { fetcher } from '@/utility/fetcher'
-import { Pagination } from '@/components/Pagination/Pagination'
-import { SearchAyah } from './SearchAyah'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { TerminalIcon } from 'lucide-react'
 import { LoaderDots } from '@/components/LoaderDots'
+import { Pagination } from '@/components/Pagination/Pagination'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { fetcher } from '@/utility/fetcher'
+import { SearchAyah } from './SearchAyah'
 
 const Search = () => {
   const params = useParams()
-
   const [currentPage, setCurrentPage] = useState(1)
-  const [searchQuery, setSearchQuery] = useState('')
+  const prevSearchRef = useRef<string>('')
 
-  const searchBody = {
-    search: searchQuery,
-    page: String(currentPage)
-  }
+  // Derive search query directly from URL params
+  const searchQuery = useMemo(() => {
+    if (typeof params?.search === 'string' && params.search.length > 2) {
+      return decodeURIComponent(params.search.toString())
+    }
+    return ''
+  }, [params?.search])
 
-  const { data, error, isLoading, mutate } = useSWR<ResponseProps>(
-    ['/api/v2/search', searchBody],
-    searchQuery?.length > 2 ? (url: [string, string]) => fetcher(url, searchBody, 'POST') : null,
+  // Reset page to 1 when search query changes
+  useEffect(() => {
+    if (searchQuery && searchQuery !== prevSearchRef.current) {
+      setCurrentPage(1)
+      prevSearchRef.current = searchQuery
+    }
+  }, [searchQuery])
+
+  // Memoize searchBody for stable SWR key reference
+  const searchBody = useMemo(
+    () => ({
+      search: searchQuery,
+      page: String(currentPage),
+    }),
+    [searchQuery, currentPage]
+  )
+
+  // SWR automatically refetches when the key changes
+  const { data, error, isLoading } = useSWR<ResponseProps>(
+    searchQuery.length > 2 ? ['/api/v2/search', searchBody] : null,
+    (url: [string, string]) => fetcher(url, searchBody, 'POST'),
     {
       refreshInterval: 0,
       dedupingInterval: 60 * 60 * 1000, // TTL of 1 hour
       keepPreviousData: false,
     }
   )
-
-  useEffect(() => {
-    if (typeof params?.search === 'string' && params.search.length > 2) {
-      setSearchQuery(decodeURIComponent(params.search.toString()))
-    }
-  }, [params?.search])
-
-  useEffect(() => {
-    mutate()
-  }, [mutate, currentPage, params?.search])
 
   if (isLoading) {
     return <LoaderDots />
@@ -55,9 +62,7 @@ const Search = () => {
       <Alert variant="destructive">
         <TerminalIcon className="h-4 w-4" />
 
-        <AlertDescription>
-          Riječ nije pronađena
-        </AlertDescription>
+        <AlertDescription>Riječ nije pronađena</AlertDescription>
       </Alert>
     )
   }

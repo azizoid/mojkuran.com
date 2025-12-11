@@ -24,13 +24,18 @@ export const ColoredText = ({ content }: ColoredTextProps) => {
           randomColor = 0
         }
 
+        // Use word + position in original string for stable key
+        const startPos = content.indexOf(
+          word,
+          index > 0 ? text.slice(0, index).join(' ').length : 0
+        )
         return (
           <span
             style={{ color: coloredTextcolors[randomColor++] }}
             className="px-1 py-0.5 hover:bg-gray-100 hover:cursor-pointer"
-            key={index}
+            key={`${word}-${startPos}`}
           >
-            {word + ' '}
+            {`${word} `}
           </span>
         )
       })}

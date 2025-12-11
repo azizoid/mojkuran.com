@@ -1,10 +1,9 @@
-import { Link } from "@/components/Link";
 import { FaExternalLinkAlt } from 'react-icons/fa'
-
-import { DisplayData } from '@/helpers/types'
+import { Link } from '@/components/Link'
+import { Sajda } from '@/components/Sajda/Sajda'
 
 import { buildUrl } from '@/helpers/buildUrl'
-import { Sajda } from '@/components/Sajda/Sajda'
+import type { DisplayData } from '@/helpers/types'
 
 export type SoorahAyahProps = {
   data: DisplayData

@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 
 const metadataTitle = {
   template: '%s | Mojkuran.com | Čitaj svoju knjigu',
@@ -10,9 +10,7 @@ export const MainMetadata: Metadata = {
   icons: '/static/favicon.ico',
   title: metadataTitle,
   // description: metadataDescription,
-  keywords: [
-
-  ],
+  keywords: [],
   metadataBase: metadataUrl,
   openGraph: {
     title: metadataTitle,

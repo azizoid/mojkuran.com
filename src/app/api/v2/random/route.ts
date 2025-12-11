@@ -1,7 +1,7 @@
-import { DataPropsLatinized } from '@/helpers/types'
-import { withMongo } from '@/utility/mongodb'
-import { Db } from 'mongodb'
+import type { Db } from 'mongodb'
 import { NextResponse } from 'next/server'
+import type { DataPropsLatinized } from '@/helpers/types'
+import { withMongo } from '@/utility/mongodb'
 
 export const GET = async () => {
   try {

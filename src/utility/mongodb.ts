@@ -1,7 +1,11 @@
-import { Db, MongoClient, MongoClientOptions } from 'mongodb'
+import { type Db, MongoClient, type MongoClientOptions } from 'mongodb'
 
-const MONGODB_URI = process.env.MONGODB_URI!
-const MONGODB_DB = process.env.MONGODB_DB!
+const MONGODB_URI = process.env.MONGODB_URI
+const MONGODB_DB = process.env.MONGODB_DB
+
+if (!MONGODB_URI || !MONGODB_DB) {
+  throw new Error('Missing required environment variables: MONGODB_URI and MONGODB_DB must be set')
+}
 
 let cachedClient: MongoClient | null = null
 let cachedDb: Db | null = null

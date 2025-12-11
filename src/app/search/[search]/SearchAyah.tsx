@@ -1,12 +1,10 @@
-import { Link } from "@/components/Link"
-import { FaExternalLinkAlt } from 'react-icons/fa'
-
 import Highlighter from 'react-highlight-words'
-
-import { DisplayData } from '@/helpers/types'
+import { FaExternalLinkAlt } from 'react-icons/fa'
+import { Link } from '@/components/Link'
+import { Sajda } from '@/components/Sajda/Sajda'
 
 import { buildUrl } from '@/helpers/buildUrl'
-import { Sajda } from '@/components/Sajda/Sajda'
+import type { DisplayData } from '@/helpers/types'
 
 export type SearchAyahProps = {
   data: DisplayData
@@ -18,7 +16,9 @@ export const SearchAyah = ({ data, sajda, mark = '' }: SearchAyahProps) => (
   <li className="soorah-list-item">
     <div className="flex flex-row">
       <span className="badge">
-        <span>{data.soorah}:{data.ayah}</span>
+        <span>
+          {data.soorah}:{data.ayah}
+        </span>
         {sajda?.includes(data.ayah) && <Sajda />}
       </span>{' '}
       <Highlighter
@@ -28,11 +28,7 @@ export const SearchAyah = ({ data, sajda, mark = '' }: SearchAyahProps) => (
         highlightClassName="bg-warning"
       />
     </div>
-    <Link
-      href={buildUrl(data.soorah, data.ayah)}
-      className="read-ayah"
-      prefetch={false}
-    >
+    <Link href={buildUrl(data.soorah, data.ayah)} className="read-ayah" prefetch={false}>
       <FaExternalLinkAlt />
     </Link>
   </li>

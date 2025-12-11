@@ -1,5 +1,4 @@
-import React from "react"
-import { Link } from "@/components/Link";
+import { Link } from '@/components/Link'
 
 export const Footer = () => (
   <nav className="py-4 bg-gray-700 text-slate-300">
@@ -8,9 +7,7 @@ export const Footer = () => (
         &copy; {new Date().getFullYear()}
       </li>
       <li className="mr-6">
-        <Link href="/">
-          Mojkuran.com
-        </Link>
+        <Link href="/">Mojkuran.com</Link>
       </li>
       <li>
         <a href="https://vaktija.ba" target="_blank" rel="noreferrer">

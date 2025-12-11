@@ -1,5 +1,4 @@
-import { LoaderDots } from "@/components/LoaderDots"
-
+import { LoaderDots } from '@/components/LoaderDots'
 
 export const SoorahLoader = () => <LoaderDots />
 

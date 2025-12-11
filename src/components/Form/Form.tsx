@@ -1,10 +1,10 @@
 'use client'
-import { ChangeEvent, SyntheticEvent, useState } from 'react'
 
 import { useParams, useRouter } from 'next/navigation'
+import { type ChangeEvent, type SyntheticEvent, useState } from 'react'
 
 import { soorahList } from '@/assets/soorah-list-object'
-import { FormProps, getView } from '@/utility/getView'
+import { type FormProps, getView } from '@/utility/getView'
 
 export const Form = () => {
   const router = useRouter()
@@ -15,7 +15,7 @@ export const Form = () => {
   const soorah = Number(params?.soorah?.toString()) || null
   const ayah = Number(params?.ayah?.toString()) || null
   const query = params?.search ? decodeURIComponent(params?.search.toString()) : null
-  const translator = 1; // Number(searchParams?.get('t') || process.env.NEXT_PUBLIC_DEFAULT_TRANSLATOR)
+  const translator = 1 // Number(searchParams?.get('t') || process.env.NEXT_PUBLIC_DEFAULT_TRANSLATOR)
 
   const [state, setState] = useState<FormProps>(() =>
     getView({ s: soorah, a: ayah, q: query, t: translator })
@@ -73,7 +73,6 @@ export const Form = () => {
       case 'ayah':
         router.push(`/${submitValue.s}/${submitValue.a}`)
         break
-      case 'empty':
       default:
         router.push('/')
     }

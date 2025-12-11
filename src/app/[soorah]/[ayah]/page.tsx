@@ -1,14 +1,12 @@
 import { notFound, redirect } from 'next/navigation'
 
 import { soorahList } from '@/assets/soorah-list-object'
-
-import { getView } from '@/utility/getView'
-
-import { getAyahService } from './getAyahService'
-import { soorahAyahTitle } from '@/helpers/soorahAyahTitle'
-import { ColoredText } from '@/components/ColoredText/ColoredText'
-import { PaginateAyah } from './PaginateAyah'
 import { Bismillah } from '@/components/Bismillah/Bismillah'
+import { ColoredText } from '@/components/ColoredText/ColoredText'
+import { soorahAyahTitle } from '@/helpers/soorahAyahTitle'
+import { getView } from '@/utility/getView'
+import { type AyahResponseType, getAyahService } from './getAyahService'
+import { PaginateAyah } from './PaginateAyah'
 
 type AyahProps = {
   params: Promise<{
@@ -22,7 +20,7 @@ type AyahProps = {
 export const dynamic = 'force-dynamic'
 
 export const generateMetadata = async (props: AyahProps) => {
-  const { soorah, ayah } = await props.params;
+  const { soorah, ayah } = await props.params
   const soorahTitle = soorahList.find((soorahItem) => soorahItem.id === Number(soorah))
 
   if (!soorahTitle) return
@@ -37,18 +35,11 @@ export const generateMetadata = async (props: AyahProps) => {
 }
 
 const AyahPage = async (props: AyahProps) => {
-  const params = await props.params;
+  const params = await props.params
 
-  const {
-    soorah: soorahParam,
-    ayah: ayahParam
-  } = params;
+  const { soorah: soorahParam, ayah: ayahParam } = params
 
-  const {
-    s: soorah,
-    a: ayah,
-    view,
-  } = getView({ s: Number(soorahParam), a: Number(ayahParam) })
+  const { s: soorah, a: ayah, view } = getView({ s: Number(soorahParam), a: Number(ayahParam) })
 
   if (view !== 'ayah') {
     if (view === 'soorah') {
@@ -58,10 +49,10 @@ const AyahPage = async (props: AyahProps) => {
     notFound()
   }
 
-  let out
+  let out: AyahResponseType
   try {
     out = await getAyahService({ soorah, ayah })
-  } catch (error) {
+  } catch (_error) {
     // If ayah is not found or database error, return 404
     notFound()
   }

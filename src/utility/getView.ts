@@ -1,7 +1,6 @@
 import { soorahList } from '@/assets/soorah-list-object'
 import { TRANSLATOR_LIST } from '@/assets/translatorList'
 
-
 const DEFAULT_TRANSLATOR = 1
 
 type EmptyState = {

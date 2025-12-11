@@ -1,6 +1,5 @@
-import { FaKaaba, FaMosque } from 'react-icons/fa'
-
 import type { IconType } from 'react-icons'
+import { FaKaaba, FaMosque } from 'react-icons/fa'
 
 type TanzilCityType = 'Mecca' | 'Medina'
 

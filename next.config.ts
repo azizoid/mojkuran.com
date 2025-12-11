@@ -1,7 +1,7 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  output: 'standalone',
   compress: true,
   poweredByHeader: false,
   generateEtags: false,
@@ -14,6 +14,6 @@ const nextConfig: NextConfig = {
     // Image optimization is handled automatically for local images
     minimumCacheTTL: 60,
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig

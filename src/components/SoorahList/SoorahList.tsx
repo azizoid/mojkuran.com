@@ -1,7 +1,6 @@
 import { soorahList } from '@/assets/soorah-list-object'
 
 import { Link } from '@/components/Link'
-import { CityAndSize } from '../CityAndSize/CityAndSize'
 import { RevealPlace } from '../RevealPlace'
 
 export const SoorahList = () => (

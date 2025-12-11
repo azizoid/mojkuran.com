@@ -1,5 +1,5 @@
-import { SoorahList } from "@/components/SoorahList/SoorahList";
-import { TopbarLinks } from "@/components/TopbarLinks/TopbarLinks";
+import { SoorahList } from '@/components/SoorahList/SoorahList'
+import { TopbarLinks } from '@/components/TopbarLinks/TopbarLinks'
 
 const HomePage = () => {
   return (

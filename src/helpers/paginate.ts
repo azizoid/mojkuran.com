@@ -9,4 +9,3 @@ export const initialPaginate: PaginationProps = {
   perPage: 30,
   currentPage: 1,
 }
-
