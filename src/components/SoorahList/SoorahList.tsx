@@ -1,39 +1,39 @@
 import { soorahList } from '@/assets/soorah-list-object'
 
-import { Link } from "@/components/Link";
+import { Link } from '@/components/Link'
 import { CityAndSize } from '../CityAndSize/CityAndSize'
+import { RevealPlace } from '../RevealPlace'
 
 export const SoorahList = () => (
   <div className="mt-2 border-t border-gray-300">
-    {soorahList.map((soorah) => (
-      <Link
-        key={soorah.id}
-        href={`/${soorah.id}`}
-        className="group flex w-full my-4 mx-auto overflow-hidden bg-white shadow-md">
-
-        <div className="flex items-center justify-center rounded-r-lg w-14 bg-emerald-50 group-hover:bg-emerald-500 group-hover:text-white">
-          {soorah.id}
-        </div>
-        <div className="px-4 py-2 -mx-3 flex flex-row w-full items-center justify-between">
-          <div className="mx-3">
-            <span className="font-semibold text-emerald-400 group-hover:text-emerald-600">
-              {soorah.title}
-            </span>
-
-            <p className="text-sm text-gray-600 w-full flex flex-row justify-start gap-3">
-              <CityAndSize
-                city={soorah.city}
-                ayahCount={soorah.ayahCount}
-                size="md"
-              />
-            </p>
+    <div className="grid grid-cols-1 gap-2 pt-4 md:grid-cols-2 md:gap-4 lg:grid-cols-3">
+      {soorahList.map((soorah) => (
+        <Link
+          key={soorah.id}
+          href={`/${soorah.id}`}
+          className="group flex w-full overflow-hidden rounded-l-xl bg-white/50 text-sm text-gray-600"
+        >
+          <div className="flex w-14 items-center justify-center  group-hover:bg-emerald-300 group-hover:font-semibold">
+            {soorah.id}
           </div>
-        </div>
-        <div className="flex w-32 items-center justify-center px-5 text-right whitespace-nowrap text-lg text-gray-600 bg-emerald-50 group-hover:bg-emerald-500 group-hover:text-white">
-          {soorah.arabic}
-        </div>
-
-      </Link>
-    ))}
+          <div className="flex w-full flex-row items-center justify-between px-2 py-2 group-hover:bg-gray-100">
+            <div className="ml-2">
+              <span className="text-base font-semibold text-emerald-400 group-hover:text-emerald-600">
+                {soorah.title}
+              </span>
+              <span>
+                <RevealPlace city={soorah.city} />
+              </span>
+            </div>
+          </div>
+          <div className="flex w-40 flex-col items-center justify-center bg-gray-50 px-5 group-hover:bg-emerald-300">
+            <span className="whitespace-nowrap text-lg font-semibold">{soorah.arabic}</span>
+            <span className="text-xs">{`${soorah.ayahCount} ${
+              [11, 111].includes(soorah.ayahCount) || soorah.ayahCount % 10 !== 1 ? 'ajeta' : 'ajet'
+            }`}</span>
+          </div>
+        </Link>
+      ))}
+    </div>
   </div>
 )

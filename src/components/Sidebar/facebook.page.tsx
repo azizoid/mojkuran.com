@@ -1,24 +1,34 @@
-import { Link } from "@/components/Link";
-import Image from 'next/image';
+import { Link } from '@/components/Link'
+import Image from 'next/image'
+import { Card } from '../Card/Card'
+import { FaFacebookSquare, FaInstagramSquare } from 'react-icons/fa'
 
 export const FacebookPage = () => (
-  <div className="relative w-full bg-gray-900 text-white rounded-lg shadow-lg">
-    <Link href="https://instagram.com/mojkuran" target="_blank" prefetch={false}>
-      <div className="relative">
-        <Image
-          src="/img/kuran.jpg"
-          alt="Quran"
-          className="w-full h-40 object-cover object-top rounded-t-lg"
-          width={610}
-          height={319}
-          placeholder="empty"
-          loading="lazy"
-        />
-        <div className="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent w-full">
-          <h1 className="text-xl">Moj Kur&apos;an</h1>
-          <h1 className="prose text-white text-xl">Pridruži Nam Se</h1>
+  <Card title="BİZİ BƏYƏN" className='relative bg-[url("/img/kuran.jpg")] bg-cover'>
+    <div className="absolute inset-0 bg-black opacity-30" />
+    <div className="relative z-10 flex h-40 w-full flex-col justify-between p-2">
+      <div className="flex flex-row gap-2">
+        <div className="flex grow flex-col font-semibold text-white">
+          <span className="text-lg">Moj Kur&apos;an</span>
+          <span className="text-xs">mojkuran.com</span>
         </div>
       </div>
-    </Link>
-  </div>
+      <div className="flex flex-row justify-between">
+        <Link
+          href="https://facebook.com/mojkuran"
+          target="_blank"
+          className="flex flex-row items-center gap-1 bg-white px-1.5 py-0.5 font-bold"
+        >
+          <FaFacebookSquare size="16" /> Follow on Facebook
+        </Link>
+        <Link
+          href="https://instagram.com/mojkuran"
+          target="_blank"
+          className="flex flex-row items-center gap-1 bg-white px-1.5 py-0.5 font-bold"
+        >
+          <FaInstagramSquare size="16" /> Follow on Instagram
+        </Link>
+      </div>
+    </div>
+  </Card>
 )

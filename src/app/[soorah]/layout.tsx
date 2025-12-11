@@ -1,27 +1,37 @@
-import { PropsWithChildren } from 'react'
+import type { PropsWithChildren } from 'react'
 
 import { SoorahCaption } from '@/components/SoorahCaption/SoorahCaption'
+import { Sidebar } from '@/components/Sidebar/Sidebar'
+import { notFound } from 'next/navigation'
 
 type SoorahLayoutProps = PropsWithChildren<{
   params: Promise<{
-    soorah: string,
+    soorah: string
   }>
 }>
 
-const SoorahLayout = async ({
-  params,
-  children,
-}: SoorahLayoutProps) => {
+const SoorahLayout = async ({ params, children }: SoorahLayoutProps) => {
   const { soorah: soorahParam } = await params
 
-  const sooran = Number(soorahParam)
+  const soorah = Number.parseInt(soorahParam, 10)
+
+  // Validate soorah number
+  if (Number.isNaN(soorah) || soorah < 1 || soorah > 114) {
+    notFound()
+  }
 
   return (
-    <ul className="page-template-list">
-      {sooran ? <SoorahCaption soorah={sooran} /> : null}
+    <div className="flex flex-wrap px-2 py-2">
+      <ul className="w-full flex-grow-2 md:w-2/3">
+        {soorah ? <SoorahCaption soorah={soorah} /> : null}
 
-      {children}
-    </ul>
+        {children}
+      </ul>
+
+      <div className="w-full grow md:w-1/3">
+        <Sidebar />
+      </div>
+    </div>
   )
 }
 
