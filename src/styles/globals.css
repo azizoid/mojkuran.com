@@ -1,102 +1,166 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer components {
-  .btn {
-    @apply bg-green-200 py-2 px-3 rounded-md shadow text-green-900 hover:bg-green-300 hover:transition-transform hover:-translate-y-0.5 active:-translate-y-0;
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-Nunito: Nunito;
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility btn {
+  @apply bg-green-200 py-2 px-3 rounded-md shadow text-green-900 hover:bg-green-300 hover:transition-transform hover:-translate-y-0.5 active:-translate-y-0;
+}
+
+@utility alert {
+  @apply rounded-b border-t-4 px-4 py-3 shadow-md;
+}
+
+@utility alert-success {
+  @apply border-teal-500 bg-teal-100 text-teal-900;
+}
+
+@utility alert-gray {
+  @apply border-gray-500 bg-gray-100 text-gray-900;
+}
+
+@utility alert-danger {
+  @apply border-red-500 bg-red-100 text-red-900;
+}
+
+@utility badge {
+  @apply mr-2 rounded-r bg-gray-50 px-2 py-1 text-sm text-black flex flex-col;
+}
+
+@utility soorah-list-item {
+  @apply prose !max-w-none flex justify-between py-2 pr-2;
+
+  &:hover {
+    .badge {
+      @apply bg-blue-400 text-white;
+    }
+
+    .read-ayah {
+      @apply text-blue-500;
+    }
   }
 
-  .alert {
-    @apply border-t-4 rounded-b px-4 py-3 shadow-md;
+  & .read-ayah {
+    @apply ml-2 text-gray-200;
   }
+}
 
-  .alert-success {
-    @apply bg-teal-100 border-teal-500 text-teal-900;
-  }
+@utility pagination {
+  @apply flex justify-center space-x-1 py-4;
+}
 
-  .alert-gray {
-    @apply bg-gray-100 border-gray-500 text-gray-900;
-  }
+@utility pagination-item {
+  @apply px-4 py-2 text-blue-400 rounded-md border hover:bg-gray-50 hover:text-gray-400 cursor-pointer;
+}
 
-  .alert-danger {
-    @apply bg-red-100 border-red-500 text-red-900;
+@utility pagination-active {
+  @apply bg-blue-400 text-blue-50;
+}
+
+@utility pagination-disabled {
+  @apply px-4 py-2 bg-gray-50 rounded-md text-gray-500;
+}
+
+@utility ayah-list-item {
+  @apply px-4 py-4 md:px-8;
+}
+
+@utility form-row {
+  @apply grid grid-cols-12 items-center space-x-4;
+}
+
+@utility form-control {
+  @apply rounded-md border-gray-400 bg-gray-50 text-sm text-gray-700 focus:border-gray-200 focus:transition-none;
+}
+
+@utility card {
+  @apply border border-solid border-gray-300 rounded-t shadow-lg;
+}
+
+@utility card-title {
+  @apply bg-gray-100 border-b text-sm py-3;
+}
+
+@utility card-content {
+  @apply space-y-1 text-sm py-3;
+}
+
+@utility page-template-list {
+  @apply list-none divide-y divide-gray-100 bg-white text-gray-700;
+}
+
+@layer utilities {
+  html,
+  body {
+    overflow-x: hidden;
   }
 
   code {
     @apply text-red-400;
   }
-
-  .badge {
-    @apply mr-2 px-2 py-1 text-sm rounded-r text-black bg-gray-50 flex flex-col;
-  }
-
-  .soorah-list-item {
-    @apply prose !max-w-none flex justify-between py-2 pr-2;
-
-    &:hover {
-      .badge {
-        @apply text-white bg-blue-400;
-      }
-
-      .read-ayah {
-        @apply text-blue-500;
-      }
-    }
-
-    & .read-ayah {
-      @apply text-gray-200 ml-2;
-    }
-  }
-
-  .pagination {
-    @apply flex justify-center space-x-1 py-4;
-  }
-
-  .pagination-item {
-    @apply px-4 py-2 text-blue-400 rounded-md border hover:bg-gray-50 hover:text-gray-400 cursor-pointer;
-  }
-
-  .pagination-active {
-    @apply bg-blue-400 text-blue-50;
-  }
-
-  .pagination-disabled {
-    @apply px-4 py-2 bg-gray-50 rounded-md text-gray-500;
-  }
-
-  .ayah-list-item {
-    @apply px-4 md:px-8 py-4;
-  }
-
-  .form-row {
-    @apply grid grid-cols-12 items-center space-x-4;
-  }
-
-  .form-control {
-    @apply border-gray-400 bg-gray-50 text-sm rounded-md text-gray-700 focus:border-gray-200 focus:transition-none;
-  }
-
-  .card {
-    @apply border border-solid border-gray-300 rounded-t shadow-lg;
-  }
-
-  .card-title {
-    @apply bg-gray-100 border-b text-sm py-3;
-  }
-
-  .card-content {
-    @apply space-y-1 text-sm py-3;
-  }
-
-  .page-template-list {
-    @apply list-none divide-y divide-gray-100 bg-white text-gray-700
-  }
-}
-
-html,
-body {
-  overflow-x: hidden;
 }
 
 @layer base {
