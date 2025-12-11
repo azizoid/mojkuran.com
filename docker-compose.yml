@@ -3,16 +3,16 @@ services:
     image: ghcr.io/azizoid/mojkuran.com:latest
     container_name: mojkuran-app
     restart: always
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        MONGODB_URI: ${MONGODB_URI}
-        MONGODB_DB: ${MONGODB_DB}
     env_file:
       - .env
     expose:
       - ${PORT}
+    deploy:
+      resources:
+        limits:
+          memory: 150M
+        reservations:
+          memory: 80M
     networks:
       - main-network
 
