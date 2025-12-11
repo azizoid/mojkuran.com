@@ -3,7 +3,7 @@ import { Link } from '@/components/Link'
 import { Card } from '../Card/Card'
 
 export const FacebookPage = () => (
-  <Card title="BİZİ BƏYƏN" className='relative bg-[url("/img/kuran.jpg")] bg-cover'>
+  <Card title="PRIDRUŽI SE" className='relative bg-[url("/img/kuran.jpg")] bg-cover'>
     <div className="absolute inset-0 bg-black opacity-30" />
     <div className="relative z-10 flex h-40 w-full flex-col justify-between p-2">
       <div className="flex flex-row gap-2">
