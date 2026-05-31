@@ -1,9 +1,11 @@
 'use client'
 
-import { MapPinnedIcon } from 'lucide-react'
+import { Smartphone } from 'lucide-react'
 import useSWR from 'swr'
 import { fetcher } from '@/utility/fetcher'
 import { LoaderDots } from '../LoaderDots'
+
+const namazIosAppUrl = 'https://apps.apple.com/app/id6760599914'
 
 const prayersListEmpty = [
   { id: 1, title: 'Zora', time: '--:--' },
@@ -30,12 +32,17 @@ export const PrayerWidget = () => {
 
   return (
     <div className="w-full text-sm">
-      <div className="flex w-full items-center justify-evenly bg-gray-700 px-4 py-2 text-white">
-        <time dateTime={data.datum[0]} className="text-center">
-          {data.datum[0]}, Sarajevo
-        </time>
-        <a href="https://vaktija.ba" target="_blank" rel="noreferrer">
-          <MapPinnedIcon size={14} className="text-green-300" />
+      <div className="w-full bg-gray-700 px-4 py-2 text-white">
+        <a
+          href={namazIosAppUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          referrerPolicy="origin"
+          aria-label="Otvori Nam.az iPhone aplikaciju u App Storeu"
+          className="flex items-center justify-center gap-2 text-center text-sm font-medium text-white transition-opacity hover:opacity-85"
+        >
+          <Smartphone size={14} aria-hidden="true" className="text-green-300" />
+          <span>Skini Nam.az aplikaciju za iPhone</span>
         </a>
       </div>
 
