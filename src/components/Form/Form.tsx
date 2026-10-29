@@ -1,25 +1,32 @@
 'use client'
 
-import { useParams, useRouter } from 'next/navigation'
-import { type ChangeEvent, type SyntheticEvent, useState } from 'react'
+import { useParams } from 'next/navigation'
+import { type ChangeEvent, type SyntheticEvent, useEffect, useState } from 'react'
 
 import { soorahList } from '@/assets/soorah-list-object'
 import { type FormProps, getView } from '@/utility/getView'
 
 export const Form = () => {
-  const router = useRouter()
-
   const params = useParams()
   // const searchParams = useSearchParams()
 
   const soorah = Number(params?.soorah?.toString()) || null
   const ayah = Number(params?.ayah?.toString()) || null
-  const query = params?.search ? decodeURIComponent(params?.search.toString()) : null
+  const query = params?.search && params.search.toString() !== 'app'
+    ? decodeURIComponent(params.search.toString())
+    : null
   const translator = 1 // Number(searchParams?.get('t') || process.env.NEXT_PUBLIC_DEFAULT_TRANSLATOR)
 
   const [state, setState] = useState<FormProps>(() =>
     getView({ s: soorah, a: ayah, q: query, t: translator })
   )
+
+  useEffect(() => {
+    const [route, search] = window.location.pathname.split('/').filter(Boolean)
+    if (route === 'search' && search && search !== 'app') {
+      setState(getView({ q: decodeURIComponent(search), t: translator }))
+    }
+  }, [])
 
   const onHandleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target
@@ -65,16 +72,16 @@ export const Form = () => {
 
     switch (submitValue.view) {
       case 'search':
-        router.push(`/search/${submitValue.q}`)
+        window.location.assign(`/search/${submitValue.q}`)
         break
       case 'soorah':
-        router.push(`/${submitValue.s}`)
+        window.location.assign(`/${submitValue.s}`)
         break
       case 'ayah':
-        router.push(`/${submitValue.s}/${submitValue.a}`)
+        window.location.assign(`/${submitValue.s}/${submitValue.a}`)
         break
       default:
-        router.push('/')
+        window.location.assign('/')
     }
   }
 

@@ -18,7 +18,6 @@ export const SoorahCaption = ({ soorah }: SoorahCaptionProps) => {
       <Link
         href={buildUrl(soorah, undefined)}
         className="text-gray-400 hover:text-black decoration-1"
-        prefetch={false}
       >
         {`${soorah}. Sura ${title}`}
         <span className="flex flex-row justify-center gap-1 text-xs">

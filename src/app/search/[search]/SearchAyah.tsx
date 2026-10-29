@@ -22,13 +22,13 @@ export const SearchAyah = ({ data, sajda, mark = '' }: SearchAyahProps) => (
         {sajda?.includes(data.ayah) && <Sajda />}
       </span>{' '}
       <Highlighter
-        searchWords={[mark]}
+        searchWords={data.matches?.length ? data.matches : [mark]}
         textToHighlight={data.content}
         autoEscape={true}
         highlightClassName="bg-warning"
       />
     </div>
-    <Link href={buildUrl(data.soorah, data.ayah)} className="read-ayah" prefetch={false}>
+    <Link href={buildUrl(data.soorah, data.ayah)} className="read-ayah">
       <FaExternalLinkAlt />
     </Link>
   </li>

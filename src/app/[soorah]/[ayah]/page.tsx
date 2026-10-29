@@ -15,9 +15,14 @@ type AyahProps = {
   }>
 }
 
-// Enable dynamic rendering to prevent NoFallbackError
-// This allows on-demand generation of ayah pages
-export const dynamic = 'force-dynamic'
+// Whole ayah area is prerendered for static export: 6236 fixed ayah routes
+export const generateStaticParams = async () =>
+  soorahList.flatMap((soorahItem) =>
+    Array.from({ length: soorahItem.ayahCount }, (_, index) => ({
+      soorah: soorahItem.id.toString(),
+      ayah: String(index + 1),
+    }))
+  )
 
 export const generateMetadata = async (props: AyahProps) => {
   const { soorah, ayah } = await props.params

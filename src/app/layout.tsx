@@ -37,7 +37,6 @@ export default function RootLayout({
               <Link
                 href="/"
                 className="py-3 flex items-center content-start text-gray-500 hover:opacity-75"
-                prefetch={false}
               >
                 <Logo />
                 Mojkur&apos;an.com

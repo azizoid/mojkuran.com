@@ -14,9 +14,8 @@ type SoorahProps = {
   }>
 }
 
-// Allow dynamic params to prevent NoFallbackError when accessing nested routes
-// Static generation will still be used for routes in generateStaticParams
-export const dynamicParams = true
+// Whole site is prerendered for static export: only enumerated routes exist
+export const dynamicParams = false
 
 export const generateStaticParams = async () =>
   soorahList.map((item) => ({

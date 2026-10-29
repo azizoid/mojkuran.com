@@ -13,7 +13,10 @@
       "!**/.next",
       "!**/build",
       "!**/coverage",
-      "!**/dist"
+      "!**/dist",
+      "!src/data",
+      "!public/data",
+      "!scripts"
     ]
   },
   "formatter": {
@@ -50,10 +53,7 @@
   },
   "overrides": [
     {
-      "includes": [
-        "**/*.json",
-        "**/*.jsonc"
-      ]
+      "includes": ["**/*.json", "**/*.jsonc"]
     }
   ]
 }

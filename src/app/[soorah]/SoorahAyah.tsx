@@ -22,7 +22,6 @@ export const SoorahAyah = ({ data, sajda }: SoorahAyahProps) => (
     <Link
       href={buildUrl(data.soorah, data.ayah)}
       className="read-ayah"
-      prefetch={false}
       title="oxu"
     >
       <FaExternalLinkAlt />

@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mojkuran",
+  "main": "functions/api.ts",
+  "compatibility_date": "2026-10-06",
+  "routes": [
+    {
+      "pattern": "mojkuran.com/*",
+      "zone_name": "mojkuran.com"
+    }
+  ],
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*", "/search/*", "/data/*"]
+  },
+  "r2_buckets": [
+    {
+      "binding": "SEARCH_DATA",
+      "bucket_name": "mojkuran-search-data"
+    }
+  ],
+  "workers_dev": true
+}

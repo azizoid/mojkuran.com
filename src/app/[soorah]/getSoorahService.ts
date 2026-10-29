@@ -1,25 +1,17 @@
 'use server-only'
-import type { Db } from 'mongodb'
-
-import type { DataPropsLatinized } from '@/helpers/types'
-import { withMongo } from '@/utility/mongodb'
+import type { DisplayData } from '@/helpers/types'
+import { loadSoorah } from '@/utility/quranData'
 
 export interface GetSoorahServiceProps {
   soorah: number
 }
 
 export const getSoorahService = async ({ soorah }: GetSoorahServiceProps) => {
-  const out = await withMongo(async (db: Db) => {
-    const collection = db.collection<DataPropsLatinized>('mojkuran')
-    return await collection
-      .find({ soorah }, { projection: { _id: 0, content_latinized: 0, metadata_id: 0 } })
-      .sort(['soorah', 'ayah'])
-      .toArray()
-  })
+  const out = await loadSoorah({ soorah })
 
   if (!out) {
     throw new Error(`Soorah not found: { soorah: ${soorah}}`)
   }
 
-  return out
+  return out satisfies DisplayData[]
 }

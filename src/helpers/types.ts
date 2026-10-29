@@ -1,24 +1,22 @@
-import type { ObjectId } from 'mongodb'
+import type { FormProps } from '@/utility/getView'
 
 export type DisplayData = {
-  id: string
+  id: number
   soorah: number
   ayah: number
   content: string
   content_latinized?: string
-  translator: number
+  matches?: string[]
 }
 
-export type DataPropsLatinized = {
-  _id: string
-  id: string
-  detail_id: number
-  soorah: number
-  ayah: number
-  content: string
-  content_latinized: string
-  translator: number
-  metadata_id: ObjectId
+export type ResponseProps = {
+  out: DisplayData[]
+  data?: FormProps
+  paginate?: {
+    total: number
+    perPage: number
+    currentPage: number
+  }
 }
 
 export type ResponseErrorType = {
