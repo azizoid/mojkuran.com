@@ -45,3 +45,70 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Smoke test deployed routes
+        run: |
+          set -euo pipefail
+
+          check_status() {
+            local expected="$1"
+            local url="$2"
+            local status=""
+            local body_file="$(mktemp)"
+
+            for attempt in 1 2 3 4 5; do
+              status="$(curl --silent --show-error --max-time 20 --output "$body_file" --write-out '%{http_code}' "$url" || true)"
+              if [ "$status" = "$expected" ]; then
+                rm -f "$body_file"
+                return 0
+              fi
+              sleep 2
+            done
+
+            echo "Expected HTTP $expected from $url, received $status"
+            cat "$body_file"
+            rm -f "$body_file"
+            return 1
+          }
+
+          check_site() {
+            local base="$1"
+            local body
+
+            curl --fail --silent --show-error --retry 3 --retry-delay 2 "$base/" -o /dev/null
+            curl --fail --silent --show-error --retry 3 --retry-delay 2 "$base/favicon.ico" -o /dev/null
+            curl --fail --silent --show-error --retry 3 --retry-delay 2 "$base/search/smoke-check" -o /dev/null
+            curl --fail --silent --show-error --retry 3 --retry-delay 2 "$base/1/1" -o /dev/null
+            check_status 404 "$base/999"
+            check_status 404 "$base/2/999"
+            check_status 404 "$base/data/records.json"
+
+            body="$(curl --fail --silent --show-error --retry 3 --retry-delay 2 "$base/api/v3/search" \
+              -H 'Content-Type: application/json' \
+              --data '{"search":"Allah","page":"1"}')"
+            echo "$body" | jq -e '.out | length > 0' > /dev/null
+
+            body="$(curl --fail --silent --show-error --retry 3 --retry-delay 2 "$base/api/v3/search" \
+              -H 'Content-Type: application/json' \
+              --data '{"search":"zzzxqvneverfoundtoken","page":"1"}')"
+            echo "$body" | jq -e '.out == null' > /dev/null
+
+            local body_file="$(mktemp)"
+            local status
+            status="$(curl --silent --show-error --output "$body_file" --write-out '%{http_code}' \
+              "$base/api/v3/search" \
+              -H 'Content-Type: application/json' \
+              --data '{"search":"Allah","page":{"toString":null}}')"
+            test "$status" = '400'
+            jq -e '.error == "Invalid page"' "$body_file" > /dev/null
+            rm -f "$body_file"
+
+            body="$(curl --fail --silent --show-error --retry 3 --retry-delay 2 "$base/api/v2/random")"
+            echo "$body" | jq -e '.id > 0 and .soorah > 0 and .ayah > 0' > /dev/null
+          }
+
+          check_site https://mojkuran.com
+          check_site https://mojkuran.shaqhuseynov.workers.dev
+
+          check_status 308 'https://www.mojkuran.com/1/1?smoke=1'
+          location="$(curl --silent --show-error --output /dev/null --write-out '%{redirect_url}' 'https://www.mojkuran.com/1/1?smoke=1')"
+          test "$location" = 'https://mojkuran.com/1/1?smoke=1'

@@ -9,6 +9,7 @@ import { Pagination } from '@/components/Pagination/Pagination'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import type { ResponseProps } from '@/helpers/types'
 import { fetcher } from '@/utility/fetcher'
+import { decodePathSegment } from '@/utility/decodePathSegment'
 import { SearchAyah } from './SearchAyah'
 
 // Static export needs one enumerated shell for /search/{anything};
@@ -24,7 +25,7 @@ const Search = () => {
   useEffect(() => {
     const [route, search] = window.location.pathname.split('/').filter(Boolean)
     if (route === 'search' && search && search !== 'app') {
-      setSearchQuery(decodeURIComponent(search))
+      setSearchQuery(decodePathSegment(search))
     }
   }, [])
 
@@ -65,7 +66,9 @@ const Search = () => {
       <Alert variant="destructive">
         <TerminalIcon className="h-4 w-4" />
 
-        <AlertDescription>Riječ nije pronađena</AlertDescription>
+        <AlertDescription>
+          {error ? 'Pretraga trenutno nije dostupna. Pokušajte ponovo.' : 'Riječ nije pronađena'}
+        </AlertDescription>
       </Alert>
     )
   }

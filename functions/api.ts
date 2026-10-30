@@ -95,7 +95,10 @@ const loadData = (env: Env) => {
       normalized: order.map((o) => normalizeBosnian(o.rec.content)),
       byId: new Map(order.map((record) => [record.rec.id, record])),
     }
-  })()
+  })().catch((error) => {
+    apiIndex = null
+    throw error
+  })
   return apiIndex
 }
 
@@ -106,7 +109,10 @@ const loadSearchIndex = (env: Env) => {
     )
     if (!object) throw new Error('Missing private search index')
     return MiniSearch.loadJSON<SearchDocument>(await object.text(), SEARCH_INDEX_OPTIONS)
-  })()
+  })().catch((error) => {
+    searchIndex = null
+    throw error
+  })
   return searchIndex
 }
 
@@ -142,6 +148,10 @@ const searchService = async (request: Request, env: Env) => {
 
     if (!search) {
       return Response.json({ error: 'Search query is required' }, { status: 400 })
+    }
+
+    if (body.page !== undefined && typeof body.page !== 'string' && typeof body.page !== 'number') {
+      return Response.json({ error: 'Invalid page' }, { status: 400 })
     }
 
     const currentPage = body.page === undefined ? 1 : Number(body.page)

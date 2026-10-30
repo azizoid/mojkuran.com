@@ -5,6 +5,7 @@ import { type ChangeEvent, type SyntheticEvent, useEffect, useState } from 'reac
 
 import { soorahList } from '@/assets/soorah-list-object'
 import { type FormProps, getView } from '@/utility/getView'
+import { decodePathSegment } from '@/utility/decodePathSegment'
 
 export const Form = () => {
   const params = useParams()
@@ -13,7 +14,7 @@ export const Form = () => {
   const soorah = Number(params?.soorah?.toString()) || null
   const ayah = Number(params?.ayah?.toString()) || null
   const query = params?.search && params.search.toString() !== 'app'
-    ? decodeURIComponent(params.search.toString())
+    ? params.search.toString()
     : null
   const translator = 1 // Number(searchParams?.get('t') || process.env.NEXT_PUBLIC_DEFAULT_TRANSLATOR)
 
@@ -24,7 +25,7 @@ export const Form = () => {
   useEffect(() => {
     const [route, search] = window.location.pathname.split('/').filter(Boolean)
     if (route === 'search' && search && search !== 'app') {
-      setState(getView({ q: decodeURIComponent(search), t: translator }))
+      setState(getView({ q: decodePathSegment(search), t: translator }))
     }
   }, [])
 
@@ -72,7 +73,7 @@ export const Form = () => {
 
     switch (submitValue.view) {
       case 'search':
-        window.location.assign(`/search/${submitValue.q}`)
+        window.location.assign(`/search/${encodeURIComponent(submitValue.q)}`)
         break
       case 'soorah':
         window.location.assign(`/${submitValue.s}`)
