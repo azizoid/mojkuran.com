@@ -75,7 +75,8 @@ jobs:
             local body
 
             curl --fail --silent --show-error --retry 3 --retry-delay 2 "$base/" -o /dev/null
-            curl --fail --silent --show-error --retry 3 --retry-delay 2 "$base/favicon.ico" -o /dev/null
+            curl --fail --silent --show-error --retry 3 --retry-delay 2 "$base/static/favicon.ico" -o /dev/null
+            check_status 404 "$base/favicon.ico"
             curl --fail --silent --show-error --retry 3 --retry-delay 2 "$base/search/smoke-check" -o /dev/null
             curl --fail --silent --show-error --retry 3 --retry-delay 2 "$base/1/1" -o /dev/null
             check_status 404 "$base/999"
