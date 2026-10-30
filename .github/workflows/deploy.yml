@@ -82,6 +82,8 @@ jobs:
             check_status 404 "$base/999"
             check_status 404 "$base/2/999"
             check_status 404 "$base/data/records.json"
+            body="$(curl --silent --show-error "$base/999")"
+            echo "$body" | grep -q 'Stranica nije pronađena'
 
             body="$(curl --fail --silent --show-error --retry 3 --retry-delay 2 "$base/api/v3/search" \
               -H 'Content-Type: application/json' \
